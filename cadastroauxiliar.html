@@ -1,0 +1,301 @@
+<section>
+
+	<style>
+
+			body, html{
+			
+			background-repeat: no-repeat;
+			
+			font-family: 'Oxygen', sans-serif;
+			}
+
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title { 
+				font-size: 50px;
+				font-family: 'Passion One', cursive; 
+				font-weight: 400; 
+			}
+
+			h2.title{
+				text-align: center;
+				color: #000EB9;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 50px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			body{
+				background: url(img/logomedico.png);
+				
+			}
+
+    </style>
+
+
+        <div class="main-login main-center">
+
+	        		<form class="form-horizontal" name="cadastroAuxiliarForm" method="post" action="#">
+	        			
+	        			<div class="panel-title text-center">
+			    			<h1 class="title">Cadastra Auxiliar</h1>
+			    		</div>
+						
+						<div class="form-group">
+							
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="cpf" class="cols-sm-2 control-label">Digite CPF</label>
+									<input type="text" class="form-control" name="cpf" id="cpf" placeholder="xxx.xxx.xxx-xx" ng-model="auxiliar.cpfAuxiliar" ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/" ng-required="true" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="crmvmedico" class="cols-sm-2 control-label">Digite o crmv do medico responsavel</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="crmvmedico" id="crmvmedico" placeholder="XXXXX" ng-model="auxiliar.crmvmedico" ng-pattern="/^\d{4,5}$/" ng-required="true" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="name" class="cols-sm-2 control-label">Digite Nome</label>
+									<input type="text" class="form-control" name="name" id="name" ng-model="auxiliar.nomeAuxiliar" placeholder="Digite seu nome aqui..." ng-required="true" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="address" class="cols-sm-2 control-label">Digite seu Endereço</label>
+									<input type="text" class="form-control" name="address" id="address" placeholder="Digite seu endereço aqui..." 
+											ng-model="auxiliar.enderecoAuxiliar" ng-required="true"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Digite seu Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="email" id="email" ng-model="auxiliar.emailAuxiliar" placeholder="Digite seu email aqui..." ng-required="true"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="phone" class="cols-sm-2 control-label">Digite seu Telefone</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="phone" id="phone" ng-model="auxiliar.telefoneAuxiliar"  placeholder="+XX (XX) XXXXX-XXXX" 
+									ng-required="true" ng-pattern= "/^.\d{2}..\d{2}..\d{4,5}.\d{4}$/"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="city" class="cols-sm-2 control-label">Seu estado</label>
+									<select ng-model="auxiliar.uf" ng-options="estado.nomeEstado estado in estados" >	
+										<option value="">Selecione seu estado</option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="state" class="cols-sm-2 control-label">Sua Cidade</label>
+									<select ng-model="auxiliar.cidade" ng-options="cidade.nomeCidade cidade in cidades" >
+										<option value="">Selecione sua cidade</option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+						
+
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Digite sua Senha</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="password" class="form-control" name="password" id="password" ng-model="auxiliar.senhaAuxiliar" ng-required="true" placeholder="Digite sua senha aqui..."/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="confirm" class="cols-sm-2 control-label">Confirme sua Senha</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirme sua senha...."/>
+								</div>
+							</div>
+						</div>
+						<div class="form-group ">
+							<button type="button" class="btn btn-primary btn-block" ng-click="novoAuxiliar(auxiliar)" 
+										ng-disabled="cadastroAuxiliarForm.$invalid">Cadastra</button>
+						</div>
+
+						
+					</form>
+
+	        		
+	        	</div>
+	
+
+</section>
+<!--
+<script>
+        angular.module("auxiliar",[])
+				.value('urlBase', 'url do back end')
+        		.controller("auxiliarCtrl", function($scope, $http, urlBase){
+        	$scope.titulo="Cadastro Medico";
+
+        	var self = this;	
+
+	        	self.auxiliar=[];
+	        	self.auxiliar=undefined;
+
+	        	self.novo = function(){
+	        		self.auxiliar = {};
+	        	};
+
+	        	self.salvar=function{
+	        		var metodo = 'POST';
+	        		if(self.auxiliar.idauxiliarMedico){
+	        			metodo='PUT'
+	        		}
+
+	        		$http({
+	        			method: metodo,
+	        			url: urlBase + 'path para cadastro',
+	        			data: self.auxiliar
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaAuxiliar();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.altera = function(auxiliar){
+	        		self.auxiliar = auxiliar;
+	        	};
+
+	        	self.deletar = function(auxiliar){
+	        		self.auxiliar = auxiliar;
+	        		$http({
+	        			method: 'DELETE',
+	        			url: urlBase + 'PATH DELETAR' + self.auxiliar.idauxiliarMedico
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaAuxiliar();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.atualizarTabelaAuxiliar=function(){
+	        		$http({
+	        			method:'GET',
+	        			url: urlBase + 'path listar auxiliares'
+	        		})then(function successCallback(response){
+	        			self.auxiliares = response.data;
+	        			self.auxiliares = undefined;
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.ocorreuErro = function(){
+	        		alert("Ocorreu um erro inesperado");
+	        	};
+
+        	function telaInicial(){
+        		location.href = "http://dev.vetonline.com/index.html";
+        	}
+
+
+        });
+        </script>
+-->
+
+ 

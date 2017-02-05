@@ -1,0 +1,245 @@
+<section>
+
+	<style>
+
+			body, html{
+			
+			background-repeat: no-repeat;
+			
+			font-family: 'Oxygen', sans-serif;
+			}
+
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title { 
+				font-size: 50px;
+				font-family: 'Passion One', cursive; 
+				font-weight: 400; 
+			}
+
+			h2.title{
+				text-align: center;
+				color: #000EB9;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 50px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			body{
+				background: url(img/logomedico.png);
+				
+			}
+
+    </style>
+
+        <div class="main-login main-center">
+
+		<form class="form-horizontal" name="cadastroMedicoForm" method="post" action="#">
+
+				<div class="panel-title text-center">
+	    			<h1 class="title">Determina possivel Anemia</h1>
+	    		</div>
+
+	    	<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<label for="AnimSeus" class="cols-sm-2 control-label">Selecione a especie de Animal</label>
+						<select name="AnimSeus" id="AnimSeus" >
+							<option value="">--</option>
+							<option value="1">Cão</option>
+							<option value="2">Gato</option>
+						</select>
+					</div>
+
+				</div>
+			</div>	
+
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<label for="AnimSeus" class="cols-sm-2 control-label">Selecione o Animal de seus cuidados</label>
+						<select name="AnimSeus" id="AnimSeus" >
+							<option value="">--</option>
+							<option value="PR">PR</option>
+						</select>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<label for="VolGlob" class="cols-sm-2 control-label">Qual o Volume Globular?</label>
+						<input type="text" class="form-control" name="VolGlob" id="VolGlob" placeholder="Digite o volume globular aqui..."/>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" name="NuHema" id="NuHema"  placeholder="Digite o número de Hemacias aqui..."/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="TxHemb" class="cols-sm-2 control-label">Qual a Taxa de Hemoglobina?</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" name="TxHemb" id="TxHemb"  placeholder="Digite a Taxa de Hemoglobina aqui..."/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<button type="button" class="btn btn-primary btn-lg btn-block login-button" >Calcular</button>
+			</div>
+		</form>
+	</div>
+	
+</section>
+
+<!-- controller
+angular.module("animal",[])
+				.value('urlBase', 'url do back end')
+        		.controller("animalCtrl", function($scope, $http, urlBase){
+        	$scope.titulo="Cadastro Medico";
+
+        	var self = this;	
+
+	        	self.animal=[];
+	        	self.animal=undefined;
+
+	        	self.novo = function(){
+	        		self.animal = {};
+	        	};
+
+	        	self.salvar=function{
+	        		var metodo = 'POST';
+	        		if(self.animal.idanimal){
+	        			metodo='PUT'
+	        		}
+
+	        		$http({
+	        			method: metodo,
+	        			url: urlBase + 'path para cadastro',
+	        			data: self.animal
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaAnimal();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.altera = function(animal){
+	        		self.animal = animal;
+	        	};
+
+	        	self.deletar = function(animal){
+	        		self.animal = animal;
+	        		$http({
+	        			method: 'DELETE',
+	        			url: urlBase + 'PATH DELETAR' + self.animal.idanimal
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaAnimal();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.atualizarTabelaAnimal=function(){
+	        		$http({
+	        			method:'GET',
+	        			url: urlBase + 'path listar auxiliares'
+	        		})then(function successCallback(response){
+	        			self.animais = response.data;
+	        			self.animais = undefined;
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.ocorreuErro = function(){
+	        		alert("Ocorreu um erro inesperado");
+	        	};
+
+        	function telaInicial(){
+        		location.href = "http://dev.vetonline.com/index.html";
+        	}
+
+
+        });
+-->

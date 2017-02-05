@@ -1,0 +1,90 @@
+<section>
+	
+	<style type="text/css">
+		
+		.custab{
+		    border: 1px solid #ccc;
+		    padding: 5px;
+		    margin: 5% 0;
+		    box-shadow: 3px 3px 2px #ccc;
+		    transition: 0.5s;
+		    }
+		.custab:hover{
+		    box-shadow: 3px 3px 0px transparent;
+		    transition: 0.5s;
+		    }
+	    .col-md-offset-2 {
+		    background-color: #fff;
+		    border-radius: 50px;
+		    margin-left: 6%;
+		    margin-top: 10px;
+		    width: 750px;
+		}
+		.well {
+		    
+		    border: 1px solid #000000;
+		    border-radius: 40px;
+		    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05) inset;
+		    margin-bottom: 20px;
+		    margin-left: 10px;
+		    margin-top: 10px;
+		    min-height: 20px;
+		    padding: 19px;
+		}
+		.table > thead > tr > th {
+		    border-bottom: 1px solid #ddd;
+		    border-right: 2px solid #ddd;
+		    padding: 5px;
+		    text-align: center;
+		}
+		.selecionado{
+			background-color: yellow;
+		}
+		.negrito{
+			font-weight: bold;
+		}
+	</style>
+
+	
+	</script>
+
+	<div class="container">
+	    <div class="row col-md-6 col-md-offset-2 custyle">
+			    <div class="well">
+			    	<label>Qual Médico você procura?<input type="text" ng-model="buscaAnimal" placeholder="Digite o nome do Médico aqui...."></label>
+			    </div>
+
+				    <table class="table table-striped custab">
+					    <thead>
+					    
+					        <tr>
+					        	<th></th>
+					            <th><a href="" ng-click="ordenarPor('crmv')" >Crmv do Médico</a></th>
+					            <th><a href="" ng-click="ordenarPor('nomeMedico')" >Nome do Medico</a></th>
+					            <th><a href="" ng-click="ordenarPor('nomeAuxiliar')" >Nome do Auxiliar</a></th>
+					            <th><a href="" ng-click="ordenarPor('telefoneAuxiliar')" >Telefone do Auxiliar</a></th>
+					            <th class="text-center">Ação</th>
+					        </tr>
+					    </thead>
+				            
+				            <tr ng-class="{'selecionado negrito': medico.selecionado}" ng-repeat="medico in listaMedicosCadastrados | 
+				            	filter: buscaAnimal | orderBy:criterioOrdenacao:direcaoOrdenacao ">
+				                
+				                <td> <imput type = "checkbox" ng-model="medico.selecionado" /> </td>
+				                <td> <p class="crmv"></p> </td>
+				                <td> <p class="nomeMedico"></p> </td>
+				                <td> <p class="nomeAuxiliar"></p> </td>
+				                <td> <p class="telefoneAuxiliar"></p> </td>
+				                <td class="text-center">
+				                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Perfil</a> 
+				                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span>Add</a> 
+				            </tr>
+				            
+				    </table>
+				    
+	    </div>
+
+	</div>
+			
+
+</section>

@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+    <html ng-app="AppVetOnline">
+    
+    <head>
+        <title>Veterinario Sem Fronteiras</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="/bootstrap.css">
+        <script src="/jquery.js"></script>
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-route/angular-route.js"></script>
+        <script src="/bower_components/angular-cookies/angular-cookies.js" ></script>
+        <script type="text/javascript" src="JS/js/functions.js" ></script>
+        <!-- Website Font style -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        
+        <style>
+            
+            .progress-bar {
+                color: #333;
+            } 
+
+
+            * {
+                -webkit-box-sizing: border-box;
+                   -moz-box-sizing: border-box;
+                        box-sizing: border-box;
+                outline: none;
+            }
+
+            .form-control {
+              position: relative;
+              font-size: 16px;
+              height: auto;
+              padding: 10px;
+                @include box-sizing(border-box);
+
+                &:focus {
+                  z-index: 2;
+                }
+            }
+
+            body {
+                background: url(img/GatosCachorro.jpg) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+
+            .login-form {
+                margin-top: 60px;
+            }
+
+            form[role=login] {
+                background: #fff none repeat scroll 0 0;
+                border-radius: 10px;
+                color: #5d5d5d;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 26px;
+                width: 500px;
+
+            }
+            form[role=login] img {
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 35px;
+            }
+            form[role=login] input,
+            form[role=login] button {
+                font-size: 18px;
+                margin: 16px 0;
+                
+            }
+            form[role=login] > div {
+                text-align: center;
+            }
+            
+            .form-links {
+                text-align: center;
+                margin-top: 1em;
+                margin-bottom: 50px;
+            }
+            .form-links a {
+                color: #fff;
+            }
+
+            form[role=cadastromedico]{
+
+                body, html{
+            
+            background-repeat: no-repeat;
+            background-color: #d3d3d3;
+            font-family: 'Oxygen', sans-serif;
+            }
+
+            .main{
+                margin-top: 70px;
+            }
+
+            h1.title { 
+                font-size: 50px;
+                font-family: 'Passion One', cursive; 
+                font-weight: 400; 
+            }
+
+            h2.title{
+                text-align: center;
+                font-size: 20px;
+                font-family: 'Passion One', cursive;
+                font-weight: 30;
+                margin-top: 5px;
+            }
+
+            hr{
+                width: 10%;
+                color: #fff;
+            }
+
+            .form-group{
+                margin-bottom: 15px;
+                padding: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            label{
+                margin-bottom: 15px;
+            }
+
+            input,
+            input::-webkit-input-placeholder {
+                font-size: 11px;
+                padding-top: 3px;
+            }
+
+            .main-login{
+                background-color: #fff;
+                /* shadows and rounded borders */
+                -moz-border-radius: 2px;
+                -webkit-border-radius: 2px;
+                border-radius: 2px;
+                -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+                -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+            }
+
+            .main-center{
+                margin-top: 30px;
+                margin: 0 auto;
+                max-width: 530px;
+                padding: 40px 40px;
+
+            }
+
+            .login-button{
+                margin-top: 5px;
+            }
+
+            .login-register{
+                font-size: 20px;
+                text-align: center;
+
+            }
+
+
+            .container.img{
+                max-width:200px;
+                max-height:150px;
+                width: auto;
+                height: auto;
+            }
+
+            .input-group{
+                border-collapse: separate;
+                position: relative;
+
+            }
+
+            body{
+                background: url(img/logomedico.png);
+                
+            }
+            .selecionado{
+            background-color: yellow;
+            }
+            .negrito{
+                font-weight: bold;
+            }
+
+            }
+        
+        </style>
+
+        
+        <script>
+            
+        //app.js
+            angular.module('AppVetOnline', ['ngRoute', 'ngCookies'])
+                    .config(['$routeProvider', function ($routeProvider) {
+                     $routeProvider
+                            
+                            .when('/login', {
+                                templateUrl: 'login.html',
+                                controller: 'LoginController',
+                                controllerAs: 'vm'
+                                
+                            })
+                        .when('/menuMedico', {
+                            templateUrl: 'menumedico.html',
+                            controller: 'MedicoController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/cadastroMedico', {
+                            templateUrl: 'cadastromedico.html',
+                            controller: 'CadastroMedicoController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/editarMedico', {
+                            templateUrl: 'atualizarMedico.html',
+                            controller: 'AtualizarMedicoController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/excluirMedico', {
+                            templateUrl: 'excluirmedico.html',
+                            controller: 'ExcluirMedicoController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/auxiliarDosMedico', {
+                            templateUrl: 'listarAuxiliaresDosMedicos.html',
+                            controller: 'AuxiliaresDosMedicosController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/PesquisarAuxiliaresCadastros', {
+                            templateUrl: 'pesquisarAuxiliaresCadastrados.html',
+                            controller: 'PesquisarAuxiliaresDosMedicosController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/AdicionarAnimal',{
+                            templateUrl:'adicionarAnimalMedico.html',
+                            controller:'AdicionarAnimalMedicoController',
+                            controllerAs:'vm'
+                            
+                        })
+                        .when('/AnimaisDoMedico',{
+                            templateUrl: 'listarAnimaisDoMedico.html',
+                            controller:'ListarAnimaisDoMedicoController',
+                            controllerAs:'vm'
+                            
+                        })
+                        .when('/DeternimarAnemia',{
+                            templateUrl:'calcularAnemia.html',
+                            controller:'DeternimarAnemiaController',
+                            controllerAs:'vm'
+                            
+                        })
+                            .when('/menuAuxiliar', {
+                                templateUrl: 'menuauxiliar.html',
+                                controller: 'AuxiliarController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/cadastroAuxiliar', {
+                                templateUrl: 'cadastroauxiliar.html',
+                                controller: 'CadastroAuxiliarController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/editarAuxiliar', {
+                                templateUrl: 'atualizarauxiliar.html',
+                                controller: 'AtualizarAuxiliarController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/excluirAuxiliar', {
+                                templateUrl: 'excluirauxiliar.html',
+                                controller: 'ExcluirAuxiliarController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/MeusMedicos',{
+                                templateUrl:'medicosAuxiliares.html',
+                                controller:'MedicosAuxiliaresControlles',
+                                controllerAs:'vm'
+                                
+                            })
+                            .when('/AnimaisDoAuxiliar',{
+                                templateUrl:'listarAnimaisAuxiliar.html',
+                                controller:'AnimaisAuxiliarController',
+                                controllerAs:'vm'
+                                
+                            })
+                            .when('/ProcurarAnimalAuxiliar',{
+                                templateUrl:'procurarAnimal.html',
+                                controller:'ProcurarAnimalAuxiliarController',
+                                controllerAs:'vm'
+                                
+                            })
+
+                        .when('/menuResponsavel', {
+                            templateUrl: 'menuresponsavel.html',
+                            controller: 'ResponsavelController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/cadastroResponsavel', {
+                            templateUrl: 'cadastroresponsavel.html',
+                            controller: 'CadastroResponsavelController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/editarResponsavel', {
+                            templateUrl: 'cadastroanimal.html',
+                            controller: 'AtualizarResponsavelController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/excluirResponsavel', {
+                            templateUrl: 'excluirresponsavel.html',
+                            controller: 'ExcluirResponsavelController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/VerAnimaisResponsavel',{
+                            templateUrl:'animaisResponsavel.html',
+                            controller:'VerAnimaisResponsavelController',
+                            controllerAs:'vm'
+                            
+                        })
+                        .when('/MedicosAnimaisResponsavel',{
+                            templateUrl:'medicosResponsavelAnimal.html',
+                            controller:'MedicosAnimaisResponsavelController',
+                            controllerAs:'vm'
+                            
+                        })
+                        .when('/MedicosCadastrados',{
+                            templateUrl:'listaMedicosCadastrados.html',
+                            controller:"MedicosCadastradosController",
+                            controllerAs:'vm'
+                            
+                        })
+                            .when('/menuClinica', {
+                                templateUrl: 'menuclinica.html',
+                                controller: 'ClinicaController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/cadastroClinica', {
+                                templateUrl: 'cadastroclinica.html',
+                                controller: 'CadastroClinicaController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/editarClinica', {
+                                templateUrl: 'editarclinica.html',
+                                controller: 'AtualizarClinicaController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/excluirClinica', {
+                                templateUrl: 'excluirclinica.html',
+                                controller: 'ExcluirClinicaController',
+                                controllerAs: 'vm'
+                                
+                            })
+                            .when('/MedicosSuaClinica',{
+                                templateUrl:'medicosDaClinica.html',
+                                controller:'MedicosSuaClinicaController',
+                                controllerAs:'vm'
+                                
+                            })
+                            .when('/BuscarMedicoParaClinica',{
+                                templateUrl:'buscarMedicos.html',
+                                controller:'BuscarMedicoParaClinicaController',
+                                controllerAs:'vm'
+                                
+                            })
+                        .when('/cadastroAnimal', {
+                            templateUrl: 'cadastroanimal.html',
+                            controller: 'CadastroAnimalController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/editarAnimal', {
+                            templateUrl: 'editaranimal.html',
+                            controller: 'AtualizarAnimalController',
+                            controllerAs: 'vm'
+                            
+                        })
+                        .when('/excluirAnimal', {
+                            templateUrl: 'excluiranimal.html',
+                            controller: 'ExcluirAnimalController',
+                            controllerAs: 'vm'
+                            
+                        })
+
+                        .when('/selecionarCadastro', {
+                            templateUrl: 'selecionarCadastro.html',
+                            controller: 'SelecionarcadastroController',
+                            controllerAs: 'vm'
+                            
+                        })
+
+                    .when('/novaSenhaAuxiliar', {
+                        templateUrl : 'novaSenhaAuxiliar.html',
+                        controller: 'novaSenhaAuxiliarController',
+                        controllerAs : 'vm'
+                        
+                    })
+
+                    .when('/novaSenhaMedico', {
+                        templateUrl : 'novaSenhaMedico.html',
+                        controller: 'novaSenhaMedicoController',
+                        controllerAs : 'vm'
+                        
+                    })
+
+                    .when('/novaSenhaResponsavel', {
+                        templateUrl : 'novaSenhaResponsavel.html',
+                        controller: 'novaSenhaResponsavelController',
+                        controllerAs : 'vm'
+                        
+                    })
+
+                    .when('/novaSenhaClinica', {
+                        templateUrl : 'novaSenhaClinica.html',
+                        controller: 'novaSenhaClinicaController',
+                        controllerAs : 'vm'
+                        
+                    })
+                        
+                        .otherwise({ redirectTo: '/login' });
+                }])
+                
+                .controller('novaSenhaAuxiliarController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
+     
+                }])
+                
+                .controller('novaSenhaMedicoController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
+     
+                }])
+
+                .controller('novaSenhaResponsavelController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
+     
+                }])
+
+                .controller('novaSenhaClinicaController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
+     
+                }])
+                .controller('LoginController', ['$scope', '$rootScope', '$location', 'AuthenticationService', function($scope, $rootScope, $location, AuthenticationService){
+
+                    AuthenticationService.ClearCredentials();
+  
+                    $scope.login = function () {
+                        $scope.dataLoading = true;
+                        AuthenticationService.Login($scope.username, $scope.password, function(response) {
+                            if(response.success) {
+                                AuthenticationService.SetCredentials($scope.username, $scope.password);
+                                $location.path('/');
+                            } else {
+                                $scope.error = response.message;
+                                $scope.dataLoading = false;
+                            }
+                        });
+                    };
+
+                    
+                }])
+
+                .factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
+                    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+                        var service = {};
+                 
+                        service.Login = function (username, password, callback) {
+                 
+                            /* Dummy authentication for testing, uses $timeout to simulate api call
+                             ----------------------------------------------*/
+                            $timeout(function(){
+                                var response = { success: username === 'test' && password === 'test' };
+                                if(!response.success) {
+                                    response.message = 'Username or password is incorrect';
+                                }
+                                callback(response);
+                            }, 1000);
+                 
+                 
+                            /* Use this for real authentication
+                             ----------------------------------------------*/
+                            //$http.post('/api/authenticate', { username: username, password: password })
+                            //    .success(function (response) {
+                            //        callback(response);
+                            //    });
+                 
+                        };
+                  
+                        service.SetCredentials = function (username, password) {
+                            var authdata = Base64.encode(username + ':' + password);
+                  
+                            $rootScope.globals = {
+                                currentUser: {
+                                    username: username,
+                                    authdata: authdata
+                                }
+                            };
+                  
+                            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+                            $cookieStore.put('globals', $rootScope.globals);
+                        };
+                  
+                        service.ClearCredentials = function () {
+                            $rootScope.globals = {};
+                            $cookieStore.remove('globals');
+                            $http.defaults.headers.common.Authorization = 'Basic ';
+                        };
+                  
+                        return service;
+                    }])
+                  
+                .factory('Base64', function () {
+                    /* jshint ignore:start */
+                  
+                    var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+                  
+                    return {
+                        encode: function (input) {
+                            var output = "";
+                            var chr1, chr2, chr3 = "";
+                            var enc1, enc2, enc3, enc4 = "";
+                            var i = 0;
+                  
+                            do {
+                                chr1 = input.charCodeAt(i++);
+                                chr2 = input.charCodeAt(i++);
+                                chr3 = input.charCodeAt(i++);
+                  
+                                enc1 = chr1 >> 2;
+                                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                                enc4 = chr3 & 63;
+                  
+                                if (isNaN(chr2)) {
+                                    enc3 = enc4 = 64;
+                                } else if (isNaN(chr3)) {
+                                    enc4 = 64;
+                                }
+                  
+                                output = output +
+                                    keyStr.charAt(enc1) +
+                                    keyStr.charAt(enc2) +
+                                    keyStr.charAt(enc3) +
+                                    keyStr.charAt(enc4);
+                                chr1 = chr2 = chr3 = "";
+                                enc1 = enc2 = enc3 = enc4 = "";
+                            } while (i < input.length);
+                  
+                            return output;
+                        },
+                  
+                        decode: function (input) {
+                            var output = "";
+                            var chr1, chr2, chr3 = "";
+                            var enc1, enc2, enc3, enc4 = "";
+                            var i = 0;
+                  
+                            // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
+                            var base64test = /[^A-Za-z0-9\+\/\=]/g;
+                            if (base64test.exec(input)) {
+                                window.alert("There were invalid base64 characters in the input text.\n" +
+                                    "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
+                                    "Expect errors in decoding.");
+                            }
+                            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+                  
+                            do {
+                                enc1 = keyStr.indexOf(input.charAt(i++));
+                                enc2 = keyStr.indexOf(input.charAt(i++));
+                                enc3 = keyStr.indexOf(input.charAt(i++));
+                                enc4 = keyStr.indexOf(input.charAt(i++));
+                  
+                                chr1 = (enc1 << 2) | (enc2 >> 4);
+                                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                                chr3 = ((enc3 & 3) << 6) | enc4;
+                  
+                                output = output + String.fromCharCode(chr1);
+                  
+                                if (enc3 != 64) {
+                                    output = output + String.fromCharCode(chr2);
+                                }
+                                if (enc4 != 64) {
+                                    output = output + String.fromCharCode(chr3);
+                                }
+                  
+                                chr1 = chr2 = chr3 = "";
+                                enc1 = enc2 = enc3 = enc4 = "";
+                  
+                            } while (i < input.length);
+                  
+                            return output;
+                        }
+                    };
+                  
+                    /* jshint ignore:end */
+                })
+                
+                .controller('HomeController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location, urlBase){
+
+                }])
+                
+                .controller('MedicoController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                   
+
+                }])
+                .controller('CadastroMedicoController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Novo Médico
+                    $scope.novoMedico = function(medico){
+                        medico.data= new Date();
+                            $http.post("url api", medico).success(function(data){
+                                delete $scope.medico;
+                                $scope.cadastroMedicoForm.$setPristine();
+                            });
+                    };
+
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };
+
+                }])
+                .controller('AtualizarMedicoController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+
+                    //Atualizar Médico
+                    $scope.atualizaMedico = function(atualizaMedico){
+                        atualizaMedico.data = new Date();
+                            $http.put("url api", atualizaMedico).success(function(data){
+                                delete $scope.atualizaMedico;
+                                $scope.atualizarMedicoForm.$setPristine();
+                            });
+                    };
+
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };
+
+                }])
+                .controller('ExcluirMedicoController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                }])
+                .controller('AuxiliaresDosMedicosController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+
+                        //Auxiliar - Meus Auxiliares
+                    var listaAuxiliarMedico = function() {
+                        $http.get("api url").success(function(data){
+                            $scope.auxiliarMedico=data;
+                        });
+
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+                .controller('PesquisarAuxiliaresDosMedicosController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Auxiliar - Pesquisar Auxiliares Cadastrados
+                    var listaTodosAuxiliaresCadastrados = function() {
+                        $http.get("api url").success(function(data){
+                            $scope.auxiliaresCadastrados=data;
+                        });
+
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+                .controller('AdicionarAnimalMedicoController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Animais - Adicionar Animal
+                    var listaAnimaisCadastrados = function() {
+                        $http.get("api url").success(function(data){
+                            $scope.animais=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+                .controller('ListarAnimaisDoMedicoController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+
+                    //Animais - Listar seus animais
+                    var listaAnimaisMedicos = function() {
+                        $http.get("api url").success(function(data){
+                            $scope.animais=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+                        
+                }])
+                .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Deternimar Anemia / Calcular
+                    $scope.novaAnemia = function(anemia){
+                        anemia.data= new Date();
+                            $http.post("url api", anemia).success(function(data){
+                                delete $scope.anemia;
+                                $scope.cadastroAnemiaForm.$setPristine();
+                            });
+                    };
+
+                }])
+
+
+                .controller('CadastroAnimalController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    $scope.novoAnimal = function(animal){
+                        animal.data= new Date();
+                            $http.post("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.cadastroAnimalrForm.$setPristine();
+                            });
+                    }
+
+                }])
+
+                .controller('AtualizarAnimalController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    $scope.novoAnimal = function(animal){
+                        animal.data= new Date();
+                            $http.post("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.cadastroAnimalrForm.$setPristine();
+                            });
+                    }
+
+                    $scope.listaAnimalMedico = function(listaAnimalMedico){
+
+                    };
+
+                    $scope.listaAnimalResponsavel = function(listaAnimalResponsavel){
+
+                    };
+
+                    $scope.listaAnimalAuxiliar = function(listaAnimalAuxiliar){
+
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                    $scope.novoAnimal = function(animal){
+                        animal.data= new Date();
+                            $http.post("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.cadastroAnimalForm.$setPristine();
+                            });
+                    };
+
+                    //Atualizar Animal
+                    $scope.atualizaAnimal = function(animal){
+                        animal.data = new Date();
+                            $http.put("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.atualizarAnimalForm.$setPristine();
+                            });
+                    };
+
+                    //Atualizar Animal
+                    $scope.atualizaAnimal = function(animal){
+                        animal.data = new Date();
+                            $http.put("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.atualizarAnimalForm.$setPristine();
+                            });
+                    };
+
+                }])
+                .controller('ExcluirAnimalController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    $scope.novoAnimal = function(animal){
+                        animal.data= new Date();
+                            $http.post("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.cadastroAnimalrForm.$setPristine();
+                            });
+                    }
+
+                    $scope.listaAnimalMedico = function(listaAnimalMedico){
+
+                    };
+
+                    $scope.listaAnimalResponsavel = function(listaAnimalResponsavel){
+
+                    };
+
+                    $scope.listaAnimalAuxiliar = function(listaAnimalAuxiliar){
+
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                    $scope.novoAnimal = function(animal){
+                        animal.data= new Date();
+                            $http.post("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.cadastroAnimalForm.$setPristine();
+                            });
+                    };
+
+                    //Atualizar Animal
+                    $scope.atualizaAnimal = function(animal){
+                        animal.data = new Date();
+                            $http.put("url api", animal).success(function(data){
+                                delete $scope.animal;
+                                $scope.atualizarAnimalForm.$setPristine();
+                            });
+                    };
+
+                }])
+
+
+
+                .controller('ClinicaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+
+                }])
+                .controller('CadastroClinicaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+
+                    //Cadastra Clinica
+                    $scope.novaClinica = function(clinica){
+                        clinica.data= new Date();
+                            $http.post("url api", clinica).success(function(data){
+                                delete $scope.clinica;
+                                $scope.cadastroClinicaForm.$setPristine();
+                            });
+                    };
+
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };
+
+                }])
+                .controller('AtualizarClinicaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Editar perfil
+                    $scope.atualizaClinica = function(clinica){
+                        clinica.data = new Date();
+                            $http.put("url api", clinica).success(function(data){
+                                delete $scope.clinica;
+                                $scope.atualizarClinicaForm.$setPristine();
+                            });
+                    };
+
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };
+
+                }])
+                .controller('ExcluirClinicaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                }])
+                .controller('MedicosSuaClinicaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Médicos - Médicos da sua Clinica
+                    var listaMedicosDaClinica = function(){
+                        $http.get("api url").success(function(data){
+                            $scope.medicoClinica=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+                .controller('BuscarMedicoParaClinicaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Medicos - Procurar Medicos
+                    var listaMedicosCadastrados = function(){
+                        $http.get("api url").success(function(data){
+                            $scope.medico=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+
+                .controller('AuxiliarController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                }])
+                .controller('CadastroAuxiliarController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    //Cadastra Auxiliar
+                    $scope.novoAuxiliar = function(auxiliar){
+                        auxiliar.data= new Date();
+                            $http.post("url api", auxiliar).success(function(data){
+                                delete $scope.auxiliar;
+                                $scope.cadastroAuxiliarForm.$setPristine();
+                            });
+                    };
+
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };
+                }])
+                .controller('AtualizarAuxiliarController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Editar perfil
+                    $scope.atualizaAuxiliar = function(auxiliar){
+                        auxiliar.data = new Date();
+                            $http.put("url api", auxiliar).success(function(data){
+                                delete $scope.auxiliar;
+                                $scope.atualizarAuxiliarForm.$setPristine();
+                            });
+                    };
+
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };
+                }])
+                .controller('ExcluirAuxiliarController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Excluir Auxiliar
+                    $scope.deletarAuxiliar = function(auxiliarMedico){
+
+                        $scope.auxiliarMedico = auxiliarMedico.filter(function(auxiliarMedico){
+                            $http.delete("url api").success(function(data){
+                                delete $scope.auxiliarMedico;
+                            });
+                        });
+                    };
+
+                }])
+                .controller('MedicosAuxiliaresControlles', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                   
+                    //Medicos - Meus Medicos
+                    var listaMedicoAuxiliar = function(){
+                        $http.get("api url").success(function(data){
+                            $scope.auxiliar=data;
+                        });
+                    };
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+                .controller('AnimaisAuxiliarController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Animais - Listar seus Animais 
+                    var listaAuxiliarAnimaisSeusCuidados = function(){
+                        $http.get("api url").success(function(data){
+                            $scope.animais=data;
+                        });
+                    };
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+                }])
+                .controller('ProcurarAnimalAuxiliarController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Animais - Procurar Animal
+                    var listaAnimaisCadastrados = function() {
+                        $http.get("api url").success(function(data){
+                            $scope.animais=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+
+
+                .controller('ResponsavelController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+
+                }])
+                .controller('CadastroResponsavelController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Cadastra Responsavel
+                    $scope.novoResponsavel = function(responsavel){
+                        responsavel.data= new Date();
+                            $http.post("url api", responsavel).success(function(data){
+                                delete $scope.responsavel;
+                                $scope.cadastroResponsavelForm.$setPristine();
+                            });
+                    }; 
+                    
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };   
+                }])
+                .controller('AtualizarResponsavelController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Atualizar Responsavel
+                    $scope.atualizaResponsavel = function(responsavel){
+                        responsavel.data = new Date();
+                            $http.put("url api", responsavel).success(function(data){
+                                delete $scope.responsavel;
+                                $scope.editarResponsavelForm.$setPristine();
+                            });
+                    };                    
+
+                    //Estados e Cidades
+                    var carregarEstados = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.estados=data;
+                        });
+                    };
+
+                    var carregarCidades = function(){
+                        $http.get("url api").success(function(data){
+                            $scope.cidades=data;
+                        });
+                    };
+                }])
+                .controller('ExcluirResponsavelController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                }])
+                .controller('VerAnimaisResponsavelController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+
+                     //Animais - Ver meus Animais
+                    var listaAnimaisDoResponsavel = function(){
+                        $http.get("api url").success(function(data){
+                            $scope.animal=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+                .controller('MedicosAnimaisResponsavelController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                     ////Médicos - Medicos dos seus Animais
+                    var listaMedicoResponsavelAnimal = function(){
+                        $http.get("api url").success(function(data){
+                            $scope.buscarMedico=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+
+                }])
+                .controller('MedicosCadastradosController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Medicos - Listar Medicos
+                    var listaMedicosCadastrados = function(){
+                        $http.get("api url").success(function(data){
+                            $scope.medico=data;
+                        });
+                    };
+
+                    $scope.ordenarPor = function(campo){
+                        $scope.criterioOrdenacao = campo;
+                        $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+                    };
+                }])
+
+                .controller('SelecionarCadastroController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    //Direcionar para as telas de cadastros
+
+
+                }])
+                .run(['$rootScope', '$location', '$cookieStore', '$http', 
+                    function ($rootScope, $location, $cookieStore, $http) {
+
+                }]);
+
+        </script>
+        
+    </head>
+    
+    <body>
+        <div class="container" ng-view="">
+        </div>        
+    </body>
+    
+</html>

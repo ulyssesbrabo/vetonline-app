@@ -1,0 +1,298 @@
+<section>
+
+		<style>
+
+			body, html{
+			
+			background-repeat: no-repeat;
+			background-color: #d3d3d3;
+			font-family: 'Oxygen', sans-serif;
+			}
+
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title { 
+				font-size: 50px;
+				font-family: 'Passion One', cursive; 
+				font-weight: 400; 
+			}
+
+			h2.title{
+				text-align: center;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 40px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			body{
+				background: url(img/logomedico.png);
+			}
+
+        </style>
+
+
+	<div class="main-login main-center">
+
+		<form class="form-horizontal" name="cadastroMedicoForm" method="post" action="#">
+
+			<img src="img/logoVeterinarioIngles.png" class="img-responsive" alt="" />
+			
+			<div class="form-group">
+				
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<label for="crmv" class="cols-sm-2 control-label">Seu Crmv</label>
+						<input type="text" class="form-control" name="crmv" ng-model="medico.crmv" placeholder="Digite seu CRMV aqui..." ng-required="true" ng-pattern="/^\d{4,5}$/"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<label for="name" class="cols-sm-2 control-label">Seu Nome</label>
+						<input type="text" class="form-control" name="nomeMedico" ng-model="medico.nomeMedico" placeholder="Digite seu Nome aqui..." ng-required="true" />
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<label for="city" class="cols-sm-2 control-label">Seu estado</label>
+						<select ng-model="medico.Estados" ng-options="estado.nomeEstado estado in estados" >	
+							<option value="">Selecione um estado</option>
+						</select>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<label for="state" class="cols-sm-2 control-label">Sua Cidade</label>
+						<select ng-model="medico.Cidade" ng-options="cidade.nomeCidade cidade in cidades" >
+							<option value="">Selecione sua cidades</option>
+						</select>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<label for="Medicalprofile" class="cols-sm-2 control-label">Perfil Médico</label>
+						<div class="input-group">
+							<textarea rows="6" style="width: 20em" ng-model="medico.perfilMedico" name="perfilMedico"></textarea>
+						</div>
+
+				</div>
+			</div>						
+
+			<div class="form-group">
+				<label for="email" class="cols-sm-2 control-label">Digite seu E-mail</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" name="emailMedico" ng-model="medico.emailMedico"  placeholder="Digite seu e-mail aqui..." ng-required="true"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="phone" class="cols-sm-2 control-label">Telefone</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" name="telefoneMedico" ng-model="medico.telefoneMedico"  placeholder="+XX (XX) XXXXX-XXXX" ng-required="true" ng-pattern= "/^.\d{2}..\d{2}..\d{4,5}.\d{4}$/"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="password" class="cols-sm-2 control-label">Senha</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="password" class="form-control" name="senhaMedico" ng-model="medico.senhaMedico"  placeholder="Digite sua senha aqui..." ng-required="true"/>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="confirm" class="cols-sm-2 control-label">Confirme sua senha</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						
+						<input type="password" class="form-control" name="confirmSenha"  placeholder="Confirme sua senha aqui..."/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<button type="button" class="btn btn-primary btn-block" ng-click = "novoMedico(medico)" ng-disabled="cadastroMedicoForm.$invalid" >Cadastra</button>
+			</div>
+
+			<div class="login-register">
+				<button type="button" class="btn btn-primary btn-block">Voltar</button>
+	            </button>
+	         </div>
+		</form>
+	</div>
+	
+</section>
+
+<!-- inserir no controller
+angular.module("medico",[])
+	        	.value('urlBase', 'url do back end')
+	        	.config(function ($routeProvider) {
+				 $routeProvider
+				        .when('/login', {
+				            templateUrl: 'avengers.html',
+				            controller: 'Avengers',
+				            controllerAs: 'vm'
+				        });
+				})
+	        	.controller("medicoCtrl", function($scope, $http, urlBase){
+	        	$scope.titulo="Cadastro Medico";
+
+	        	var self = this;	
+
+	        	self.medico=[];
+	        	self.medico=undefined;
+
+	        	self.novo = function(){
+	        		self.medico = {};
+	        	};
+
+	        	self.salvar=function{
+	        		var metodo = 'POST';
+	        		if(self.medico.idmedico){
+	        			metodo='PUT'
+	        		}
+
+	        		$http({
+	        			method: metodo,
+	        			url: urlBase + 'path para cadastro',
+	        			data: self.medico
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaMedico();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.altera = function(medico){
+	        		self.medico = medico;
+	        	};
+
+	        	self.deletar = function(medico){
+	        		self.medico = medico;
+	        		$http({
+	        			method: 'DELETE',
+	        			url: urlBase + 'PATH DELETAR' + self.medico.idmedico
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaMedico();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.consulta = function(medico){
+	        		self.medico = medico;
+	        		$http({
+	        			method: 'GET',
+	        			url: urlBase+'PATH CONSULTA'+self.medico.crmv
+	        		});
+	        	};
+
+	        	self.atualizarTabelaMedico=function(){
+	        		$http({
+	        			method:'GET',
+	        			url: urlBase + 'path listar medicos'
+	        		})then(function successCallback(response){
+	        			self.medicos = response.data;
+	        			self.medico = undefined;
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.ocorreuErro = function(){
+	        		alert("Ocorreu um erro inesperado");
+	        	};
+
+	        	function telaInicial(){
+	        		location.href = "http://dev.vetonline.com/index.html";
+	        	}
+
+        });
+-->

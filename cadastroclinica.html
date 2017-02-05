@@ -1,0 +1,318 @@
+<section>
+	
+	<style>
+
+			body, html{
+			
+			background-repeat: no-repeat;
+			background-color: #d3d3d3;
+			font-family: 'Oxygen', sans-serif;
+			}
+
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title { 
+				font-size: 50px;
+				font-family: 'Passion One', cursive; 
+				font-weight: 400; 
+			}
+
+			h2.title{
+				text-align: center;
+				color: #000EB9;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 50px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			body{
+				background: url(img/logoresponsavel1.jpg);
+			}
+
+
+    </style>
+
+        <div class="container">
+        	
+        	<div class="row main">
+
+	        	<div class="main-login main-center" >
+
+	        		<form class="form-horizontal" name="cadastroClinicaForm" method="post" action="#">
+	        			
+	        			<img src="img/logoVeterinarioIngles.png" class="img-responsive" alt=""/>
+						
+						<div class="form-group">
+							
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="cpf" class="cols-sm-2 control-label">Digite o CNPJ da Clinica</label>
+									<input type="text" class="form-control" name="cpf" id="cpf" ng-model="clinica.cnpjClinica" ng-pattern="/^\d{2}.\d{3}.\d{3}.\d{4}-\d{2}$/" ng-required="true" placeholder="XX.XXX.XXX/XXXX.XX"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="name" class="cols-sm-2 control-label">Digite o nome da Clinica</label>
+									<input type="text" class="form-control" name="name" id="name" placeholder="Digite o nome da Clinica aqui..." ng-model="clinica.nomeClinica" ng-required="true"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="address" class="cols-sm-2 control-label">Digite o Endereço da Clinica</label>
+									<input type="text" class="form-control" name="address" id="address" placeholder="Digite o Endereço da Clinica aqui..." ng-model="clinica.enderecoClinica" ng-required="true"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="phone" class="cols-sm-2 control-label">Digite o telefone Residencial da Clinica</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="phone" id="phone" ng-model="clinica.telefoneClinicaResidencial" placeholder="+XX (XX) XXXXX-XXXX" ng-required="true" ng-pattern= "/^.\d{2}..\d{2}..\d{4,5}.\d{4}$/"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="phone" class="cols-sm-2 control-label">Digite o telefone Celular da Clinica</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="phone" id="phone" ng-model="clinica.telefoneClinicaCelular" placeholder="+XX (XX) XXXXX-XXXX" ng-required="true" ng-pattern= "/^.\d{2}..\d{2}..\d{4,5}.\d{4}$/"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="phone" class="cols-sm-2 control-label">Digite outros Telefones da Clinica</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="phone" id="phone" ng-model="clinica.telefoneClinicaCelularOutros" placeholder="+XX (XX) XXXXX-XXXX" ng-required="true" ng-pattern= "/^.\d{2}..\d{2}..\d{4,5}.\d{4}$/"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Digite o Email da Clinica</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="email" id="email" ng-model="clinica.emailclinica" ng-required="true" placeholder="Digite seu email aqui..."/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="city" class="cols-sm-2 control-label">Seu estado</label>
+									<select ng-model="clinica.uf" ng-options="estado.nomeEstado estado in estados" ng-required="true">
+										<option value="">Selecione um estado</option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<label for="state" class="cols-sm-2 control-label">Sua Cidade</label>
+									<select ng-model="clinica.cidade" ng-options="cidade.nomeCidade cidade in cidades" ng-required="true">
+										<option value="">Selecione sua cidades</option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<label for="perfilClinica" class="cols-sm-2 control-label">Perfil Clinica</label>
+									<div class="input-group">
+										<textarea rows="6" style="width: 20em" id="perfilClinica" name="perfilClinica" ng-model="clinica.perfilClinica" ></textarea>
+									</div>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="senhaClinica" class="cols-sm-2 control-label">Digite sua Senha</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="password" class="form-control" name="senhaClinica" id="senhaClinica" ng-model="clinica.senhaClinica" placeholder="Digite sua senha aqui..."/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="confirm" class="cols-sm-2 control-label">Confirme sua Senha</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirme sua senha..."/>
+								</div>
+							</div>
+						</div>
+						<div class="form-group ">
+							<button type="button" class="btn btn-primary btn-block" ng-click="novaClinica(clinica)" ng-disabled="cadastroClinicaForm.$invalid" >Cadastra</button>
+						</div>
+
+					</form>
+	        		
+	        	</div>
+        		
+        	</div>
+
+        </div>
+
+</section>
+
+
+<!--
+<script>
+        angular.module("clinica",[])
+        		.value('urlBase', 'url do back end')
+        		.controller("clinicaCtrl", function($scope, $http, urlBase){
+        	$scope.titulo="Cadastro Medico";
+
+        	var self = this;	
+
+	        	self.clinica=[];
+	        	self.clinica=undefined;
+
+	        	self.novo = function(){
+	        		self.clinica = {};
+	        	};
+
+	        	self.salvar=function{
+	        		var metodo = 'POST';
+	        		if(self.clinica.idclinicaVeterinaria){
+	        			metodo='PUT'
+	        		}
+
+	        		$http({
+	        			method: metodo,
+	        			url: urlBase + 'path para cadastro',
+	        			data: self.clinica
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaClinica();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.altera = function(clinica){
+	        		self.clinica = clinica;
+	        	};
+
+	        	self.deletar = function(clinica){
+	        		self.clinica = clinica;
+	        		$http({
+	        			method: 'DELETE',
+	        			url: urlBase + 'PATH DELETAR' + self.clinica.idclinicaVeterinaria
+	        		})then(function successCallback(response){
+	        			self.atualizarTabelaClinica();
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.atualizarTabelaClinica=function(){
+	        		$http({
+	        			method:'GET',
+	        			url: urlBase + 'path listar auxiliares'
+	        		})then(function successCallback(response){
+	        			self.responsaveis = response.data;
+	        			self.responsaveis = undefined;
+	        		}, function erroCallBack(response){
+	        			self.ocorreuErro();
+	        		});
+	        	};
+
+	        	self.ocorreuErro = function(){
+	        		alert("Ocorreu um erro inesperado");
+	        	};
+
+        	function telaInicial(){
+        		location.href = "http://dev.vetonline.com/index.html";
+        	}
+
+
+        });
+        </script>
+-->

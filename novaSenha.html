@@ -1,0 +1,157 @@
+<section>
+	
+	<style>
+
+			body, html{
+			
+			background-repeat: no-repeat;
+			
+			font-family: 'Oxygen', sans-serif;
+			}
+
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title { 
+				font-size: 50px;
+				font-family: 'Passion One', cursive; 
+				font-weight: 400; 
+			}
+
+			h2.title{
+				text-align: center;
+				color: #000EB9;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 50px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			body{
+				background: url(img/logomedico.png);
+				
+			}
+
+    </style>
+
+    <script type="text/javascript">
+
+    	function verificarSenhas(){
+		if (document.novaSenhaForm.novasenha.value == document.novaSenhaForm.confsenha.value)
+			{alert ("As duas senhas conferem")
+			}
+			 
+			else{
+			alert ("As duas senhas não conferem")
+			}
+		}
+
+
+    </script>
+
+
+    <div class="main-login main-center" >
+
+    		<form class="form-horizontal" name="novaSenhaForm" method="post" action="#">
+				
+				<div class="panel-title text-center">
+	    			<h1 class="title">Nova Senha</h1>
+	    		</div>
+
+				<div class="form-group">
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<label for="novasenha" class="cols-sm-2 control-label">Nova Senhal</label>
+							<input type="password" class="form-control" name="novasenha" id="novasenha" placeholder="Digite a nova senha aqui..."/>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<label for="confsenha" class="cols-sm-2 control-label">Confirma Senha</label>
+							<input type="password" class="form-control" name="confsenha" id="confsenha" placeholder="Confrime sua senha aqui..."/>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="verificarSenhas()" >Salvar</button>
+				</div>
+
+			</form>
+    		
+    	</div>
+
+
+</section>

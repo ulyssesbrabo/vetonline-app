@@ -103,7 +103,7 @@
 
         <div class="main-login main-center">
 
-		<form class="form-horizontal" name="cadastroMedicoForm" method="post" action="#">
+		<form class="form-horizontal" name="calcularAnemiaForm" method="post" action="#">
 
 				<div class="panel-title text-center">
 	    			<h1 class="title">Determina possivel Anemia</h1>
@@ -122,19 +122,6 @@
 
 				</div>
 			</div>	
-
-			<div class="form-group">
-				<div class="cols-sm-10">
-					<div class="input-group">
-						<label for="AnimSeus" class="cols-sm-2 control-label">Selecione o Animal de seus cuidados</label>
-						<select name="AnimSeus" id="AnimSeus" >
-							<option value="">--</option>
-							<option value="PR">PR</option>
-						</select>
-					</div>
-
-				</div>
-			</div>
 
 			<div class="form-group">
 				<div class="cols-sm-10">
@@ -164,8 +151,14 @@
 				</div>
 			</div>
 
+			<dir>
+					<label for="res">Resultado:</label>
+	      			<input type="text" name="res" id="res" />
+			</dir>
+
+
 			<div class="form-group ">
-				<button type="button" class="btn btn-primary btn-lg btn-block login-button" >Calcular</button>
+				<input type="button" value="Calcular" class="botao" onClick="calcular(document.calcularAnemiaForm.AnimSeus.value)">
 			</div>
 		</form>
 	</div>

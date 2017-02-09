@@ -107,66 +107,23 @@
     		<h1 class="title">Atualizar Médico</h1>
     	</div>
 
-		<form class="form-horizontal" name="cadastroMedicoForm" method="post" action="#">
-			
-			<div class="form-group">
-				
-				<div class="cols-sm-10">
-					<div class="input-group">
-						<label for="crmv" class="cols-sm-2 control-label">Seu Crmv</label>
-						<input type="text" class="form-control" name="crmv" id="crmv" placeholder="Digite seu CRMV aqui..."/>
-					</div>
-				</div>
-			</div>
+		<form class="form-horizontal" name="atualizaMedicoForm" method="post" action="#">
 
 			<div class="form-group">
 				
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<label for="name" class="cols-sm-2 control-label">Seu Nome</label>
-						<input type="text" class="form-control" name="name" id="name" placeholder="Digite seu Nome aqui..."/>
+						<input type="text" class="form-control" name="name" ng-model="atualizaMedico.nomeMedico" placeholder="Digite seu Nome aqui..."/>
 					</div>
 				</div>
 			</div>
-
-			<div class="form-group">
-				<div class="cols-sm-10">
-					<div class="input-group">
-						<label for="city" class="cols-sm-2 control-label">Sua Cidade</label>
-						<input type="text" class="form-control" name="city" id="city" placeholder="Sua Cidade aqui..."/>
-					</div>
-
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="cols-sm-10">
-					<div class="input-group">
-						<label for="state" class="cols-sm-2 control-label">Seu Estado</label>
-						<select name="state" id="state" >
-							<option value="">--</option>
-							<option value="PR">PR</option>
-						</select>
-					</div>
-
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="cols-sm-10">
-					<label for="Medicalprofile" class="cols-sm-2 control-label">Perfil Médico</label>
-						<div class="input-group">
-							<textarea rows="6" style="width: 20em" id="Medicalprofile" name="Medicalprofile" ></textarea>
-						</div>
-
-				</div>
-			</div>						
 
 			<div class="form-group">
 				<label for="email" class="cols-sm-2 control-label">Digite seu E-mail</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
-						<input type="text" class="form-control" name="email" id="email"  placeholder="Digite seu e-mail aqui..."/>
+						<input type="text" class="form-control" name="email" ng-model="atualizaMedico.emailMedico"  placeholder="Digite seu e-mail aqui..."/>
 					</div>
 				</div>
 			</div>
@@ -175,19 +132,24 @@
 				<label for="phone" class="cols-sm-2 control-label">Telefone</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
-						<input type="text" class="form-control" name="phone" id="phone"  placeholder="Digite seu telefone aqui..."/>
+						<input type="text" class="form-control" name="phone" ng-model="atualizaMedico.telefoneMedico"  placeholder="Digite seu telefone aqui..." ng-pattern= "/^\d{4,5}\d{4}$/" ng-required="true"/>
 					</div>
 				</div>
 			</div>
 
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<label for="Medicalprofile" class="cols-sm-2 control-label">Perfil Médico</label>
+						<div class="input-group">
+							<textarea rows="6" style="width: 20em" ng-model="atualizaMedico.perfilMedico" name="Medicalprofile" ></textarea>
+						</div>
+				</div>
+			</div>						
+
 			<div class="form-group ">
-				<button type="button" class="btn btn-primary btn-lg btn-block login-button" >Cadastra</button>
+				<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click = "atualizaMedico(atualizaMedico)" ng-disabled="atualizaMedicoForm.$invalid" >Atualizar</button>
 			</div>
 
-			<div class="login-register">
-				<button type="button" class="btn btn-primary btn-lg btn-block login-button">Voltar</button>
-	            </button>
-	         </div>
 		</form>
 	</div>
 	

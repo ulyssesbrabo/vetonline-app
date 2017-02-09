@@ -464,7 +464,39 @@
   
                     $scope.login = function () {
                         $scope.dataLoading = true;
-                        AuthenticationService.Login($scope.username, $scope.password, function(response) {
+                        var usuario = ($scope.username, $scope.password);
+
+                            AuthenticationService.LoginResponsavel(usuario, function(response){
+                                if (response.success) {
+                                    AuthenticationService.SetCredentials(usuario.username, usuario.password);
+                                    $location.path('/menuResponsavel');
+                                }else{
+                                    AuthenticationService.LoginAuxiliar(usuario, function(response){
+                                        if (response.success) {
+                                            AuthenticationService.SetCredentials(usuario.username, usuario.password);
+                                            $location.path('/menuAuxiliar');
+                                        }else{
+                                            AuthenticationService.LoginClinica(usuario, function(response){
+                                                if (response.success) {
+                                                    AuthenticationService.SetCredentials(usuario.username, usuario.password);
+                                                    $location.path('/menuClinica');
+                                                }else{
+                                                    AuthenticationService.LoginMedico(usuario, function(response){
+                                                        if (response.success) {
+                                                            AuthenticationService.SetCredentials(usuario.username, usuario.password);
+                                                            $location.path('/menuMedico');
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+
+/*
+
+                        AuthenticationService.Login( usuario, function(response) {
                             if(response.success) {
                                 AuthenticationService.SetCredentials($scope.username, $scope.password);
                                 $location.path('/');
@@ -473,6 +505,7 @@
                                 $scope.dataLoading = false;
                             }
                         });
+                        */
                     };
 
                     
@@ -482,10 +515,11 @@
                     function (Base64, $http, $cookieStore, $rootScope, $timeout) {
                         var service = {};
                  
-                        service.Login = function (username, password, callback) {
+                        //service.Login = function (usuario, callback) {
                  
                             /* Dummy authentication for testing, uses $timeout to simulate api call
                              ----------------------------------------------*/
+                            /*
                             $timeout(function(){
                                 var response = { success: username === 'test' && password === 'test' };
                                 if(!response.success) {
@@ -502,14 +536,42 @@
                             //        callback(response);
                             //    });
                  
+                        
+
+                        service.LoginMedico = function(){
+                            $http.get('http://localhost:8000/autenticacaoMedico', usuario)
+                            .success(function(response){
+                                callback(response);
+                            });
+                        };
+
+                        service.LoginAuxiliar = function(){
+                            $http.get('http://localhost:8000/autenticacaoAuxiliar', usuario)
+                            .success(function(response){
+                                callback(response);
+                            });
+                        };
+
+                        service.LoginResponsavel = function(){
+                            $http.get('http://localhost:8000/autenticacaoResponsavel', usuario)
+                            .success(function(response){
+                                callback(response);
+                            });
+                        };
+
+                        service.LoginClinica = function(){
+                            $http.get('http://localhost:8000/autenticacaoClinica', usuario)
+                            .success(function(response){
+                                callback(response);
+                            });
                         };
                   
-                        service.SetCredentials = function (username, password) {
-                            var authdata = Base64.encode(username + ':' + password);
+                        service.SetCredentials = function (usuario) {
+                            var authdata = Base64.encode(usuario.username + ':' + usuario.password);
                   
                             $rootScope.globals = {
                                 currentUser: {
-                                    username: username,
+                                    username: usuario.username,
                                     authdata: authdata
                                 }
                             };
@@ -622,30 +684,62 @@
                    
 
                 }])
-                .controller('CadastroMedicoController', ['$scope', '$rootScope', '$location', 
+                .controller('CadastroMedicoController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
-                    
+
+                    $scope.estados = [];
+                    $scope.cidades = [];
+
+
+
                     //Novo Médico
                     $scope.novoMedico = function(medico){
-                        medico.data= new Date();
-                            $http.post("url api", medico).success(function(data){
-                                delete $scope.medico;
+                        $http({
+                            method: 'POST',
+                            url: ('http://localhost:8000/novoMedico', medico)
+                        }).then(function(success, data){
+                            delete $scope.medico;
                                 $scope.cadastroMedicoForm.$setPristine();
-                            });
+                        })
                     };
 
+                    $scope.carregarEstados = function(){
+                        $http({
+                            method: 'GET',
+                            url: 'http://localhost:8000/selecionarEstado'
+                        }).then(function(success, data){
+                            $scope.estados = success.data ;
+                        })
+                    };
+
+                    $scope.carregarEstados();
+
+                    $scope.carregarCidades = function(data){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/selecionarCidade/',$scope.estados)
+                        }).then(function(success, data){
+                            $scope.cidades= success.data ;
+                            console.log(data);
+                        }, function(error){
+
+                        });
+                    };
+
+
+                           /*
                     //Estados e Cidades
                     var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
+                        $http.get('http://localhost:8000/selecionarEstado').success(function(data){
                             $scope.estados=data;
                         });
                     };
 
                     var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
+                        $http.get("http://localhost:8000/selecionarCidade/"+carregarEstados(estados)).success(function(data){
                             $scope.cidades=data;
                         });
-                    };
+                    };*/
 
                 }])
                 .controller('AtualizarMedicoController', ['$scope', '$rootScope', '$location', 
@@ -654,25 +748,13 @@
                     //Atualizar Médico
                     $scope.atualizaMedico = function(atualizaMedico){
                         atualizaMedico.data = new Date();
-                            $http.put("url api", atualizaMedico).success(function(data){
+                            $http.put("http://localhost:8000/atualizaMedico", atualizaMedico).success(function(data){
                                 delete $scope.atualizaMedico;
                                 $scope.atualizarMedicoForm.$setPristine();
                             });
                     };
 
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.cidades=data;
-                        });
-                    };
-
+                    
                 }])
                 .controller('ExcluirMedicoController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -683,10 +765,16 @@
 
                         //Auxiliar - Meus Auxiliares
                     var listaAuxiliarMedico = function() {
-                        $http.get("api url").success(function(data){
+                        $http.get("http://localhost:8000/auxiliaresMedicos", login(usuario)).success(function(data){
                             $scope.auxiliarMedico=data;
                         });
 
+                    };
+
+                    var deletarAuxiliarMedico = function(){
+                        $http.delete("http://localhost:8000/excluirAuxiliar", login(usuario)).success(function(data){
+                            $scope.deleteAuxiliar=data;
+                        })
                     };
 
                     $scope.ordenarPor = function(campo){
@@ -700,10 +788,17 @@
                     
                     //Auxiliar - Pesquisar Auxiliares Cadastrados
                     var listaTodosAuxiliaresCadastrados = function() {
-                        $http.get("api url").success(function(data){
+                        $http.get("http://localhost:8000/auxiliaresCadastrados", login(usuario)).success(function(data){
                             $scope.auxiliaresCadastrados=data;
                         });
+                    };
 
+                    var inserirAuxiliar = login(usuario) && auxiliar.selecionado;
+
+                    var adicionarAuxiliar = function(){
+                        $http.post("http://localhost:8000/inserirAuxiliarMedico", inserirAuxiliar).success(function(data){
+                            $scope.adicionarAuxiliar=data;
+                        });
                     };
 
                     $scope.ordenarPor = function(campo){
@@ -717,8 +812,16 @@
                     
                     //Animais - Adicionar Animal
                     var listaAnimaisCadastrados = function() {
-                        $http.get("api url").success(function(data){
+                        $http.get("http://localhost:8000/animaisCadastrados", login(usuario)).success(function(data){
                             $scope.animais=data;
+                        });
+                    };
+
+                    var inserirAnimalMedico = login(usuario) && animal.selecionado;
+
+                    var adicionarAnimal = function(){
+                        $http.post("http://localhost:8000/adicionarAnimal", inserirAnimalMedico).success(function(data){
+                            $scope.adicionarAnimal=data;
                         });
                     };
 
@@ -733,7 +836,7 @@
 
                     //Animais - Listar seus animais
                     var listaAnimaisMedicos = function() {
-                        $http.get("api url").success(function(data){
+                        $http.get("http://localhost:8000/animaisMedico", login(usuario)).success(function(data){
                             $scope.animais=data;
                         });
                     };
@@ -746,15 +849,96 @@
                 }])
                 .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
+
+                        var anemiaMacrociticaNormocromica = function(){
+                            $http.get("http://localhost:8000/anemiaMacrocitica").success(function(data){
+                                $scope.anemia=data;
+                            });
+                        };
+
+                        var anemiaMacrociticaHipocromica = function(){
+                            $http.get("http://localhost:8000/anemiaMacrociticaHipocromica").success(function(data){
+                                $scope.anemia=data;
+                            });
+                        };
+
+                        var anemiaMicrocitico = function(){
+                            $http.get("http://localhost:8000/anemiaMicrocitico").success(function(data){
+                                $scope.anemia=data;
+                            });
+                        };
+
+                        var anemiaMicrociticoHipocromico = function(){
+                            $http.get("http://localhost:8000/anemiaMicrociticoHipocromico").success(function(data){
+                                $scope.anemia=data;
+                            });
+                        };
                     
+                    function calcular(AnimSeus){
+                        var VolGlob = document.calcularAnemiaForm.VolGlob.value;
+                        var NuHema = document.calcularAnemiaForm.NuHema.value;
+                        var TxHemb = document.calcularAnemiaForm.TxHemb.value;
+
+                            if (AnimSeus == "1") {
+                                var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
+                                var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
+
+                                    if (VGM>=49 && CHGM<=30) {
+                                        var res = anemiaMacrociticaNormocromica();
+                                    }else{
+                                        if (VGM>=49 && CHGM>30) {
+                                            var res = anemiaMacrociticaHipocromica();
+                                        }else{
+                                                if (VGM<=37 && CHGM<=30) {
+                                                    var res = anemiaMicrociticoHipocromico();
+                                                }else{
+                                                    if (VGM<=37 && CHGM>30) {
+                                                        var res = anemiaMicrocitico();
+                                                    }
+                                                }
+                                            }
+                                        }
+                            }else{
+                                
+                                if (AnimSeus == "2") {
+                                    var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
+                                    var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
+                                        if (VGM>=49 && CHGM<=30) {
+
+                                        }else{
+                                            if (VGM>=49 && CHGM>30) {
+
+                                            }else{
+                                                if (37>VGM<49 && CHGM>30) {
+
+                                                }else{
+                                                    if (VGM<=37 && CHGM<=30) {
+
+                                                    }else{
+                                                        if (VGM<=37 && CHGM>30) {
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                }
+                            }
+
+                            document.calcularAnemiaForm.AnimSeus.value = res;   
+                    };
+
                     //Deternimar Anemia / Calcular
-                    $scope.novaAnemia = function(anemia){
-                        anemia.data= new Date();
-                            $http.post("url api", anemia).success(function(data){
-                                delete $scope.anemia;
+                    $scope.novaAnemia = function(inserirAnemia){
+                        inserirAnemia.data= new Date();
+                            $http.post("http://localhost:8000/inserirAnemia", inserirAnemia).success(function(data){
+                                delete $scope.inserirAnemia;
                                 $scope.cadastroAnemiaForm.$setPristine();
                             });
                     };
+
+
 
                 }])
 
@@ -784,7 +968,9 @@
                     }
 
                     $scope.listaAnimalMedico = function(listaAnimalMedico){
+                        $http.get("", login(usuario).success(function(data){
 
+                        }))
                     };
 
                     $scope.listaAnimalResponsavel = function(listaAnimalResponsavel){
@@ -892,18 +1078,7 @@
                             });
                     };
 
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.cidades=data;
-                        });
-                    };
+                    
 
                 }])
                 .controller('AtualizarClinicaController', ['$scope', '$rootScope', '$location', 
@@ -918,19 +1093,7 @@
                             });
                     };
 
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.cidades=data;
-                        });
-                    };
-
+                    
                 }])
                 .controller('ExcluirClinicaController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -941,7 +1104,7 @@
                     
                     //Médicos - Médicos da sua Clinica
                     var listaMedicosDaClinica = function(){
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.medicoClinica=data;
                         });
                     };
@@ -957,7 +1120,7 @@
                     
                     //Medicos - Procurar Medicos
                     var listaMedicosCadastrados = function(){
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.medico=data;
                         });
                     };
@@ -984,18 +1147,6 @@
                             });
                     };
 
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.cidades=data;
-                        });
-                    };
                 }])
                 .controller('AtualizarAuxiliarController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -1007,19 +1158,6 @@
                                 delete $scope.auxiliar;
                                 $scope.atualizarAuxiliarForm.$setPristine();
                             });
-                    };
-
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.cidades=data;
-                        });
                     };
                 }])
                 .controller('ExcluirAuxiliarController', ['$scope', '$rootScope', '$location', 
@@ -1041,7 +1179,7 @@
                    
                     //Medicos - Meus Medicos
                     var listaMedicoAuxiliar = function(){
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.auxiliar=data;
                         });
                     };
@@ -1056,7 +1194,7 @@
                     
                     //Animais - Listar seus Animais 
                     var listaAuxiliarAnimaisSeusCuidados = function(){
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.animais=data;
                         });
                     };
@@ -1070,7 +1208,7 @@
                     
                     //Animais - Procurar Animal
                     var listaAnimaisCadastrados = function() {
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.animais=data;
                         });
                     };
@@ -1097,20 +1235,7 @@
                                 delete $scope.responsavel;
                                 $scope.cadastroResponsavelForm.$setPristine();
                             });
-                    }; 
-                    
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.cidades=data;
-                        });
-                    };   
+                    };    
                 }])
                 .controller('AtualizarResponsavelController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -1122,20 +1247,7 @@
                                 delete $scope.responsavel;
                                 $scope.editarResponsavelForm.$setPristine();
                             });
-                    };                    
-
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("url api").success(function(data){
-                            $scope.cidades=data;
-                        });
-                    };
+                    }; 
                 }])
                 .controller('ExcluirResponsavelController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -1146,7 +1258,7 @@
 
                      //Animais - Ver meus Animais
                     var listaAnimaisDoResponsavel = function(){
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.animal=data;
                         });
                     };
@@ -1162,7 +1274,7 @@
                     
                      ////Médicos - Medicos dos seus Animais
                     var listaMedicoResponsavelAnimal = function(){
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.buscarMedico=data;
                         });
                     };
@@ -1178,7 +1290,7 @@
                     
                     //Medicos - Listar Medicos
                     var listaMedicosCadastrados = function(){
-                        $http.get("api url").success(function(data){
+                        $http.get("api url", login(usuario.username)).success(function(data){
                             $scope.medico=data;
                         });
                     };
@@ -1189,16 +1301,28 @@
                     };
                 }])
 
-                .controller('SelecionarCadastroController', ['$scope', '$rootScope', '$location', 
+                .controller('SelecionarcadastroController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
                     
-                    //Direcionar para as telas de cadastros
+                    
 
 
                 }])
                 .run(['$rootScope', '$location', '$cookieStore', '$http', 
                     function ($rootScope, $location, $cookieStore, $http) {
-
+                   /*
+                    // keep user logged in after page refresh
+                    $rootScope.globals = $cookieStore.get('globals') || {};
+                    if ($rootScope.globals.currentUser) {
+                        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+                    }
+              
+                    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+                        // redirect to login page if not logged in
+                        if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                            $location.path('/login');
+                        }
+                    });*/
                 }]);
 
         </script>

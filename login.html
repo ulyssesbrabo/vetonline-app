@@ -1,20 +1,20 @@
 <section class="login-form">
 
-        <form method="post" role="login">
+        <form  name="formLogin" method="post" role="login">
 
             <img src="img/logoVeterinarioIngles.png" class="img-responsive" alt="" />
 
               <label for="username">Login</label>
               <i class="fa fa-key"></i>
-              <input name="username" id="username" class="form-control" type="text" ng-model="user.username" required placeholder="CRMV(Médico) ou CPF(Auxiliar/Responsavel)"/>
+              <input name="username" id="username" class="form-control" type="text" ng-model="usuario.username" ng-pattern = "/^\d{4,11}$/" required= "true" placeholder="CRMV(Médico) ou CPF(Auxiliar/Responsavel)"/>
               
               <label for="password">Password</label>
               <i class="fa fa-lock"></i>
-              <input name="password" id="password" class="form-control" type="password" ng-model="user.password" required placeholder="Sua senha" />
+              <input name="password" id="password" class="form-control" type="password" ng-model="usuario.password" required= "true" placeholder="Sua senha" />
           
                 <div class="pwstrength_viewport_progress"></div>
           
-                <button type="submit" ng-click="logar(user)" class="btn btn-lg btn-primary btn-block">Login</button>
+                <button type="submit" ng-disabled="formLogin.$invalid || dataLoading" class="btn btn-lg btn-primary btn-block">Login</button>
           
                   <div>
                     

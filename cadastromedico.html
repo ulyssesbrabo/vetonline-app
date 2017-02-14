@@ -130,12 +130,10 @@
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<label for="city" class="cols-sm-2 control-label">Seu estado</label>
-						<select name="estado" id="estado" ng-model="medico.Estados" 
+						<select name="estado" id="estado" ng-model="estadoSelecionado" 
 								ng-change = "carregarCidades()">
-
 							<option value="">Selecione um estado</option>
 							<option ng-repeat="option in estados" value="{{option.idEstados}}">{{option.nomeEstados}}</option>
-
 						</select>
 					</div>
 

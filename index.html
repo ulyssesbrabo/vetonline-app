@@ -689,6 +689,7 @@
 
                     $scope.estados = [];
                     $scope.cidades = [];
+                    $scope.estadoSelecionado = {};
 
 
 
@@ -712,12 +713,11 @@
                         })
                     };
 
-                    $scope.carregarEstados();
-
-                    $scope.carregarCidades = function(data){
+                    $scope.carregarCidades = function(idEstados,data){
+                        
                         $http({
                             method: 'GET',
-                            url: ('http://localhost:8000/selecionarCidade/',$scope.estados)
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
                         }).then(function(success, data){
                             $scope.cidades= success.data ;
                             console.log(data);
@@ -725,6 +725,8 @@
 
                         });
                     };
+
+                    $scope.carregarEstados();
 
 
                            /*

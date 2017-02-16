@@ -689,19 +689,15 @@
 
                     $scope.estados = [];
                     $scope.cidades = [];
-                    $scope.estadoSelecionado = {};
-
-
+                    $scope.Estados = [];
 
                     //Novo Médico
                     $scope.novoMedico = function(medico){
-                        $http({
-                            method: 'POST',
-                            url: ('http://localhost:8000/novoMedico', medico)
-                        }).then(function(success, data){
+                        medico.data = new Date();
+                        $http.post('http://localhost:8000/novoMedico', medico).then(function (data){
                             delete $scope.medico;
-                                $scope.cadastroMedicoForm.$setPristine();
-                        })
+                            $scope.cadastroMedicoForm.$setPristine();                            
+                        });
                     };
 
                     $scope.carregarEstados = function(){
@@ -709,39 +705,25 @@
                             method: 'GET',
                             url: 'http://localhost:8000/selecionarEstado'
                         }).then(function(success, data){
-                            $scope.estados = success.data ;
-                        })
+                            $scope.estados = success.data;
+                        }, function(error){
+
+                        });
                     };
 
-                    $scope.carregarCidades = function(idEstados,data){
+                    $scope.carregarCidades = function(data){
                         
                         $http({
                             method: 'GET',
-                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.medico.Estados)
                         }).then(function(success, data){
                             $scope.cidades= success.data ;
-                            console.log(data);
                         }, function(error){
 
                         });
                     };
 
                     $scope.carregarEstados();
-
-
-                           /*
-                    //Estados e Cidades
-                    var carregarEstados = function(){
-                        $http.get('http://localhost:8000/selecionarEstado').success(function(data){
-                            $scope.estados=data;
-                        });
-                    };
-
-                    var carregarCidades = function(){
-                        $http.get("http://localhost:8000/selecionarCidade/"+carregarEstados(estados)).success(function(data){
-                            $scope.cidades=data;
-                        });
-                    };*/
 
                 }])
                 .controller('AtualizarMedicoController', ['$scope', '$rootScope', '$location', 
@@ -755,7 +737,6 @@
                                 $scope.atualizarMedicoForm.$setPristine();
                             });
                     };
-
                     
                 }])
                 .controller('ExcluirMedicoController', ['$scope', '$rootScope', '$location', 
@@ -764,14 +745,19 @@
                 }])
                 .controller('AuxiliaresDosMedicosController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
+                    //Auxiliar - Meus Auxiliares
+                    $scope.auxiliarMedico = [];
+                    $scope.listaAuxiliarMedico = function(){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/auxiliaresMedicos'  )
+                        }).then(function(success, data){
+                            $scope.auxiliarMedico = data;
+                        }, function(error){
 
-                        //Auxiliar - Meus Auxiliares
-                    var listaAuxiliarMedico = function() {
-                        $http.get("http://localhost:8000/auxiliaresMedicos", login(usuario)).success(function(data){
-                            $scope.auxiliarMedico=data;
                         });
-
                     };
+                    $scope.listaAuxiliarMedico();
 
                     var deletarAuxiliarMedico = function(){
                         $http.delete("http://localhost:8000/excluirAuxiliar", login(usuario)).success(function(data){
@@ -785,15 +771,24 @@
                     };
 
                 }])
-                .controller('PesquisarAuxiliaresDosMedicosController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-                    
+                .controller('PesquisarAuxiliaresDosMedicosController', ['$scope', '$rootScope',
+                    '$location',function($scope, $rootScope, $location, $http, urlBase){
                     //Auxiliar - Pesquisar Auxiliares Cadastrados
-                    var listaTodosAuxiliaresCadastrados = function() {
-                        $http.get("http://localhost:8000/auxiliaresCadastrados", login(usuario)).success(function(data){
-                            $scope.auxiliaresCadastrados=data;
+
+                    $scope.auxiliaresCadastrados = [];
+
+                    $scope.listaTodosAuxiliaresCadastrados = function(){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/auxiliaresCadastrados'  )
+                        }).then(function(success, data){
+                            $scope.auxiliaresCadastrados = data;
+                        }, function(error){
+
                         });
                     };
+
+                    $scope.listaTodosAuxiliaresCadastrados();
 
                     var inserirAuxiliar = login(usuario) && auxiliar.selecionado;
 
@@ -811,11 +806,18 @@
                 }])
                 .controller('AdicionarAnimalMedicoController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
-                    
+                        
                     //Animais - Adicionar Animal
-                    var listaAnimaisCadastrados = function() {
-                        $http.get("http://localhost:8000/animaisCadastrados", login(usuario)).success(function(data){
-                            $scope.animais=data;
+                    $scope.animais=[];
+
+                    $scope.listaAnimaisCadastrados = function(){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/animaisCadastrados'  )
+                        }).then(function(success, data){
+                            $scope.animais = data;
+                        }, function(error){
+
                         });
                     };
 
@@ -832,14 +834,20 @@
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
 
+                    $scope.listaAnimaisCadastrados();
+
                 }])
                 .controller('ListarAnimaisDoMedicoController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
+                    
+                    $scope.listaAnimaisMedicos = function(){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/animaisMedico')
+                        }).then(function(success, data){
+                            $scope.animais = success.data;
+                        }, function(error){
 
-                    //Animais - Listar seus animais
-                    var listaAnimaisMedicos = function() {
-                        $http.get("http://localhost:8000/animaisMedico", login(usuario)).success(function(data){
-                            $scope.animais=data;
                         });
                     };
 
@@ -939,12 +947,7 @@
                                 $scope.cadastroAnemiaForm.$setPristine();
                             });
                     };
-
-
-
                 }])
-
-
                 .controller('CadastroAnimalController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
                     
@@ -961,14 +964,6 @@
                 .controller('AtualizarAnimalController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
                     
-                    $scope.novoAnimal = function(animal){
-                        animal.data= new Date();
-                            $http.post("url api", animal).success(function(data){
-                                delete $scope.animal;
-                                $scope.cadastroAnimalrForm.$setPristine();
-                            });
-                    }
-
                     $scope.listaAnimalMedico = function(listaAnimalMedico){
                         $http.get("", login(usuario).success(function(data){
 
@@ -988,23 +983,6 @@
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
 
-                    $scope.novoAnimal = function(animal){
-                        animal.data= new Date();
-                            $http.post("url api", animal).success(function(data){
-                                delete $scope.animal;
-                                $scope.cadastroAnimalForm.$setPristine();
-                            });
-                    };
-
-                    //Atualizar Animal
-                    $scope.atualizaAnimal = function(animal){
-                        animal.data = new Date();
-                            $http.put("url api", animal).success(function(data){
-                                delete $scope.animal;
-                                $scope.atualizarAnimalForm.$setPristine();
-                            });
-                    };
-
                     //Atualizar Animal
                     $scope.atualizaAnimal = function(animal){
                         animal.data = new Date();
@@ -1018,14 +996,6 @@
                 .controller('ExcluirAnimalController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
                     
-                    $scope.novoAnimal = function(animal){
-                        animal.data= new Date();
-                            $http.post("url api", animal).success(function(data){
-                                delete $scope.animal;
-                                $scope.cadastroAnimalrForm.$setPristine();
-                            });
-                    }
-
                     $scope.listaAnimalMedico = function(listaAnimalMedico){
 
                     };
@@ -1042,27 +1012,7 @@
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
-
-                    $scope.novoAnimal = function(animal){
-                        animal.data= new Date();
-                            $http.post("url api", animal).success(function(data){
-                                delete $scope.animal;
-                                $scope.cadastroAnimalForm.$setPristine();
-                            });
-                    };
-
-                    //Atualizar Animal
-                    $scope.atualizaAnimal = function(animal){
-                        animal.data = new Date();
-                            $http.put("url api", animal).success(function(data){
-                                delete $scope.animal;
-                                $scope.atualizarAnimalForm.$setPristine();
-                            });
-                    };
-
                 }])
-
-
 
                 .controller('ClinicaController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -1080,8 +1030,33 @@
                             });
                     };
 
-                    
+                    $scope.estados = [];
+                    $scope.cidades = [];
+                    $scope.estadoSelecionado = {};
 
+                    $scope.carregarEstados = function(){
+                        $http({
+                            method: 'GET',
+                            url: 'http://localhost:8000/selecionarEstado'
+                        }).then(function(success, data){
+                            $scope.estados = success.data ;
+                        })
+                    };
+
+                    $scope.carregarCidades = function(idEstados,data){
+                        
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
+                        }).then(function(success, data){
+                            $scope.cidades= success.data ;
+                            console.log(data);
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarEstados();
                 }])
                 .controller('AtualizarClinicaController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -1143,11 +1118,38 @@
                     //Cadastra Auxiliar
                     $scope.novoAuxiliar = function(auxiliar){
                         auxiliar.data= new Date();
-                            $http.post("url api", auxiliar).success(function(data){
+                            $http.post("http://localhost:8000/novoAuxiliar", auxiliar).success(function(data){
                                 delete $scope.auxiliar;
                                 $scope.cadastroAuxiliarForm.$setPristine();
                             });
                     };
+
+                    $scope.estados = [];
+                    $scope.cidades = [];
+                    $scope.estadoSelecionado = {};
+
+                    $scope.carregarEstados = function(){
+                        $http({
+                            method: 'GET',
+                            url: 'http://localhost:8000/selecionarEstado'
+                        }).then(function(success, data){
+                            $scope.estados = success.data ;
+                        })
+                    };
+
+                    $scope.carregarCidades = function(idEstados,data){
+                        
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
+                        }).then(function(success, data){
+                            $scope.cidades= success.data ;
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarEstados();
 
                 }])
                 .controller('AtualizarAuxiliarController', ['$scope', '$rootScope', '$location', 
@@ -1209,11 +1211,19 @@
                     function($scope, $rootScope, $location, $http, urlBase){
                     
                     //Animais - Procurar Animal
-                    var listaAnimaisCadastrados = function() {
-                        $http.get("api url", login(usuario.username)).success(function(data){
-                            $scope.animais=data;
+                    $scope.animais=[];
+                    $scope.listaAnimaisCadastrados = function(){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/')
+                        }).then(function(success, data){
+                            $scope.animais = data;
+                        }, function(error){
+
                         });
                     };
+
+                    $scope.listaAnimaisCadastrados();
 
                     $scope.ordenarPor = function(campo){
                         $scope.criterioOrdenacao = campo;
@@ -1221,8 +1231,6 @@
                     };
 
                 }])
-
-
                 .controller('ResponsavelController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
 
@@ -1237,7 +1245,35 @@
                                 delete $scope.responsavel;
                                 $scope.cadastroResponsavelForm.$setPristine();
                             });
-                    };    
+                    };   
+
+                    $scope.estados = [];
+                    $scope.cidades = [];
+                    $scope.estadoSelecionado = {};
+
+                    $scope.carregarEstados = function(){
+                        $http({
+                            method: 'GET',
+                            url: 'http://localhost:8000/selecionarEstado'
+                        }).then(function(success, data){
+                            $scope.estados = success.data ;
+                        })
+                    };
+
+                    $scope.carregarCidades = function(idEstados,data){
+                        
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
+                        }).then(function(success, data){
+                            $scope.cidades= success.data ;
+                            console.log(data);
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarEstados(); 
                 }])
                 .controller('AtualizarResponsavelController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -1259,9 +1295,14 @@
                     function($scope, $rootScope, $location, $http, urlBase){
 
                      //Animais - Ver meus Animais
-                    var listaAnimaisDoResponsavel = function(){
-                        $http.get("api url", login(usuario.username)).success(function(data){
-                            $scope.animal=data;
+                    $scope.listaAnimaisDoResponsavel = function(data){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/AnimaisResponsavel'  )
+                        }).then(function(success, data){
+
+                        }, function(error){
+
                         });
                     };
 
@@ -1289,11 +1330,18 @@
                 }])
                 .controller('MedicosCadastradosController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
+
+                    $scope.listaMedicosCadastrados = [];
                     
                     //Medicos - Listar Medicos
-                    var listaMedicosCadastrados = function(){
-                        $http.get("api url", login(usuario.username)).success(function(data){
-                            $scope.medico=data;
+                    $scope.listaMedicosCadastrados = function(data){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/Medicos&Auxiliares'  )
+                        }).then(function(success, data){
+
+                        }, function(error){
+
                         });
                     };
 
@@ -1301,14 +1349,12 @@
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
+
+                    $scope.listaMedicosCadastrados();
                 }])
 
                 .controller('SelecionarcadastroController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
-                    
-                    
-
-
                 }])
                 .run(['$rootScope', '$location', '$cookieStore', '$http', 
                     function ($rootScope, $location, $cookieStore, $http) {

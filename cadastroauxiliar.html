@@ -104,123 +104,115 @@
 
         <div class="main-login main-center">
 
-	        		<form class="form-horizontal" name="cadastroAuxiliarForm" method="post" action="#">
-	        			
-	        			<div class="panel-title text-center">
-			    			<h1 class="title">Cadastra Auxiliar</h1>
-			    		</div>
-						
-						<div class="form-group">
-							
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<label for="cpf" class="cols-sm-2 control-label">Digite CPF</label>
-									<input type="text" class="form-control" name="cpf" id="cpf" placeholder="xxx.xxx.xxx-xx" ng-model="auxiliar.cpfAuxiliar" ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/" ng-required="true" />
-								</div>
-							</div>
+    		<form class="form-horizontal" name="cadastroAuxiliarForm" method="post" action="#">
+    			
+    			<div class="panel-title text-center">
+	    			<h1 class="title">Cadastra Auxiliar</h1>
+	    		</div>
+				
+				<div class="form-group">
+					
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<label for="cpf" class="cols-sm-2 control-label">Digite CPF</label>
+							<input type="text" class="form-control" name="cpf" id="cpf" placeholder="xxx.xxx.xxx-xx" ng-model="auxiliar.cpfAuxiliar" ng-required="true"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<label for="name" class="cols-sm-2 control-label">Digite Nome</label>
+							<input type="text" class="form-control" name="name" id="name" ng-model="auxiliar.nomeAuxiliar" placeholder="Digite seu nome aqui..." ng-required="true" />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<label for="address" class="cols-sm-2 control-label">Digite seu Endereço</label>
+							<input type="text" class="form-control" name="address" id="address" placeholder="Digite seu endereço aqui..." 
+									ng-model="auxiliar.enderecoAuxiliar" ng-required="true"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="email" class="cols-sm-2 control-label">Digite seu Email</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<input type="text" class="form-control" name="email" id="email" ng-model="auxiliar.emailAuxiliar" placeholder="Digite seu email aqui..." ng-required="true"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="phone" class="cols-sm-2 control-label">Digite seu Telefone</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<input type="text" class="form-control" name="phone" id="phone" ng-model="auxiliar.telefoneAuxiliar" placeholder="+XX (XX) XXXXX-XXXX" 
+							ng-required="true"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<label for="city" class="cols-sm-2 control-label">Seu estado</label>
+							<select name="estado" id="estadoSelecionado" ng-model="auxiliar.Estados" 
+									ng-change = "carregarCidades()">
+								<option value="">Selecione um estado</option>
+								<option ng-repeat="option in estados" value="{{option.idEstados}}">{{option.nomeEstados}}</option>
+							</select>
 						</div>
 
-						<div class="form-group">
-							<label for="crmvmedico" class="cols-sm-2 control-label">Digite o crmv do medico responsavel</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="text" class="form-control" name="crmvmedico" id="crmvmedico" placeholder="XXXXX" ng-model="auxiliar.crmvmedico" ng-pattern="/^\d{4,5}$/" ng-required="true" />
-								</div>
-							</div>
+					</div>	
+				</div>
+
+				<div class="form-group">
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<label for="state" class="cols-sm-2 control-label">Sua Cidade</label>
+							<select name="cidade" id="cidade" ng-model="auxiliar.Cidade">
+								<option value="">Selecione sua cidades</option>
+								<option ng-repeat="option in cidades" value="{{option.idCidade}}">{{option.nomeCidade}}</option>
+							</select>
 						</div>
 
-						<div class="form-group">
-							
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<label for="name" class="cols-sm-2 control-label">Digite Nome</label>
-									<input type="text" class="form-control" name="name" id="name" ng-model="auxiliar.nomeAuxiliar" placeholder="Digite seu nome aqui..." ng-required="true" />
-								</div>
-							</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="password" class="cols-sm-2 control-label">Digite sua Senha</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<input type="password" class="form-control" name="password" id="password" ng-model="auxiliar.senhaAuxiliar" ng-required="true" placeholder="Digite sua senha aqui..."/>
 						</div>
-
-						<div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<label for="address" class="cols-sm-2 control-label">Digite seu Endereço</label>
-									<input type="text" class="form-control" name="address" id="address" placeholder="Digite seu endereço aqui..." 
-											ng-model="auxiliar.enderecoAuxiliar" ng-required="true"/>
-								</div>
-							</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="confirm" class="cols-sm-2 control-label">Confirme sua Senha</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirme sua senha...."/>
 						</div>
+					</div>
+				</div>
+				<div class="form-group ">
+					<button type="button" class="btn btn-primary btn-block" ng-click="novoAuxiliar(auxiliar)" 
+								ng-disabled="cadastroAuxiliarForm.$invalid">Cadastra</button>
+				</div>
 
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Digite seu Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="text" class="form-control" name="email" id="email" ng-model="auxiliar.emailAuxiliar" placeholder="Digite seu email aqui..." ng-required="true"/>
-								</div>
-							</div>
-						</div>
+				
+			</form>
 
-						<div class="form-group">
-							<label for="phone" class="cols-sm-2 control-label">Digite seu Telefone</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="text" class="form-control" name="phone" id="phone" ng-model="auxiliar.telefoneAuxiliar"  placeholder="+XX (XX) XXXXX-XXXX" 
-									ng-required="true" ng-pattern= "/^.\d{2}..\d{2}..\d{4,5}.\d{4}$/"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<label for="city" class="cols-sm-2 control-label">Seu estado</label>
-									<select ng-model="auxiliar.uf" ng-options="estado.nomeEstado estado in estados" >	
-										<option value="">Selecione seu estado</option>
-									</select>
-								</div>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<label for="state" class="cols-sm-2 control-label">Sua Cidade</label>
-									<select ng-model="auxiliar.cidade" ng-options="cidade.nomeCidade cidade in cidades" >
-										<option value="">Selecione sua cidade</option>
-									</select>
-								</div>
-
-							</div>
-						</div>
-
-						
-
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Digite sua Senha</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="password" class="form-control" name="password" id="password" ng-model="auxiliar.senhaAuxiliar" ng-required="true" placeholder="Digite sua senha aqui..."/>
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label for="confirm" class="cols-sm-2 control-label">Confirme sua Senha</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirme sua senha...."/>
-								</div>
-							</div>
-						</div>
-						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-block" ng-click="novoAuxiliar(auxiliar)" 
-										ng-disabled="cadastroAuxiliarForm.$invalid">Cadastra</button>
-						</div>
-
-						
-					</form>
-
-	        		
-	        	</div>
+    		
+    	</div>
 	
 
 </section>

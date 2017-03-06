@@ -9,6 +9,7 @@
         <script src="/bower_components/angular/angular.js"></script>
         <script src="/bower_components/angular-route/angular-route.js"></script>
         <script src="/bower_components/angular-cookies/angular-cookies.js" ></script>
+        <script src="/bower_components/ngstorage/ngStorage.js"></script>
         <script type="text/javascript" src="JS/js/functions.js" ></script>
         <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -458,223 +459,54 @@
                 .controller('novaSenhaClinicaController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
      
                 }])
-                .controller('LoginController', ['$scope', '$rootScope', '$location', 'AuthenticationService', function($scope, $rootScope, $location, AuthenticationService){
+                .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $rootScope, $location, $localStorage){
 
-                    AuthenticationService.ClearCredentials();
-  
-                    $scope.login = function () {
-                        $scope.dataLoading = true;
-                        var usuario = ($scope.username, $scope.password);
 
-                            AuthenticationService.LoginResponsavel(usuario, function(response){
-                                if (response.success) {
-                                    AuthenticationService.SetCredentials(usuario.username, usuario.password);
-                                    $location.path('/menuResponsavel');
-                                }else{
-                                    AuthenticationService.LoginAuxiliar(usuario, function(response){
-                                        if (response.success) {
-                                            AuthenticationService.SetCredentials(usuario.username, usuario.password);
-                                            $location.path('/menuAuxiliar');
-                                        }else{
-                                            AuthenticationService.LoginClinica(usuario, function(response){
-                                                if (response.success) {
-                                                    AuthenticationService.SetCredentials(usuario.username, usuario.password);
-                                                    $location.path('/menuClinica');
-                                                }else{
-                                                    AuthenticationService.LoginMedico(usuario, function(response){
-                                                        if (response.success) {
-                                                            AuthenticationService.SetCredentials(usuario.username, usuario.password);
-                                                            $location.path('/menuMedico');
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-
-/*
-
-                        AuthenticationService.Login( usuario, function(response) {
-                            if(response.success) {
-                                AuthenticationService.SetCredentials($scope.username, $scope.password);
-                                $location.path('/');
-                            } else {
-                                $scope.error = response.message;
-                                $scope.dataLoading = false;
+                    $scope.login = function(usuario){
+                        $http.post('http://localhost:8000/autenticacaoMedico', usuario).then(function(){
+                            if (res.type==false) {
+                                $http.post('http://localhost:8000/autenticacaoResponsavel',usuario).then(function(){
+                                    if (res.type==false) {
+                                        $http.post('http://localhost:8000/autenticacaoAuxiliar',usuario).then(function(){
+                                            if (res.type==false) {
+                                                $http.post('http://localhost:8000/autenticacaoClinica',usuario).then(function(){
+                                                    if (res.type==false) {
+                                                        alert(res.data)
+                                                    }else{
+                                                        $localStorage.token = res.data.token;
+                                                        window.location = "/menuClinica";
+                                                    }
+                                                }, function(){
+                                                    $rootScope.error='Falha ao registra-se';
+                                                })
+                                            }else{
+                                                $localStorage.token = res.data.token;
+                                                window.location = "/menuAuxiliar";
+                                            }
+                                        }, function(){
+                                            $rootScope.error='Falha ao registra-se';
+                                        })
+                                    }else{
+                                        $localStorage.token = res.data.token;
+                                        window.location = "/menuResponsavel";
+                                    }
+                                }, function(){
+                                    $rootScope.error='Falha ao registra-se';
+                                })
+                            }else{
+                                $localStorage.token = res.data.token;
+                                window.location = "/menuMedico";
                             }
-                        });
-                        */
+                        }, function(){
+                            $rootScope.error='Falha ao registra-se';
+                        })
+
                     };
 
-                    
+
                 }])
-
-                .factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-                    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
-                        var service = {};
-                 
-                        //service.Login = function (usuario, callback) {
-                 
-                            /* Dummy authentication for testing, uses $timeout to simulate api call
-                             ----------------------------------------------*/
-                            /*
-                            $timeout(function(){
-                                var response = { success: username === 'test' && password === 'test' };
-                                if(!response.success) {
-                                    response.message = 'Username or password is incorrect';
-                                }
-                                callback(response);
-                            }, 1000);
-                 
-                 
-                            /* Use this for real authentication
-                             ----------------------------------------------*/
-                            //$http.post('/api/authenticate', { username: username, password: password })
-                            //    .success(function (response) {
-                            //        callback(response);
-                            //    });
-                 
-                        
-
-                        service.LoginMedico = function(){
-                            $http.get('http://localhost:8000/autenticacaoMedico', usuario)
-                            .success(function(response){
-                                callback(response);
-                            });
-                        };
-
-                        service.LoginAuxiliar = function(){
-                            $http.get('http://localhost:8000/autenticacaoAuxiliar', usuario)
-                            .success(function(response){
-                                callback(response);
-                            });
-                        };
-
-                        service.LoginResponsavel = function(){
-                            $http.get('http://localhost:8000/autenticacaoResponsavel', usuario)
-                            .success(function(response){
-                                callback(response);
-                            });
-                        };
-
-                        service.LoginClinica = function(){
-                            $http.get('http://localhost:8000/autenticacaoClinica', usuario)
-                            .success(function(response){
-                                callback(response);
-                            });
-                        };
-                  
-                        service.SetCredentials = function (usuario) {
-                            var authdata = Base64.encode(usuario.username + ':' + usuario.password);
-                  
-                            $rootScope.globals = {
-                                currentUser: {
-                                    username: usuario.username,
-                                    authdata: authdata
-                                }
-                            };
-                  
-                            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-                            $cookieStore.put('globals', $rootScope.globals);
-                        };
-                  
-                        service.ClearCredentials = function () {
-                            $rootScope.globals = {};
-                            $cookieStore.remove('globals');
-                            $http.defaults.headers.common.Authorization = 'Basic ';
-                        };
-                  
-                        return service;
-                    }])
-                  
-                .factory('Base64', function () {
-                    /* jshint ignore:start */
-                  
-                    var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-                  
-                    return {
-                        encode: function (input) {
-                            var output = "";
-                            var chr1, chr2, chr3 = "";
-                            var enc1, enc2, enc3, enc4 = "";
-                            var i = 0;
-                  
-                            do {
-                                chr1 = input.charCodeAt(i++);
-                                chr2 = input.charCodeAt(i++);
-                                chr3 = input.charCodeAt(i++);
-                  
-                                enc1 = chr1 >> 2;
-                                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-                                enc4 = chr3 & 63;
-                  
-                                if (isNaN(chr2)) {
-                                    enc3 = enc4 = 64;
-                                } else if (isNaN(chr3)) {
-                                    enc4 = 64;
-                                }
-                  
-                                output = output +
-                                    keyStr.charAt(enc1) +
-                                    keyStr.charAt(enc2) +
-                                    keyStr.charAt(enc3) +
-                                    keyStr.charAt(enc4);
-                                chr1 = chr2 = chr3 = "";
-                                enc1 = enc2 = enc3 = enc4 = "";
-                            } while (i < input.length);
-                  
-                            return output;
-                        },
-                  
-                        decode: function (input) {
-                            var output = "";
-                            var chr1, chr2, chr3 = "";
-                            var enc1, enc2, enc3, enc4 = "";
-                            var i = 0;
-                  
-                            // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
-                            var base64test = /[^A-Za-z0-9\+\/\=]/g;
-                            if (base64test.exec(input)) {
-                                window.alert("There were invalid base64 characters in the input text.\n" +
-                                    "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
-                                    "Expect errors in decoding.");
-                            }
-                            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-                  
-                            do {
-                                enc1 = keyStr.indexOf(input.charAt(i++));
-                                enc2 = keyStr.indexOf(input.charAt(i++));
-                                enc3 = keyStr.indexOf(input.charAt(i++));
-                                enc4 = keyStr.indexOf(input.charAt(i++));
-                  
-                                chr1 = (enc1 << 2) | (enc2 >> 4);
-                                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                                chr3 = ((enc3 & 3) << 6) | enc4;
-                  
-                                output = output + String.fromCharCode(chr1);
-                  
-                                if (enc3 != 64) {
-                                    output = output + String.fromCharCode(chr2);
-                                }
-                                if (enc4 != 64) {
-                                    output = output + String.fromCharCode(chr3);
-                                }
-                  
-                                chr1 = chr2 = chr3 = "";
-                                enc1 = enc2 = enc3 = enc4 = "";
-                  
-                            } while (i < input.length);
-                  
-                            return output;
-                        }
-                    };
-                  
-                    /* jshint ignore:end */
-                })
-                
+                               
                 .controller('HomeController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location, urlBase){
 
                 }])
@@ -1018,45 +850,44 @@
                     function($scope, $rootScope, $location, $http, urlBase){
 
                 }])
-                .controller('CadastroClinicaController', ['$scope', '$rootScope', '$location', 
+                .controller('CadastroClinicaController', ['$scope', '$rootScope', '$location', '$http', 
                     function($scope, $rootScope, $location, $http, urlBase){
-
-                    //Cadastra Clinica
-                    $scope.novaClinica = function(clinica){
-                        clinica.data= new Date();
-                            $http.post("url api", clinica).success(function(data){
-                                delete $scope.clinica;
-                                $scope.cadastroClinicaForm.$setPristine();
-                            });
-                    };
 
                     $scope.estados = [];
                     $scope.cidades = [];
-                    $scope.estadoSelecionado = {};
+                    $scope.Estados = [];
+                    //Cadastra Clinica
+                    $scope.novaClinica = function(clinica){
+                        clinica.data = new Date();
+                        $http.post('http://localhost:8000/novaClinica', clinica).then(function(data){
+                            delete $scope.clinica;
+                            $scope.cadastroClinicaForm.$setPristine();
+                        });
+                    };
 
                     $scope.carregarEstados = function(){
                         $http({
                             method: 'GET',
                             url: 'http://localhost:8000/selecionarEstado'
                         }).then(function(success, data){
-                            $scope.estados = success.data ;
-                        })
-                    };
-
-                    $scope.carregarCidades = function(idEstados,data){
-                        
-                        $http({
-                            method: 'GET',
-                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
-                        }).then(function(success, data){
-                            $scope.cidades= success.data ;
-                            console.log(data);
+                            $scope.estados = success.data;
                         }, function(error){
 
                         });
                     };
 
+                    $scope.carregarCidades = function(data){
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.clinica.Estados)
+                        }).then(function(success, data){
+                            $scope.cidades= success.data ;
+                        }, function(error){
+
+                        });
+                    };
                     $scope.carregarEstados();
+
                 }])
                 .controller('AtualizarClinicaController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
@@ -1113,35 +944,38 @@
                     function($scope, $rootScope, $location, $http, urlBase){
                     
                 }])
-                .controller('CadastroAuxiliarController', ['$scope', '$rootScope', '$location', 
+                .controller('CadastroAuxiliarController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
+                    
                     //Cadastra Auxiliar
-                    $scope.novoAuxiliar = function(auxiliar){
-                        auxiliar.data= new Date();
-                            $http.post("http://localhost:8000/novoAuxiliar", auxiliar).success(function(data){
-                                delete $scope.auxiliar;
-                                $scope.cadastroAuxiliarForm.$setPristine();
-                            });
-                    };
-
                     $scope.estados = [];
                     $scope.cidades = [];
-                    $scope.estadoSelecionado = {};
+                    $scope.Estados = [];
+
+                    $scope.novoAuxiliar = function(auxiliar){
+                        auxiliar.data = new Date();
+                        $http.post('http://localhost:8000/novoAuxiliar', auxiliar).then(function (data){
+                            delete $scope.auxiliar;
+                            $scope.cadastroAuxiliarForm.$setPristine();                            
+                        });
+                    };
 
                     $scope.carregarEstados = function(){
                         $http({
                             method: 'GET',
                             url: 'http://localhost:8000/selecionarEstado'
                         }).then(function(success, data){
-                            $scope.estados = success.data ;
-                        })
+                            $scope.estados = success.data;
+                        }, function(error){
+
+                        });
                     };
 
-                    $scope.carregarCidades = function(idEstados,data){
+                    $scope.carregarCidades = function(data){
                         
                         $http({
                             method: 'GET',
-                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.auxiliar.Estados)
                         }).then(function(success, data){
                             $scope.cidades= success.data ;
                         }, function(error){
@@ -1235,45 +1069,87 @@
                     function($scope, $rootScope, $location, $http, urlBase){
 
                 }])
-                .controller('CadastroResponsavelController', ['$scope', '$rootScope', '$location', 
+                .controller('CadastroResponsavelController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
-                    
-                    //Cadastra Responsavel
-                    $scope.novoResponsavel = function(responsavel){
-                        responsavel.data= new Date();
-                            $http.post("url api", responsavel).success(function(data){
-                                delete $scope.responsavel;
-                                $scope.cadastroResponsavelForm.$setPristine();
-                            });
-                    };   
-
+                    /*
                     $scope.estados = [];
                     $scope.cidades = [];
-                    $scope.estadoSelecionado = {};
+                    $scope.Estados = [];
+
+                    //Novo Médico
+                    $scope.novoMedico = function(medico){
+                        medico.data = new Date();
+                        $http.post('http://localhost:8000/novoMedico', medico).then(function (data){
+                            delete $scope.medico;
+                            $scope.cadastroMedicoForm.$setPristine();                            
+                        });
+                    };
 
                     $scope.carregarEstados = function(){
                         $http({
                             method: 'GET',
                             url: 'http://localhost:8000/selecionarEstado'
                         }).then(function(success, data){
-                            $scope.estados = success.data ;
-                        })
-                    };
-
-                    $scope.carregarCidades = function(idEstados,data){
-                        
-                        $http({
-                            method: 'GET',
-                            url: ('http://localhost:8000/selecionarCidade/'+$scope.estadoSelecionado)
-                        }).then(function(success, data){
-                            $scope.cidades= success.data ;
-                            console.log(data);
+                            $scope.estados = success.data;
                         }, function(error){
 
                         });
                     };
 
-                    $scope.carregarEstados(); 
+                    $scope.carregarCidades = function(data){
+                        
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.medico.Estados)
+                        }).then(function(success, data){
+                            $scope.cidades= success.data ;
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarEstados();
+                    */
+
+                    //Cadastra Responsavel
+                    $scope.estados = [];
+                    $scope.cidades = [];
+                    $scope.Estados = [];
+
+                    //Novo Responsavel
+                    $scope.novoResponsavel = function(responsavel){
+                        responsavel.data = new Date();
+                        $http.post('http://localhost:8000/novoResponsavel', responsavel).then(function (data){
+                            delete $scope.responsavel;
+                            $scope.cadastroMedicoForm.$setPristine();                            
+                        });
+                    };
+
+                    $scope.carregarEstados = function(){
+                        $http({
+                            method: 'GET',
+                            url: 'http://localhost:8000/selecionarEstado'
+                        }).then(function(success, data){
+                            $scope.estados = success.data;
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarCidades = function(data){
+                        
+                        $http({
+                            method: 'GET',
+                            url: ('http://localhost:8000/selecionarCidade/'+$scope.responsavel.Estados)
+                        }).then(function(success, data){
+                            $scope.cidades= success.data ;
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarEstados();
+
                 }])
                 .controller('AtualizarResponsavelController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){

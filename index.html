@@ -202,7 +202,7 @@
         <script>
             
         //app.js
-            angular.module('AppVetOnline', ['ngRoute', 'ngCookies'])
+            angular.module('AppVetOnline', ['ngRoute', 'ngCookies', 'ngStorage'])
                     .config(['$routeProvider', function ($routeProvider) {
                      $routeProvider
                             
@@ -459,51 +459,57 @@
                 .controller('novaSenhaClinicaController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
      
                 }])
-                .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', 
-                    function($scope, $rootScope, $location, $localStorage){
+                .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', '$http', 
+                    function($scope, $rootScope, $location, $localStorage, $http){
 
 
                     $scope.login = function(usuario){
-                        $http.post('http://localhost:8000/autenticacaoMedico', usuario).then(function(){
-                            if (res.type==false) {
-                                $http.post('http://localhost:8000/autenticacaoResponsavel',usuario).then(function(){
-                                    if (res.type==false) {
-                                        $http.post('http://localhost:8000/autenticacaoAuxiliar',usuario).then(function(){
-                                            if (res.type==false) {
-                                                $http.post('http://localhost:8000/autenticacaoClinica',usuario).then(function(){
-                                                    if (res.type==false) {
-                                                        alert(res.data)
-                                                    }else{
-                                                        $localStorage.token = res.data.token;
-                                                        window.location = "/menuClinica";
-                                                    }
-                                                }, function(){
-                                                    $rootScope.error='Falha ao registra-se';
-                                                })
-                                            }else{
-                                                $localStorage.token = res.data.token;
-                                                window.location = "/menuAuxiliar";
-                                            }
-                                        }, function(){
-                                            $rootScope.error='Falha ao registra-se';
-                                        })
-                                    }else{
-                                        $localStorage.token = res.data.token;
-                                        window.location = "/menuResponsavel";
-                                    }
-                                }, function(){
-                                    $rootScope.error='Falha ao registra-se';
-                                })
-                            }else{
-                                $localStorage.token = res.data.token;
-                                window.location = "/menuMedico";
-                            }
-                        }, function(){
-                            $rootScope.error='Falha ao registra-se';
+
+                        $http({
+                            method: 'POST',
+                            data: usuario,
+                            url: 'http://localhost:8000/autenticacaoMedico'
+                        }).then(function(data){
+                            $localStorage.token = data.token;
+                            $location.path = "/index.html#!/menuMedico";
+                        },function(data, status){
+                            $rootScope.error = "Usuário não encontrado!"
+                        })
+                        
+                        $http({
+                            method: 'POST',
+                            data: usuario,
+                            url: 'http://localhost:8000/autenticacaoResponsavel'
+                        }).then(function(data){
+                            $localStorage.token = data.token;
+                            $location.path = "/index.html#!/menuResponsavel";
+                        },function(data, status){
+                            $rootScope.error = "Usuário não encontrado!"
+                        })
+
+                        $http({
+                            method: 'POST',
+                            data: usuario,
+                            url: 'http://localhost:8000/autenticacaoAuxiliar'
+                        }).then(function(data){
+                            $localStorage.token = data.token;
+                            $location.path = "/index.html#!/menuAuxiliar";
+                        },function(data, status){
+                            $rootScope.error = "Usuário não encontrado!"
+                        })
+
+                        $http({
+                            method: 'POST',
+                            data: usuario,
+                            url: 'http://localhost:8000/autenticacaoClinica'
+                        }).then(function(data){
+                            $localStorage.token = data.token;
+                            $location.path = "/index.html#!/menuClinica";
+                        },function(data, status){
+                            $rootScope.error = "Usuário não encontrado!"
                         })
 
                     };
-
 
                 }])
                                
@@ -513,8 +519,6 @@
                 
                 .controller('MedicoController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
-                   
-
                 }])
                 .controller('CadastroMedicoController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){

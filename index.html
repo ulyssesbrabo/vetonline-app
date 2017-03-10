@@ -462,53 +462,46 @@
                 .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', '$http', 
                     function($scope, $rootScope, $location, $localStorage, $http){
 
-
                     $scope.login = function(usuario){
 
-                        $http({
-                            method: 'POST',
-                            data: usuario,
-                            url: 'http://localhost:8000/autenticacaoMedico'
-                        }).then(function(data){
-                            $localStorage.token = data.token;
-                            $location.path = "/index.html#!/menuMedico";
-                        },function(data, status){
-                            $rootScope.error = "Usuário não encontrado!"
-                        })
-                        
-                        $http({
-                            method: 'POST',
-                            data: usuario,
-                            url: 'http://localhost:8000/autenticacaoResponsavel'
-                        }).then(function(data){
-                            $localStorage.token = data.token;
-                            $location.path = "/index.html#!/menuResponsavel";
-                        },function(data, status){
-                            $rootScope.error = "Usuário não encontrado!"
-                        })
+                        $http.post('http://localhost:8000/autenticacaoMedico', usuario)
+                            .then(function(data){
+                                $localStorage.token = data.token;
+                                delete $scope.usuario;
+                                $scope.formLogin.$setPristine();
+                                $location.path('/menuMedico');
+                        },function(error){
+                            console.log("erro")
+                        });
 
-                        $http({
-                            method: 'POST',
-                            data: usuario,
-                            url: 'http://localhost:8000/autenticacaoAuxiliar'
-                        }).then(function(data){
-                            $localStorage.token = data.token;
-                            $location.path = "/index.html#!/menuAuxiliar";
-                        },function(data, status){
-                            $rootScope.error = "Usuário não encontrado!"
-                        })
+                        $http.post('http://localhost:8000/autenticacaoAuxiliar',usuario)
+                            .then(function(data){
+                                $localStorage.token = data.token;
+                                delete $scope.usuario;
+                                $scope.formLogin.$setPristine();
+                                $location.url('/menuAuxiliar');
+                            },function(erro){
+                                $rootScope.error = "Usuário não encontrado!"
+                            });
+                        $http.post('http://localhost:8000/autenticacaoClinica',usuario)
+                            .then(function(data){
+                                $localStorage.token = data.token;
+                                delete $scope.usuario;
+                                $scope.formLogin.$setPristine();
+                                $location.url('/menuClinica');
+                            },function(erro){
+                                $rootScope.error = "Usuário não encontrado!"
+                            });
 
-                        $http({
-                            method: 'POST',
-                            data: usuario,
-                            url: 'http://localhost:8000/autenticacaoClinica'
-                        }).then(function(data){
-                            $localStorage.token = data.token;
-                            $location.path = "/index.html#!/menuClinica";
-                        },function(data, status){
-                            $rootScope.error = "Usuário não encontrado!"
-                        })
-
+                        $http.post('http://localhost:8000/autenticacaoResponsavel',usuario)
+                            .then(function(data){
+                                $localStorage.token = data.token;
+                                delete $scope.usuario;
+                                $scope.formLogin.$setPristine();
+                                $location.url('/menuResponsavel');
+                            },function(erro){
+                                $rootScope.error = "Usuário não encontrado!"
+                            });
                     };
 
                 }])
@@ -1237,7 +1230,15 @@
                     function($scope, $rootScope, $location, $http, urlBase){
                 }])
                 .run(['$rootScope', '$location', '$cookieStore', '$http', 
-                    function ($rootScope, $location, $cookieStore, $http) {
+                    function ($location, $scope, $rootScope, $localStorage, $http) {
+                        
+                        $localStorage.token;
+
+
+                        if ($rootScope == undefined) {
+                            $location.url('/login');                            
+                        }
+                     
                    /*
                     // keep user logged in after page refresh
                     $rootScope.globals = $cookieStore.get('globals') || {};

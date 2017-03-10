@@ -3,16 +3,7 @@
         <form  name="formLogin" method="post" role="login">
 
             <img src="img/logoVeterinarioIngles.png" class="img-responsive" alt="" />
-
-              <label for="tipousuario" class="cols-sm-2 control-label">Categoria</label>
-              <select name="catUser" id="catUser">
-                  <option value="">Selecione uma categoria</option>
-                  <option value="1">Médico</option>
-                  <option value="2">Auxiliar</option>
-                  <option value="3">Clinica</option>
-                  <option value="4">Responsavel</option>
-              </select>
-
+            
               <label for="username">Login</label>
               <i class="fa fa-key"></i>
               <input name="username" id="username" class="form-control" type="text" ng-model="usuario.username" ng-pattern = "/^\d{4,11}$/" required= "true" placeholder="CRMV(Médico) ou CPF(Auxiliar/Responsavel)"/>

@@ -441,7 +441,8 @@
                         
                     })
                         
-                        .otherwise({ redirectTo: '/login' });
+                    .otherwise({ redirectTo: '/login' });
+
                 }])
                 
                 .controller('novaSenhaAuxiliarController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
@@ -1229,29 +1230,15 @@
                 .controller('SelecionarcadastroController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
                 }])
-                .run(['$rootScope', '$location', '$cookieStore', '$http', 
-                    function ($location, $scope, $rootScope, $localStorage, $http) {
-                        
-                        $localStorage.token;
-
-
-                        if ($rootScope == undefined) {
-                            $location.url('/login');                            
-                        }
-                     
-                   /*
-                    // keep user logged in after page refresh
-                    $rootScope.globals = $cookieStore.get('globals') || {};
-                    if ($rootScope.globals.currentUser) {
-                        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-                    }
-              
-                    $rootScope.$on('$locationChangeStart', function (event, next, current) {
-                        // redirect to login page if not logged in
-                        if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                .run(['$rootScope', '$localStorage', '$location', '$cookieStore', '$http', 
+                    function ($rootScope, $localStorage, $location, $scope, $http) {
+                   
+                   $rootScope.$on('$locationChangeStart', function(event, next, current){
+                        if ($location.path() !== '/login' && !$localStorage.token) {
                             $location.path('/login');
                         }
-                    });*/
+                   });
+
                 }]);
 
         </script>

@@ -1234,11 +1234,15 @@
                     function ($rootScope, $localStorage, $location, $scope, $http) {
                    
                    $rootScope.$on('$locationChangeStart', function(event, next, current){
-                        if ($location.path() !== '/login' && !$localStorage.token) {
-                            $location.path('/login');
+                        if ($localStorage.token) {
+
+                        } else {
+                            if ($location.path() !== '/login'&& !$localStorage.token) {
+                                $location.path('/login');                            
+                            }
                         }
                    });
-
+                   
                 }]);
 
         </script>

@@ -460,8 +460,10 @@
                 .controller('novaSenhaClinicaController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
      
                 }])
-                .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', '$http', 
+                .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', '$http', '$timeout', 
                     function($scope, $rootScope, $location, $localStorage, $http){
+
+                    $scope.mensagemSucesso = false;
 
                     $scope.login = function(usuario){
 
@@ -471,6 +473,11 @@
                                 delete $scope.usuario;
                                 $scope.formLogin.$setPristine();
                                 $location.path('/menuMedico');
+                                $scope.mensagem = "Médico cadastrado com sucesso!"
+                                 $timeout(function(){
+                                    $scope.mensagemSucesso = true;
+                                 },3000);
+
                         },function(error){
                             console.log("erro")
                         });
@@ -505,6 +512,11 @@
                             });
                     };
 
+                    $scope.selecionarCadast = function(){
+                        $location.url('/selecionarCadastro');
+
+                    }
+
                 }])
                                
                 .controller('HomeController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location, urlBase){
@@ -520,13 +532,15 @@
                     $scope.estados = [];
                     $scope.cidades = [];
                     $scope.Estados = [];
+                    $scope.medico = {};
 
                     //Novo Médico
-                    $scope.novoMedico = function(medico){
-                        medico.data = new Date();
-                        $http.post('http://localhost:8000/novoMedico', medico).then(function (data){
+                    $scope.novoMedico = function(){
+                        $scope.medico.data = new Date();
+                        $http.post('http://localhost:8000/novoMedico', $scope.medico).then(function (data){
                             delete $scope.medico;
-                            $scope.cadastroMedicoForm.$setPristine();                            
+                            $scope.cadastroMedicoForm.$setPristine();
+                            $location.url('/login');
                         });
                     };
 
@@ -580,7 +594,10 @@
                     $scope.listaAuxiliarMedico = function(){
                         $http({
                             method: 'GET',
-                            url: ('http://localhost:8000/auxiliaresMedicos'  )
+                            url: ('http://localhost:8000/auxiliaresMedicos'),
+                            header:{
+                                Authorization:"JWT "+$localStorage.token
+                            }
                         }).then(function(success, data){
                             $scope.auxiliarMedico = data;
                         }, function(error){
@@ -1229,19 +1246,37 @@
 
                 .controller('SelecionarcadastroController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
+
+                        $scope.cadMedico = function(){
+                            $location.url('/cadastroMedico');
+                        };
+
+                        $scope.cadResponsavel = function(){
+                            $location.path('/cadastroResponsavel');
+                        };
+
+                        $scope.cadAuxiliar = function(){
+                            $location.url("/cadastroAuxiliar");
+                        };
+
+                        $scope.cadClinica = function(){
+                            $location.path('/cadastroClinica');
+                        };
+
                 }])
                 .run(['$rootScope', '$localStorage', '$location', '$cookieStore', '$http', 
                     function ($rootScope, $localStorage, $location, $scope, $http) {
-                   
+                   /*
+                   var rotasLivres = ['/login','/selecionarCadastro','/cadastroMedico','/cadastroResponsavel','/cadastroAuxiliar','/cadastroClinica'];
+
                    $rootScope.$on('$locationChangeStart', function(event, next, current){
                         if ($localStorage.token) {
-
-                        } else {
-                            if ($location.path() !== '/login'&& !$localStorage.token) {
-                                $location.path('/login');                            
-                            }
+                                return true;                            
                         }
-                   });
+                        if(rotasLivres.indexOf($location.path())<0){
+                            $location.path('/login');
+                        };
+                   });*/
                    
                 }]);
 

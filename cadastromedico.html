@@ -201,8 +201,10 @@
 			</div>
 
 			<div class="form-group ">
-				<button type="button" class="btn btn-primary btn-block" ng-click = "novoMedico(medico)" ng-disabled="cadastroMedicoForm.$invalid" >Cadastra</button>
+				<button type="button" class="btn btn-primary btn-block" ng-click = "novoMedico" ng-disabled="cadastroMedicoForm.$invalid" >Cadastra</button>
 			</div>
+
+			<p ng-show="mensagem.length" ng-hide="mensagemSucesso">{{mensagem}}</p>  
 
 			<div class="login-register">
 				<button type="button" class="btn btn-primary btn-block">Voltar</button>
@@ -212,90 +214,3 @@
 	</div>
 	
 </section>
-
-<!-- inserir no controller
-angular.module("medico",[])
-	        	.value('urlBase', 'url do back end')
-	        	.config(function ($routeProvider) {
-				 $routeProvider
-				        .when('/login', {
-				            templateUrl: 'avengers.html',
-				            controller: 'Avengers',
-				            controllerAs: 'vm'
-				        });
-				})
-	        	.controller("medicoCtrl", function($scope, $http, urlBase){
-	        	$scope.titulo="Cadastro Medico";
-
-	        	var self = this;	
-
-	        	self.medico=[];
-	        	self.medico=undefined;
-
-	        	self.novo = function(){
-	        		self.medico = {};
-	        	};
-
-	        	self.salvar=function{
-	        		var metodo = 'POST';
-	        		if(self.medico.idmedico){
-	        			metodo='PUT'
-	        		}
-
-	        		$http({
-	        			method: metodo,
-	        			url: urlBase + 'path para cadastro',
-	        			data: self.medico
-	        		})then(function successCallback(response){
-	        			self.atualizarTabelaMedico();
-	        		}, function erroCallBack(response){
-	        			self.ocorreuErro();
-	        		});
-	        	};
-
-	        	self.altera = function(medico){
-	        		self.medico = medico;
-	        	};
-
-	        	self.deletar = function(medico){
-	        		self.medico = medico;
-	        		$http({
-	        			method: 'DELETE',
-	        			url: urlBase + 'PATH DELETAR' + self.medico.idmedico
-	        		})then(function successCallback(response){
-	        			self.atualizarTabelaMedico();
-	        		}, function erroCallBack(response){
-	        			self.ocorreuErro();
-	        		});
-	        	};
-
-	        	self.consulta = function(medico){
-	        		self.medico = medico;
-	        		$http({
-	        			method: 'GET',
-	        			url: urlBase+'PATH CONSULTA'+self.medico.crmv
-	        		});
-	        	};
-
-	        	self.atualizarTabelaMedico=function(){
-	        		$http({
-	        			method:'GET',
-	        			url: urlBase + 'path listar medicos'
-	        		})then(function successCallback(response){
-	        			self.medicos = response.data;
-	        			self.medico = undefined;
-	        		}, function erroCallBack(response){
-	        			self.ocorreuErro();
-	        		});
-	        	};
-
-	        	self.ocorreuErro = function(){
-	        		alert("Ocorreu um erro inesperado");
-	        	};
-
-	        	function telaInicial(){
-	        		location.href = "http://dev.vetonline.com/index.html";
-	        	}
-
-        });
--->

@@ -185,7 +185,7 @@
 				<label for="password" class="cols-sm-2 control-label">Senha</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
-						<input type="password" class="form-control" name="senhaMedico" ng-model="medico.senhaMedico"  placeholder="Digite sua senha aqui..." ng-required="true"/>
+						<input type="password" id="password" class="form-control" name="senhaMedico" ng-model="medico.senhaMedico"  placeholder="Digite sua senha aqui..." ng-required="true"/>
 					</div>
 				</div>
 			</div>
@@ -194,8 +194,9 @@
 				<label for="confirm" class="cols-sm-2 control-label">Confirme sua senha</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
-						
-						<input type="password" class="form-control" name="confirmSenha"  placeholder="Confirme sua senha aqui..."/>
+						<input type="password_c" id="password_c" class="form-control" name="password_c"  placeholder="Confirme sua senha aqui..." valid-password-c required/>
+						<span ng-show="cadastroMedicoForm.$error.required && cadastroMedicoForm.password_c.$dirty">Por favor confirma sua senha!</span>
+						<span ng-show="!cadastroMedicoForm.$error.required && cadastroMedicoForm.password_c.$error.noMatch && cadastroMedicoForm.password.$dirty">A senha não conferem!</span>
 					</div>
 				</div>
 			</div>

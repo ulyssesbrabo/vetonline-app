@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="/bootstrap.css">
         <script src="/jquery.js"></script>
         <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-password/angular-password.js"></script>
         <script src="/bower_components/angular-route/angular-route.js"></script>
         <script src="/bower_components/angular-cookies/angular-cookies.js" ></script>
         <script src="/bower_components/ngstorage/ngStorage.js"></script>
@@ -468,8 +469,8 @@
                     $scope.login = function(usuario){
 
                         $http.post('http://localhost:8000/autenticacaoMedico', usuario)
-                            .then(function(data){
-                                $localStorage.token = data.token;
+                            .then(function(res){
+                                $localStorage.token = res.data.token;
                                 delete $scope.usuario;
                                 $scope.formLogin.$setPristine();
                                 $location.path('/menuMedico');
@@ -1096,45 +1097,6 @@
                 }])
                 .controller('CadastroResponsavelController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
-                    /*
-                    $scope.estados = [];
-                    $scope.cidades = [];
-                    $scope.Estados = [];
-
-                    //Novo Médico
-                    $scope.novoMedico = function(medico){
-                        medico.data = new Date();
-                        $http.post('http://localhost:8000/novoMedico', medico).then(function (data){
-                            delete $scope.medico;
-                            $scope.cadastroMedicoForm.$setPristine();                            
-                        });
-                    };
-
-                    $scope.carregarEstados = function(){
-                        $http({
-                            method: 'GET',
-                            url: 'http://localhost:8000/selecionarEstado'
-                        }).then(function(success, data){
-                            $scope.estados = success.data;
-                        }, function(error){
-
-                        });
-                    };
-
-                    $scope.carregarCidades = function(data){
-                        
-                        $http({
-                            method: 'GET',
-                            url: ('http://localhost:8000/selecionarCidade/'+$scope.medico.Estados)
-                        }).then(function(success, data){
-                            $scope.cidades= success.data ;
-                        }, function(error){
-
-                        });
-                    };
-
-                    $scope.carregarEstados();
-                    */
 
                     //Cadastra Responsavel
                     $scope.estados = [];
@@ -1282,17 +1244,19 @@
                 }])
                 .run(['$rootScope', '$localStorage', '$location', '$cookieStore', '$http', 
                     function ($rootScope, $localStorage, $location, $scope, $http) {
-                   /*
+                   
                    var rotasLivres = ['/login','/selecionarCadastro','/cadastroMedico','/cadastroResponsavel','/cadastroAuxiliar','/cadastroClinica'];
 
                    $rootScope.$on('$locationChangeStart', function(event, next, current){
                         if ($localStorage.token) {
+                            console.log($localStorage.token);
                                 return true;                            
+                        }else{
+                            if(rotasLivres.indexOf($location.path())<0){
+                                $location.path('/login');
+                            }
                         }
-                        if(rotasLivres.indexOf($location.path())<0){
-                            $location.path('/login');
-                        };
-                   });*/
+                   });
                    
                 }]);
 

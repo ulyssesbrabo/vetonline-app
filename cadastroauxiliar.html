@@ -204,9 +204,13 @@
 					</div>
 				</div>
 				<div class="form-group ">
-					<button type="button" class="btn btn-primary btn-block" ng-click="novoAuxiliar(auxiliar)" 
-								ng-disabled="cadastroAuxiliarForm.$invalid">Cadastra</button>
+					<button type="button" class="btn btn-primary btn-block" ng-click="novoAuxiliar(auxiliar)"	ng-disabled="cadastroAuxiliarForm.$invalid">Cadastra</button>
+					<p ng-show="mensagem.length" ng-hide="mensagemSucesso">{{mensagem}}</p>
 				</div>
+
+				<div class="login-register">
+	                <button type="button" class="btn btn-primary btn-block" ng-click="voltarLogin()">Voltar</button>
+            	</div>
 
 				
 			</form>
@@ -216,78 +220,3 @@
 	
 
 </section>
-<!--
-<script>
-        angular.module("auxiliar",[])
-				.value('urlBase', 'url do back end')
-        		.controller("auxiliarCtrl", function($scope, $http, urlBase){
-        	$scope.titulo="Cadastro Medico";
-
-        	var self = this;	
-
-	        	self.auxiliar=[];
-	        	self.auxiliar=undefined;
-
-	        	self.novo = function(){
-	        		self.auxiliar = {};
-	        	};
-
-	        	self.salvar=function{
-	        		var metodo = 'POST';
-	        		if(self.auxiliar.idauxiliarMedico){
-	        			metodo='PUT'
-	        		}
-
-	        		$http({
-	        			method: metodo,
-	        			url: urlBase + 'path para cadastro',
-	        			data: self.auxiliar
-	        		})then(function successCallback(response){
-	        			self.atualizarTabelaAuxiliar();
-	        		}, function erroCallBack(response){
-	        			self.ocorreuErro();
-	        		});
-	        	};
-
-	        	self.altera = function(auxiliar){
-	        		self.auxiliar = auxiliar;
-	        	};
-
-	        	self.deletar = function(auxiliar){
-	        		self.auxiliar = auxiliar;
-	        		$http({
-	        			method: 'DELETE',
-	        			url: urlBase + 'PATH DELETAR' + self.auxiliar.idauxiliarMedico
-	        		})then(function successCallback(response){
-	        			self.atualizarTabelaAuxiliar();
-	        		}, function erroCallBack(response){
-	        			self.ocorreuErro();
-	        		});
-	        	};
-
-	        	self.atualizarTabelaAuxiliar=function(){
-	        		$http({
-	        			method:'GET',
-	        			url: urlBase + 'path listar auxiliares'
-	        		})then(function successCallback(response){
-	        			self.auxiliares = response.data;
-	        			self.auxiliares = undefined;
-	        		}, function erroCallBack(response){
-	        			self.ocorreuErro();
-	        		});
-	        	};
-
-	        	self.ocorreuErro = function(){
-	        		alert("Ocorreu um erro inesperado");
-	        	};
-
-        	function telaInicial(){
-        		location.href = "http://dev.vetonline.com/index.html";
-        	}
-
-
-        });
-        </script>
--->
-
- 

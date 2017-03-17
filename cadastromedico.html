@@ -201,14 +201,13 @@
 			</div>
 
 			<div class="form-group ">
-				<button type="button" class="btn btn-primary btn-block" ng-click = "novoMedico" ng-disabled="cadastroMedicoForm.$invalid" >Cadastra</button>
+				<button type="button" class="btn btn-primary btn-block" ng-click = "novoMedico(medico)" ng-disabled="cadastroMedicoForm.$invalid" >Cadastra</button>
 			</div>
 
-			<p ng-show="mensagem.length" ng-hide="mensagemSucesso">{{mensagem}}</p>  
+			<p ng-show="mensagem.length" ng-hide="mensagemSucesso">{{mensagem}}</p>
 
 			<div class="login-register">
-				<button type="button" class="btn btn-primary btn-block">Voltar</button>
-	            </button>
+				<button type="button" class="btn btn-primary btn-block" ng-click="voltarLogin()">Voltar</button>
 	        </div>
 		</form>
 	</div>

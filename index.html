@@ -446,6 +446,178 @@
 
                 }])
                 
+                .directive('menuMedico',['$compile', function(){
+                    return{
+                        restrict: 'E',
+                        link: function(scope, iElement, iAttrs){
+                            scope.body = document.body;
+                            scope.element = iElement[0];
+
+                            //renderize sidebar
+                            scope.element.style.display = "block";
+
+                            //add width on sidebar
+                            function isNumber(n) {
+                                return !isNaN(parseFloat(n)) && isFinite(n);
+                            }
+
+                            if (isNumber(iAttrs.size)) {
+                                scope.element.style.maxWidth = iAttrs.size + 'px';
+                            } else {
+                                scope.element.style.maxWidth = iAttrs.size;
+                            }
+
+                            //add class to position on sidebar
+                            scope.element.classList.add("sidebar--" + iAttrs.position);
+
+                            //renderize bg-sidebar
+                            var bgSidebar = document.createElement("div");
+                            bgSidebar.setAttribute("class", "sidebar-bg");
+                            bgSidebar.setAttribute("id", iAttrs.id + "-bg");
+                            bgSidebar.setAttribute("sidebar-toggle", iAttrs.id);
+                            scope.body.appendChild(bgSidebar);
+
+                            $compile(bgSidebar)(scope);
+                        }
+                    };
+                }])
+
+                .directive('menuClinica',['$compile', function(){
+                    return{
+                        restrict: 'E',
+                        link: function(scope, iElement, iAttrs){
+                            scope.body = document.body;
+                            scope.element = iElement[0];
+
+                            //renderize sidebar
+                            scope.element.style.display = "block";
+
+                            //add width on sidebar
+                            function isNumber(n) {
+                                return !isNaN(parseFloat(n)) && isFinite(n);
+                            }
+
+                            if (isNumber(iAttrs.size)) {
+                                scope.element.style.maxWidth = iAttrs.size + 'px';
+                            } else {
+                                scope.element.style.maxWidth = iAttrs.size;
+                            }
+
+                            //add class to position on sidebar
+                            scope.element.classList.add("sidebar--" + iAttrs.position);
+
+                            //renderize bg-sidebar
+                            var bgSidebar = document.createElement("div");
+                            bgSidebar.setAttribute("class", "sidebar-bg");
+                            bgSidebar.setAttribute("id", iAttrs.id + "-bg");
+                            bgSidebar.setAttribute("sidebar-toggle", iAttrs.id);
+                            scope.body.appendChild(bgSidebar);
+
+                            $compile(bgSidebar)(scope);
+                        }
+                    };
+                }])
+
+                .directive('menuAuxiliar',['$compile', function(){
+                    return{
+                        restrict: 'E',
+                        link: function(scope, iElement, iAttrs){
+                            scope.body = document.body;
+                            scope.element = iElement[0];
+
+                            //renderize sidebar
+                            scope.element.style.display = "block";
+
+                            //add width on sidebar
+                            function isNumber(n) {
+                                return !isNaN(parseFloat(n)) && isFinite(n);
+                            }
+
+                            if (isNumber(iAttrs.size)) {
+                                scope.element.style.maxWidth = iAttrs.size + 'px';
+                            } else {
+                                scope.element.style.maxWidth = iAttrs.size;
+                            }
+
+                            //add class to position on sidebar
+                            scope.element.classList.add("sidebar--" + iAttrs.position);
+
+                            //renderize bg-sidebar
+                            var bgSidebar = document.createElement("div");
+                            bgSidebar.setAttribute("class", "sidebar-bg");
+                            bgSidebar.setAttribute("id", iAttrs.id + "-bg");
+                            bgSidebar.setAttribute("sidebar-toggle", iAttrs.id);
+                            scope.body.appendChild(bgSidebar);
+
+                            $compile(bgSidebar)(scope);
+                        }
+                    };
+                }])
+                
+                .directive('menuResponsavel',['$compile', function(){
+                    return{
+                        restrict: 'E',
+                        link: function(scope, iElement, iAttrs){
+                            scope.body = document.body;
+                            scope.element = iElement[0];
+
+                            //renderize sidebar
+                            scope.element.style.display = "block";
+
+                            //add width on sidebar
+                            function isNumber(n) {
+                                return !isNaN(parseFloat(n)) && isFinite(n);
+                            }
+
+                            if (isNumber(iAttrs.size)) {
+                                scope.element.style.maxWidth = iAttrs.size + 'px';
+                            } else {
+                                scope.element.style.maxWidth = iAttrs.size;
+                            }
+
+                            //add class to position on sidebar
+                            scope.element.classList.add("sidebar--" + iAttrs.position);
+
+                            //renderize bg-sidebar
+                            var bgSidebar = document.createElement("div");
+                            bgSidebar.setAttribute("class", "sidebar-bg");
+                            bgSidebar.setAttribute("id", iAttrs.id + "-bg");
+                            bgSidebar.setAttribute("sidebar-toggle", iAttrs.id);
+                            scope.body.appendChild(bgSidebar);
+
+                            $compile(bgSidebar)(scope);
+                        }
+                    };
+                }])
+
+                .controller('MedicoController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                        $scope.menuMedico = {
+
+                        };
+                }])
+
+                .controller('AuxiliarController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                        $scope.menuAuxiliar = {
+                            
+                        };
+                }])
+
+                .controller('ResponsavelController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                        $scope.menuResponsavel = {
+                            
+                        };
+                }])
+
+                .controller('ClinicaController', ['$scope', '$rootScope', '$location', 
+                    function($scope, $rootScope, $location, $http, urlBase){
+                        $scope.menuClinica = {
+                            
+                        };    
+                }])
+                
                 .controller('novaSenhaAuxiliarController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
      
                 }])
@@ -479,8 +651,8 @@
                         });
 
                         $http.post('http://localhost:8000/autenticacaoAuxiliar',usuario)
-                            .then(function(data){
-                                $localStorage.token = data.token;
+                            .then(function(res){
+                                $localStorage.token = res.data.token;
                                 delete $scope.usuario;
                                 $scope.formLogin.$setPristine();
                                 $location.url('/menuAuxiliar');
@@ -488,8 +660,8 @@
                                 $rootScope.error = "Usuário não encontrado!"
                             });
                         $http.post('http://localhost:8000/autenticacaoClinica',usuario)
-                            .then(function(data){
-                                $localStorage.token = data.token;
+                            .then(function(res){
+                                $localStorage.token = res.data.token;
                                 delete $scope.usuario;
                                 $scope.formLogin.$setPristine();
                                 $location.url('/menuClinica');
@@ -498,8 +670,8 @@
                             });
 
                         $http.post('http://localhost:8000/autenticacaoResponsavel',usuario)
-                            .then(function(data){
-                                $localStorage.token = data.token;
+                            .then(function(res){
+                                $localStorage.token = res.data.token;
                                 delete $scope.usuario;
                                 $scope.formLogin.$setPristine();
                                 $location.url('/menuResponsavel');
@@ -517,10 +689,7 @@
                 .controller('HomeController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location, urlBase){
 
                 }])
-                
-                .controller('MedicoController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-                }])
+
                 .controller('CadastroMedicoController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
 
@@ -595,7 +764,7 @@
                             method: 'GET',
                             url: ('http://localhost:8000/auxiliaresMedicos'),
                             header:{
-                                Authorization:"JWT "+$localStorage.token
+                                Authorization: "JWT "+$localStorage.token
                             }
                         }).then(function(success, data){
                             $scope.auxiliarMedico = data;
@@ -860,10 +1029,6 @@
                     };
                 }])
 
-                .controller('ClinicaController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-
-                }])
                 .controller('CadastroClinicaController', ['$scope', '$rootScope', '$location', '$http', 
                     function($scope, $rootScope, $location, $http, urlBase){
 
@@ -960,10 +1125,6 @@
 
                 }])
 
-                .controller('AuxiliarController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-                    
-                }])
                 .controller('CadastroAuxiliarController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
                     
@@ -1091,10 +1252,7 @@
                     };
 
                 }])
-                .controller('ResponsavelController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-
-                }])
+                
                 .controller('CadastroResponsavelController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
 
@@ -1244,7 +1402,7 @@
                 }])
                 .run(['$rootScope', '$localStorage', '$location', '$cookieStore', '$http', 
                     function ($rootScope, $localStorage, $location, $scope, $http) {
-                   
+                   /*
                    var rotasLivres = ['/login','/selecionarCadastro','/cadastroMedico','/cadastroResponsavel','/cadastroAuxiliar','/cadastroClinica'];
 
                    $rootScope.$on('$locationChangeStart', function(event, next, current){
@@ -1256,7 +1414,7 @@
                                 $location.path('/login');
                             }
                         }
-                   });
+                   });*/
                    
                 }]);
 

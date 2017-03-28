@@ -243,9 +243,9 @@
                             controllerAs: 'vm'
                             
                         })
-                        .when('/PesquisarAuxiliaresCadastros', {
+                        .when('/auxiliaresCadastrado', {
                             templateUrl: 'pesquisarAuxiliaresCadastrados.html',
-                            controller: 'PesquisarAuxiliaresDosMedicosController',
+                            controller: 'AuxiliaresCadastradosController',
                             controllerAs: 'vm'
                             
                         })
@@ -446,240 +446,41 @@
 
                 }])
                 
-                .directive('menuMedico',['$compile', function(){
-                    return{
-                        restrict: 'E',
-                         transclude: true,
-                        link: function(scope, iElement, iAttrs){
-                            
-                            $(function() {
-                               var accordionActive = false;
-                              
-                               $(window).on('resize', function() {
-                                   var windowWidth = $(window).width();
-                                   var $topMenu = $('#top-menu');
-                                   var $sideMenu = $('#side-menu');     
-                                   
-                                   if (windowWidth < 768) {
-                                      if ($topMenu.hasClass("active")) {             
-                                        $topMenu.removeClass("active");
-                                        $sideMenu.addClass("active");
-                                        
-                                        var $ddl = $('#top-menu .movable.dropdown');
-                                        $ddl.detach();
-                                        $ddl.removeClass('dropdown');
-                                        $ddl.addClass('nav-header');
-                                        
-                                        $ddl.find('.dropdown-toggle').removeClass('dropdown-toggle').addClass('link');
-                                        $ddl.find('.dropdown-menu').removeClass('dropdown-menu').addClass('submenu');
-                                                    
-                                        $ddl.prependTo($sideMenu.find('.accordion'));
-                                        $('#top-menu #qform').detach().removeClass('navbar-form').prependTo($sideMenu);
-                                        
-                                        if (!accordionActive) {
-                                           var Accordion2 = function(el, multiple) {
-                                             this.el = el || {};
-                                             this.multiple = multiple || false;
-
-                                              // Variables privadas
-                                             var links = this.el.find('.movable .link');
-                                             // Evento
-                                             links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
-                                            }
-
-                                          Accordion2.prototype.dropdown = function(e) {
-                                            var $el = e.data.el;
-                                            $this = $(this),
-                                              $next = $this.next();
-
-                                            $next.slideToggle();
-                                            $this.parent().toggleClass('open');
-
-                                            if (!e.data.multiple) {
-                                              $el.find('.movable .submenu').not($next).slideUp().parent().removeClass('open');
-                                            };
-                                          }    
-
-                                          var accordion = new Accordion2($('ul.accordion'), false); 
-                                          accordionActive = true;
-                                        }
-                                      }
-                                   }
-                                   else {
-                                      if ($sideMenu.hasClass("active")) {              
-                                        $sideMenu.removeClass('active');
-                                        $topMenu.addClass('active');
-                                        
-                                        var $ddl = $('#side-menu .movable.nav-header');
-                                        $ddl.detach();
-                                        $ddl.removeClass('nav-header');
-                                        $ddl.addClass('dropdown');
-                                        
-                                        $ddl.find('.link').removeClass('link').addClass('dropdown-toggle');
-                                        $ddl.find('.submenu').removeClass('submenu').addClass('dropdown-menu');
-                                        
-                                         $('#side-menu #qform').detach().addClass('navbar-form').appendTo($topMenu.find('.nav'));
-                                        $ddl.appendTo($topMenu.find('.nav'));
-                                      }
-                                   }
-                               });
-                              
-                              /**/
-                              var $menulink = $('.side-menu-link'),       
-                                  $wrap = $('.wrap');
-                              
-                              $menulink.click(function() {    
-                                $menulink.toggleClass('active');
-                                $wrap.toggleClass('active');    
-                                return false;
-                              });
-                              
-                              /*Accordion*/
-                              var Accordion = function(el, multiple) {
-                                this.el = el || {};
-                                this.multiple = multiple || false;
-
-                                // Variables privadas
-                                var links = this.el.find('.link');
-                                // Evento
-                                links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
-                              }
-
-                              Accordion.prototype.dropdown = function(e) {
-                                 var $el = e.data.el;
-                                 $this = $(this),
-                                  $next = $this.next();
-
-                                $next.slideToggle();
-                                $this.parent().toggleClass('open');
-
-                                if (!e.data.multiple) {
-                                  $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-                                };
-                              } 
-
-                              var accordion = new Accordion($('ul.accordion'), false); 
-                              
-                              
-                            });
-
-                        }
-                    };
-                }])
-
-                .directive('menuClinica',['$compile', function(){
-                    return{
-                        restrict: 'E',
-                        link: function(scope, iElement, iAttrs){
-                            scope.body = document.body;
-                            scope.element = iElement[0];
-
-                            //renderize sidebar
-                            scope.element.style.display = "block";
-
-                            //add width on sidebar
-                            function isNumber(n) {
-                                return !isNaN(parseFloat(n)) && isFinite(n);
-                            }
-
-                            if (isNumber(iAttrs.size)) {
-                                scope.element.style.maxWidth = iAttrs.size + 'px';
-                            } else {
-                                scope.element.style.maxWidth = iAttrs.size;
-                            }
-
-                            //add class to position on sidebar
-                            scope.element.classList.add("sidebar--" + iAttrs.position);
-
-                            //renderize bg-sidebar
-                            var bgSidebar = document.createElement("div");
-                            bgSidebar.setAttribute("class", "sidebar-bg");
-                            bgSidebar.setAttribute("id", iAttrs.id + "-bg");
-                            bgSidebar.setAttribute("sidebar-toggle", iAttrs.id);
-                            scope.body.appendChild(bgSidebar);
-
-                            $compile(bgSidebar)(scope);
-                        }
-                    };
-                }])
-
-                .directive('menuAuxiliar',['$compile', function(){
-                    return{
-                        restrict: 'E',
-                        link: function(scope, iElement, iAttrs){
-                            scope.body = document.body;
-                            scope.element = iElement[0];
-
-                            //renderize sidebar
-                            scope.element.style.display = "block";
-
-                            //add width on sidebar
-                            function isNumber(n) {
-                                return !isNaN(parseFloat(n)) && isFinite(n);
-                            }
-
-                            if (isNumber(iAttrs.size)) {
-                                scope.element.style.maxWidth = iAttrs.size + 'px';
-                            } else {
-                                scope.element.style.maxWidth = iAttrs.size;
-                            }
-
-                            //add class to position on sidebar
-                            scope.element.classList.add("sidebar--" + iAttrs.position);
-
-                            //renderize bg-sidebar
-                            var bgSidebar = document.createElement("div");
-                            bgSidebar.setAttribute("class", "sidebar-bg");
-                            bgSidebar.setAttribute("id", iAttrs.id + "-bg");
-                            bgSidebar.setAttribute("sidebar-toggle", iAttrs.id);
-                            scope.body.appendChild(bgSidebar);
-
-                            $compile(bgSidebar)(scope);
-                        }
-                    };
-                }])
-                
-                .directive('menuResponsavel',['$compile', function(){
-                    return{
-                        restrict: 'E',
-                        link: function(scope, iElement, iAttrs){
-                            scope.body = document.body;
-                            scope.element = iElement[0];
-
-                            //renderize sidebar
-                            scope.element.style.display = "block";
-
-                            //add width on sidebar
-                            function isNumber(n) {
-                                return !isNaN(parseFloat(n)) && isFinite(n);
-                            }
-
-                            if (isNumber(iAttrs.size)) {
-                                scope.element.style.maxWidth = iAttrs.size + 'px';
-                            } else {
-                                scope.element.style.maxWidth = iAttrs.size;
-                            }
-
-                            //add class to position on sidebar
-                            scope.element.classList.add("sidebar--" + iAttrs.position);
-
-                            //renderize bg-sidebar
-                            var bgSidebar = document.createElement("div");
-                            bgSidebar.setAttribute("class", "sidebar-bg");
-                            bgSidebar.setAttribute("id", iAttrs.id + "-bg");
-                            bgSidebar.setAttribute("sidebar-toggle", iAttrs.id);
-                            scope.body.appendChild(bgSidebar);
-
-                            $compile(bgSidebar)(scope);
-                        }
-                    };
-                }])
-
-                .controller('MedicoController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('MedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
+                    function($scope, $rootScope, $location, $localStorage, $http){
+                        
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
                         }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
+
                 }])
 
                 .controller('AuxiliarController', ['$scope', '$rootScope', '$location', 
@@ -720,6 +521,8 @@
                 }])
                 .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', '$http', '$timeout', 
                     function($scope, $rootScope, $location, $localStorage, $http){
+
+                    delete $localStorage.token;
 
                     $scope.mensagemSucesso = false;
 
@@ -823,8 +626,40 @@
                     };
 
                 }])
-                .controller('AtualizarMedicoController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('AtualizarMedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
+                    function($scope, $rootScope, $location, $localStorage, $http){
+
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
 
                     //Atualizar Médico
                     $scope.atualizaMedico = function(atualizaMedico){
@@ -833,30 +668,66 @@
                                 delete $scope.atualizaMedico;
                                 $scope.atualizarMedicoForm.$setPristine();
                             });
-                    };
+                    }
                     
                 }])
                 .controller('ExcluirMedicoController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
                     
                 }])
-                .controller('AuxiliaresDosMedicosController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('AuxiliaresDosMedicosController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
+                    function($scope, $rootScope, $location, $localStorage, $http){
+
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
+
+                        
                     //Auxiliar - Meus Auxiliares
                     $scope.auxiliarMedico = [];
                     $scope.listaAuxiliarMedico = function(){
+                        $http.get("")
                         $http({
                             method: 'GET',
-                            url: ('http://localhost:8000/auxiliaresMedicos'),
+                            url: ('http://localhost:8000/auxiliaresMedicos')/*,
                             header:{
                                 Authorization: "JWT "+$localStorage.token
-                            }
+                            }*/
                         }).then(function(success, data){
                             $scope.auxiliarMedico = data;
                         }, function(error){
 
                         });
                     };
+
                     $scope.listaAuxiliarMedico();
 
                     var deletarAuxiliarMedico = function(){
@@ -870,11 +741,45 @@
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
 
+                    
+
                 }])
-                .controller('PesquisarAuxiliaresDosMedicosController', ['$scope', '$rootScope',
-                    '$location',function($scope, $rootScope, $location, $http, urlBase){
+                .controller('AuxiliaresCadastradosController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
+                    function($scope, $rootScope, $location, $localStorage, $http){
                     //Auxiliar - Pesquisar Auxiliares Cadastrados
 
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
+/*
                     $scope.auxiliaresCadastrados = [];
 
                     $scope.listaTodosAuxiliaresCadastrados = function(){
@@ -901,12 +806,45 @@
                     $scope.ordenarPor = function(campo){
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
-                    };
+                    };*/
 
                 }])
-                .controller('AdicionarAnimalMedicoController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('AdicionarAnimalMedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
+                    function($scope, $rootScope, $location, $localStorage, $http){
+
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
                         
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }    
+
+                    /*    
                     //Animais - Adicionar Animal
                     $scope.animais=[];
 
@@ -921,7 +859,7 @@
                         });
                     };
 
-                    var inserirAnimalMedico = login(usuario) && animal.selecionado;
+                    
 
                     var adicionarAnimal = function(){
                         $http.post("http://localhost:8000/adicionarAnimal", inserirAnimalMedico).success(function(data){
@@ -935,11 +873,44 @@
                     };
 
                     $scope.listaAnimaisCadastrados();
+                    */
 
                 }])
-                .controller('ListarAnimaisDoMedicoController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-                    
+                .controller('ListarAnimaisDoMedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
+                    function($scope, $rootScope, $location, $localStorage, $http){
+                        
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
+                    /*
                     $scope.listaAnimaisMedicos = function(){
                         $http({
                             method: 'GET',
@@ -955,10 +926,42 @@
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
-                        
+                     */   
                 }])
-                .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
+                    function($scope, $rootScope, $location, $localStorage, $http){
+
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
 
                         var anemiaMacrociticaNormocromica = function(){
                             $http.get("http://localhost:8000/anemiaMacrocitica").success(function(data){
@@ -1442,7 +1445,7 @@
                 }])
                 .controller('MedicosCadastradosController', ['$scope', '$rootScope', '$location', 
                     function($scope, $rootScope, $location, $http, urlBase){
-
+/*
                     $scope.listaMedicosCadastrados = [];
                     
                     //Medicos - Listar Medicos
@@ -1463,6 +1466,7 @@
                     };
 
                     $scope.listaMedicosCadastrados();
+                    */
                 }])
 
                 .controller('SelecionarcadastroController', ['$scope', '$rootScope', '$location', 
@@ -1487,7 +1491,7 @@
                 }])
                 .run(['$rootScope', '$localStorage', '$location', '$cookieStore', '$http', 
                     function ($rootScope, $localStorage, $location, $scope, $http) {
-                   /*
+                   
                    var rotasLivres = ['/login','/selecionarCadastro','/cadastroMedico','/cadastroResponsavel','/cadastroAuxiliar','/cadastroClinica'];
 
                    $rootScope.$on('$locationChangeStart', function(event, next, current){
@@ -1499,7 +1503,7 @@
                                 $location.path('/login');
                             }
                         }
-                   });*/
+                   });
                    
                 }]);
 

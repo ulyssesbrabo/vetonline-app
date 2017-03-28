@@ -2,7 +2,7 @@
 	
 	<style>
 		
-			.wrap {
+				.wrap {
 			  position: relative;
 			}
 			.wrap .nav-bar .navbar-brand {
@@ -358,26 +358,17 @@
 		  
 		});
 
-		$(document).ready(function(){
-			$("#menuMedico a").click(function(e){
-				e.preventDefault();
-
-				var href = $(this).attr('ng-click');
-				$("#conteudoCentral").load(ng-click+"#conteudoCentral")
-			});
-		});
-
 	</script>
 
 
 	<div class="wrap">
-		  <nav class="nav-bar navbar-inverse" role="navigation">
-		      <div id ="top-menu" class="container-fluid active">
+	  <nav class="nav-bar navbar-inverse" role="navigation">
+	      <div id ="top-menu" class="container-fluid active">
 
-		      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
+	      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
 
-		      </div>      
-		  </nav>
+	      </div>      
+	  </nav>
 
 		  <aside id="side-menu" class="aside" role="navigation">            
 		        <ul id="menuMedico" class="nav nav-list accordion">                    
@@ -388,7 +379,7 @@
 		              <li><a ng-click="paginaAtualiza()">Editar Perfil</a></li>  
 		              <li><a href="/novaSenha.html">Atualizar Senha</a></li>
 		              <li><a href="#">Excluir Perfil</a></li>
-		              <li><a href="#">Sair</a></li>
+		              <li><a ng-click="sair()">Sair</a></li>
 		            </ul>
 		          </li>
 		          
@@ -396,8 +387,8 @@
 		            <div class="link"><i class="fa fa-lg fa-users"></i>Auxiliares<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
 		              <li><a href="/cadastroauxiliar.html">Cadastra Auxiliar</a></li>
-		              <li><a ng-click="auxiliarMedico()">Meus Auxiliares</a></li>
-		              <li><a href="/pesquisarAuxiliaresCadastrados.html">Pesquisar Auxiliares Cadastrados</a></li>
+		              <li><a ng-click="paginaAuxiliares()">Meus Auxiliares</a></li>
+		              <li><a ng-click="paginaPesquisaAuxiliar()">Pesquisar Auxiliares Cadastrados</a></li>
 		            </ul>
 		          </li>
 		          
@@ -405,9 +396,8 @@
 		            <div class="link"><i class="fa fa-twitter"></i>Animais<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
 		              <li><a href="/cadastroanimal.html">Cadastra Animal</a></li>
-		              <li><a href="/atualizarAnimal.html">Editar Animal</a></li>
-		              <li><a href="/adicionarAnimalMedico.html">Adicionar Animal</a></li>
-		              <li><a href="/listarAnimaisDoMedico.html">Listar seus Pacientes</a></li>
+		              <li><a ng-click="paginaAnimaisCadastrados()">Adicionar Animal</a></li>
+		              <li><a ng-click="paginaAnimaisMedico()">Listar seus Pacientes</a></li>
 		              
 		              
 		            </ul>
@@ -416,7 +406,7 @@
 		           <li class="nav-header">
 		            <div class="link"><i class="fa fa-lg fa-map-marker"></i>Deternimar Anemia<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a href="/calcularAnemia.html">Calcular</a></li>
+		              <li><a ng-click="paginaDeterminarAnemia()">Calcular</a></li>
 		              
 		            </ul>
 		          </li>
@@ -440,7 +430,7 @@
 		    </section>
 		  </div>  
 		  
-		</div>
+	</div>
 
 
 

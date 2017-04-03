@@ -11,6 +11,7 @@
         <script src="/bower_components/angular-route/angular-route.js"></script>
         <script src="/bower_components/angular-cookies/angular-cookies.js" ></script>
         <script src="/bower_components/ngstorage/ngStorage.js"></script>
+        <script src="/bower_components/angular-resource/angular-resource.js"></script>
         <script type="text/javascript" src="JS/js/functions.js" ></script>
         <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -203,8 +204,11 @@
         <script>
             
         //app.js
-            angular.module('AppVetOnline', ['ngRoute', 'ngCookies', 'ngStorage'])
-                    .config(['$routeProvider', function ($routeProvider) {
+            angular.module('AppVetOnline', ['ngResource', 'ngRoute', 'ngCookies', 'ngStorage'])
+                    .config(['$sceDelegateProvider','$routeProvider', '$httpProvider', function ($sceDelegateProvider,$routeProvider, $httpProvider) {
+                        $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://dev.vetonline.com:8000/**']);
+                        
+
                      $routeProvider
                             
                             .when('/login', {
@@ -444,6 +448,17 @@
                         
                     .otherwise({ redirectTo: '/login' });
 
+                    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage){
+                            return{
+                                request : function(req){
+                                    if ($localStorage.token) {
+                                        req.headers.Authorization = 'JWT ' + $localStorage.token;
+                                    }
+                                    return req;
+                                }
+                            };
+                    }]);
+
                 }])
                 
                 .controller('MedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
@@ -675,8 +690,10 @@
                     function($scope, $rootScope, $location, $http, urlBase){
                     
                 }])
-                .controller('AuxiliaresDosMedicosController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
-                    function($scope, $rootScope, $location, $localStorage, $http){
+                .controller('AuxiliaresDosMedicosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.auxiliarMedico = [];
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
@@ -712,23 +729,16 @@
 
                         
                     //Auxiliar - Meus Auxiliares
-                    $scope.auxiliarMedico = [];
-                    $scope.listaAuxiliarMedico = function(){
-                        $http.get("")
-                        $http({
-                            method: 'GET',
-                            url: ('http://localhost:8000/auxiliaresMedicos')/*,
-                            header:{
-                                Authorization: "JWT "+$localStorage.token
-                            }*/
-                        }).then(function(success, data){
-                            $scope.auxiliarMedico = data;
+                    
+                    var listaAuxiliarMedico = function(){
+                        $http.get('http://localhost:8000/auxiliaresMedicos').then(function(success, data){
+                            $scope.auxiliarMedico = success.data;
                         }, function(error){
 
                         });
+                        
                     };
 
-                    $scope.listaAuxiliarMedico();
 
                     var deletarAuxiliarMedico = function(){
                         $http.delete("http://localhost:8000/excluirAuxiliar", login(usuario)).success(function(data){
@@ -741,11 +751,17 @@
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
 
+                    listaAuxiliarMedico();
+
                     
 
                 }])
-                .controller('AuxiliaresCadastradosController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
-                    function($scope, $rootScope, $location, $localStorage, $http){
+                .controller('AuxiliaresCadastradosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',
+                    function($scope, $http, $rootScope, $location, $localStorage){
+
+                    $scope.auxiliaresCadastrados = [];  
+                    $scope.listaTodosAuxiliaresCadastrados = []  ;
+
                     //Auxiliar - Pesquisar Auxiliares Cadastrados
 
                         $scope.paginaAtualiza = function(){
@@ -779,38 +795,39 @@
                         $scope.paginaDeterminarAnemia = function(){
                             $location.path('/DeternimarAnemia');
                         }
-/*
-                    $scope.auxiliaresCadastrados = [];
 
-                    $scope.listaTodosAuxiliaresCadastrados = function(){
-                        $http({
-                            method: 'GET',
-                            url: ('http://localhost:8000/auxiliaresCadastrados'  )
-                        }).then(function(success, data){
-                            $scope.auxiliaresCadastrados = data;
-                        }, function(error){
+                    
 
-                        });
+                    var listaTodosAuxiliaresCadastrados = function(){
+                        $http.get('http://dev.vetonline.com:8000/auxiliaresCadastrados').then(function(success, data){
+                                console.log("Chegou aqui");
+                                $scope.auxiliaresCadastrados = success.data;
+                            
+                            }, function(error){
+                                console.log("Chegou aqui");
+                                console.log(error);
+                            });
+                        
                     };
-
-                    $scope.listaTodosAuxiliaresCadastrados();
-
-                    var inserirAuxiliar = login(usuario) && auxiliar.selecionado;
-
+                    
+                    
                     var adicionarAuxiliar = function(){
                         $http.post("http://localhost:8000/inserirAuxiliarMedico", inserirAuxiliar).success(function(data){
-                            $scope.adicionarAuxiliar=data;
+                            $scope.adicionarAuxiliar = data;
                         });
                     };
 
                     $scope.ordenarPor = function(campo){
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
-                    };*/
+                    };
+                    
+                    listaTodosAuxiliaresCadastrados();
 
                 }])
-                .controller('AdicionarAnimalMedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
-                    function($scope, $rootScope, $location, $localStorage, $http){
+
+                .controller('AdicionarAnimalMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',
+                    function($scope, $http, $rootScope, $location, $localStorage){
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
@@ -844,16 +861,13 @@
                             $location.path('/DeternimarAnemia');
                         }    
 
-                    /*    
+                     
                     //Animais - Adicionar Animal
                     $scope.animais=[];
 
-                    $scope.listaAnimaisCadastrados = function(){
-                        $http({
-                            method: 'GET',
-                            url: ('http://localhost:8000/animaisCadastrados'  )
-                        }).then(function(success, data){
-                            $scope.animais = data;
+                    var listaAnimaisCadastrados = function(){
+                        $http.get('http://dev.vetonline.com:8000/animaisCadastrados').then(function(success, data){
+                            $scope.animais = success.data;
                         }, function(error){
 
                         });
@@ -872,12 +886,14 @@
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
 
-                    $scope.listaAnimaisCadastrados();
-                    */
+                    listaAnimaisCadastrados();
+                    
 
                 }])
-                .controller('ListarAnimaisDoMedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
-                    function($scope, $rootScope, $location, $localStorage, $http){
+                .controller('ListarAnimaisDoMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.animais=[];
                         
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
@@ -910,15 +926,18 @@
                         $scope.paginaDeterminarAnemia = function(){
                             $location.path('/DeternimarAnemia');
                         }
-                    /*
-                    $scope.listaAnimaisMedicos = function(){
-                        $http({
-                            method: 'GET',
-                            url: ('http://localhost:8000/animaisMedico')
-                        }).then(function(success, data){
+                    
+                    var listaAnimaisMedicos = function(){
+                        $http.get('http://dev.vetonline.com:8000/animaisMedico').then(function(success, data){
                             $scope.animais = success.data;
                         }, function(error){
 
+                        });
+                    };
+
+                    $scope.isAnimalSelecionado = function (animais) {
+                        return animais.some(function (animal) {
+                            return animal.selecionado;
                         });
                     };
 
@@ -926,7 +945,9 @@
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
-                     */   
+
+                    listaAnimaisMedicos();
+                     
                 }])
                 .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
                     function($scope, $rootScope, $location, $localStorage, $http){
@@ -1493,6 +1514,8 @@
                     function ($rootScope, $localStorage, $location, $scope, $http) {
                    
                    var rotasLivres = ['/login','/selecionarCadastro','/cadastroMedico','/cadastroResponsavel','/cadastroAuxiliar','/cadastroClinica'];
+
+                   //$http.defaults.headers.common.Authorization = $localStorage.token;
 
                    $rootScope.$on('$locationChangeStart', function(event, next, current){
                         if ($localStorage.token) {

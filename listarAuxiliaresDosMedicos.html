@@ -374,6 +374,35 @@
 			    padding-right: 15px;
 			}
 
+			.jumbotron {
+			    margin-left: 60px;
+			    padding-bottom: 38px;
+			    padding-top: 38px;
+			}
+			.container .jumbotron, .container-fluid .jumbotron {
+			    border-radius: 36px;
+			}
+
+			.form-control {
+			    background-color: #fff;
+			    background-image: none;
+			    border: 1px solid #ccc;
+			    border-radius: 44px;
+			    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+			    color: #555;
+			    display: block;
+			    line-height: 1.42857;
+			    margin-bottom: 24px;
+			    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+			    width: 100%;
+			}
+			.jumbotron h1, .jumbotron .h1 {
+			    color: red;
+			    font-family: times new roman;
+			    font-size: 25px;
+			    font-style: italic;
+			}
+
         	
 			}
 
@@ -559,46 +588,31 @@
 		      </a>      
 		    </div>
 		    <section class="content-inner">
-		   
 
-	    	<div class="container">
-			    <div class="row col-md-6 col-md-offset-2 custyle">
-					    <div class="well">
-					    	<label>Qual Auxiliar você procura?<input type="text" ng-model="buscaAuxiliar" placeholder="Digite o nome do Auxiliar aqui...."></label>
-					    </div>
-
-						    <table class="table table-striped custab">
-							    <thead>
-							    
-							        <tr>
-							        	<th></th>
-							            <th><a href="" ng-click="ordenarPor('cpfAuxiliar')" >CPF do Auxiliar</a></th>
-							            <th><a href="" ng-click="ordenarPor('nomeAuxiliar')" >Nome do Auxiliar</a></th>
-							            <th><a href="" ng-click="ordenarPor('emailAuxiliar')" >E-mail do Auxiliar</a></th>
-							            <th><a href="" ng-click="ordenarPor('telefoneAuxiliar')" >Telefone do Auxiliar</a></th>
-							            <th class="text-center">Ação</th>
-							        </tr>
-							    </thead>
-						            
-						            <tr ng-class="{'selecionado negrito': auxiliar.selecionado}" ng-repeat="auxiliar in listaAuxiliardosMedicos | 
-						            	filter: buscaAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao ">
-						                
-						                <td> <imput type = "checkbox" ng-model="auxiliar.selecionado" /> </td>
-						                <td> <p class="cpfAuxiliar"></p></td>
-						                <td> <p class="nomeAuxiliar"></p></td>
-						                <td> <p class="emailAuxiliar"></p></td>
-						                <td> <p class="telefoneAuxiliar"></p></td>
-						                <td class="text-center">
-						                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Perfil</a> 
-						                <a class="btn btn-danger btn-xs" ng-click="deletarAuxiliarMedico()" ng-disabled="!auxiliarSelecionado(auxiliar)" ><span class="glyphicon glyphicon-remove"></span> Deletar</a></td>
-						            </tr>
-						            
-						    </table>
-						    
-			    </div>
-
-			</div>
-
+		   		 <div class="jumbotron">
+		   		 <div class="panel-title text-center">
+	    			<h1 class="title">Seus Auxiliares</h1>
+	    		</div>
+		    		<input class="form-control" type="text" ng-model="buscarAuxiliar" placeholder="Qual Auxiliar você procura?" >
+		    		<table class="table table-striped">
+		    			<tr>
+		    				<th></th>
+		    				<th>Nome Auxiliar</th>
+		    				<th>Telefone Auxiliar</th>
+		    				<th>E-mail Auxiliar</th>
+		    				<th>Ação</th>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': auxiliar.selecionado}" ng-repeat="auxiliar in auxiliarMedico | 
+						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
+							<td><input type="checkbox" ng-model="auxiliar.selecionado"></td>
+							<td>{{auxiliar.nomeAuxiliar}}</td>
+							<td>{{auxiliar.telefoneAuxiliar}}</td>
+							<td>{{auxiliar.emailAuxiliar}}</td>
+							<td> <button class="btn btn-info btn-xs" ng-click="adicionarAuxiliar()">Perfil</button> <button class="btn btn-danger btn-xs" ng-click="deletarAuxiliar()">Deletar</button> </td>
+		    				
+		    			</tr>
+		    		</table>
+		    	</div>
 		    </section>
 		  </div>  
 		  

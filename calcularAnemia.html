@@ -525,62 +525,35 @@
 			    <div class="main-login main-center">
 
 					<form class="form-horizontal" name="calcularAnemiaForm" method="post" action="#">
+						
+						<div class="panel-title text-center">
+			    			<h1 class="title">Determina possivel Anemia</h1>
+			    		</div>
 
-							<div class="panel-title text-center">
-				    			<h1 class="title">Determina possivel Anemia</h1>
-				    		</div>
+						<fieldset>
+							<label for="AnimSeus" class="cols-sm-2 control-label">Selecione a especie de Animal</label>
+								<select name="AnimSeus" id="AnimSeus" ng-model="anemia.especie">
+									<option value="">--</option>
+									<option value="1">Cão</option>
+									<option value="2">Gato</option>
+								</select>
 
-				    	<div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<label for="AnimSeus" class="cols-sm-2 control-label">Selecione a especie de Animal</label>
-									<select name="AnimSeus" id="AnimSeus" >
-										<option value="">--</option>
-										<option value="1">Cão</option>
-										<option value="2">Gato</option>
-									</select>
-								</div>
+							<label for="VolGlob" class="cols-sm-2 control-label">Qual o Volume Globular?</label>
+							<input type="text" name="VolGlob" id="VolGlob" class="form-control" ng-model="anemia.VolGlob"/>
 
-							</div>
-						</div>	
-
-						<div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<label for="VolGlob" class="cols-sm-2 control-label">Qual o Volume Globular?</label>
-									<input type="text" class="form-control" name="VolGlob" id="VolGlob" placeholder="Digite o volume globular aqui..."/>
-								</div>
-
-							</div>
-						</div>
-
-						<div class="form-group">
 							<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="text" class="form-control" name="NuHema" id="NuHema"  placeholder="Digite o número de Hemacias aqui..."/>
-								</div>
-							</div>
-						</div>
+							<input type="text" name="NuHema" id="NuHema" class="form-control" ng-model="anemia.NuHema"/>
 
-						<div class="form-group">
-							<label for="TxHemb" class="cols-sm-2 control-label">Qual a Taxa de Hemoglobina?</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="text" class="form-control" name="TxHemb" id="TxHemb"  placeholder="Digite a Taxa de Hemoglobina aqui..."/>
-								</div>
-							</div>
-						</div>
-
-						<dir>
-								<label for="res">Resultado:</label>
-				      			<input type="text" name="res" id="res" />
-						</dir>
+							<label for="TxHemb" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
+							<input type="text" name="TxHemb" id="TxHemb" class="form-control" ng-model="anemia.Hemacias"/>
 
 
-						<div class="form-group ">
-							<input type="button" value="Calcular" class="botao" onClick="calcular(document.calcularAnemiaForm.AnimSeus.value)">
-						</div>
+							<label for="res">Resultado:</label>
+						    <input type="text" name="res" id="res" />
+
+						    <input type="button" value="Calcular" class="botao" ng-click="calcular(anemia)"/>
+
+						</fieldset>
 					</form>
 				</div>
 

@@ -1007,26 +1007,84 @@
                                 $scope.anemia=data;
                             });
                         };
-                    
-                    function calcular(AnimSeus){
-                        var VolGlob = document.calcularAnemiaForm.VolGlob.value;
-                        var NuHema = document.calcularAnemiaForm.NuHema.value;
-                        var TxHemb = document.calcularAnemiaForm.TxHemb.value;
+
+                        
+
+                        $scope.calcular = function(anemia){
+                        
+                        
+                        
+                        var VGM =  (((parseFloat(anemia.VolGlob))*10)/ parseFloat(anemia.NuHema));
+                        var CHGM = (((parseFloat(anemia.TxHemb))*100)/parseFloat(anemia.VolGlob));
+                        console.log(AnimSeus);
+                        console.log("Entrou na Função");
+                            if (anemia.especie == "1") {
+                                console.log("Entrou na seleção 1");
+                                    if (60>= VGM <=72 && 31>= CHGM <=37) {
+                                        var res = "Cehgou aqui 1";
+                                    }else{
+                                        if (VGM>=72 && CHGM>37) {
+                                            var res = "Chegou aqui 2";
+                                        }else{
+                                                if (VGM<=60 && CHGM<=31) {
+                                                    var res = "chegou aqui 3" ;
+                                                }
+                                             }
+                                        }
+                            }else{
+                                
+                                if (AnimSeus == "2") {
+                                    var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
+                                    var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
+                                        if (VGM>=49 && CHGM<=30) {
+                                        }else{
+                                            if (VGM>=49 && CHGM>30) {
+                                            }else{
+                                                if (37>VGM<49 && CHGM>30) {
+                                                }else{
+                                                    if (VGM<=37 && CHGM<=30) {
+                                                    }else{
+                                                        if (VGM<=37 && CHGM>30) {
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                }
+                            }
+                            document.calcularAnemiaForm.res.value = res;   
+                        };
+                        
+                    /*
+                    $scope.calcular =  function(anemia){
+
+                        if (anemia.tipo = "1") {
+                            var VGM = ((anemia.VolGlob * 10)/ anemia.NuHema);
+                            var CHGM = ((anemia.TxHemb * 100)/ anemia.VolGlob);
+                            if (VGM>=72 && 31>=CHGM<=37) {
+                                var res = anemiaMacrociticaNormocromica();
+                            } else {
+
+                            }
+                        } else {}
+
+
+                        
 
                             if (AnimSeus == "1") {
                                 var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
                                 var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
 
-                                    if (VGM>=49 && CHGM<=30) {
+                                    if (VGM>=72 && CHGM<=37) {
                                         var res = anemiaMacrociticaNormocromica();
                                     }else{
-                                        if (VGM>=49 && CHGM>30) {
+                                        if (VGM>=72 && CHGM>31) {
                                             var res = anemiaMacrociticaHipocromica();
                                         }else{
-                                                if (VGM<=37 && CHGM<=30) {
+                                                if (VGM<=60 && CHGM<=37) {
                                                     var res = anemiaMicrociticoHipocromico();
                                                 }else{
-                                                    if (VGM<=37 && CHGM>30) {
+                                                    if (VGM<=60 && CHGM>31) {
                                                         var res = anemiaMicrocitico();
                                                     }
                                                 }
@@ -1061,7 +1119,7 @@
                             }
 
                             document.calcularAnemiaForm.AnimSeus.value = res;   
-                    };
+                    };*/
 
                     //Deternimar Anemia / Calcular
                     $scope.novaAnemia = function(inserirAnemia){

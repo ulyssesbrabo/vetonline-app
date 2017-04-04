@@ -13,10 +13,18 @@
 			 	margin-top: 70px;
 			}
 
-			h1.title { 
-				font-size: 50px;
-				font-family: 'Passion One', cursive; 
-				font-weight: 400; 
+			h1.title {
+			    font-family: times new roman;
+			    font-size: 30px;
+			    font-style: italic;
+			    font-weight: 400;
+			    margin-bottom: 20px;
+			}
+
+			.form-horizontal .control-label {
+			    margin-bottom: 10px;
+			    padding-top: 17px;
+			    text-align: right;
 			}
 
 			h2.title{
@@ -337,6 +345,20 @@
 			    padding-right: 15px;
 			}
 
+			textarea {
+			    border-radius: 7px;
+			    margin-top: 12px;
+			    overflow: auto;
+			}
+
+			.btn-info {
+			    background-color: #5bc0de;
+			    border-color: #46b8da;
+			    color: #fff;
+			    margin: auto auto 30px;
+			    width: 30%;
+			}
+
         	
 			}
 
@@ -548,10 +570,14 @@
 							<input type="text" name="TxHemb" id="TxHemb" class="form-control" ng-model="anemia.Hemacias"/>
 
 
-							<label for="res">Resultado:</label>
-						    <input type="text" name="res" id="res" />
+							<label for="res" class="cols-sm-2 control-label">Resultado:</label>
+							<textarea name="res" id="res" rows="6" style="width: 20em"></textarea>
+							<button type="button" class="btn btn-info btn-block" ng-click="">Adicionar anemia</button>
 
-						    <input type="button" value="Calcular" class="botao" ng-click="calcular(anemia)"/>
+
+							<dir>
+								<button type="button" class="btn btn-primary btn-block" ng-click="calcular(anemia)">Calcular</button>
+							</dir>
 
 						</fieldset>
 					</form>

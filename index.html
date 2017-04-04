@@ -445,6 +445,12 @@
                         controllerAs : 'vm'
                         
                     })
+
+                    .when('/aluno',{
+                        templateUrl: 'alunoVeterinaria.html',
+                        controller: 'AlunoVeterinariaController',
+                        controllerAs: 'vm'
+                    })
                         
                     .otherwise({ redirectTo: '/login' });
 
@@ -585,6 +591,10 @@
 
                     $scope.selecionarCadast = function(){
                         $location.url('/selecionarCadastro');
+                    };
+
+                    $scope.aluno = function(){
+                        $location.url('/aluno');
                     };
 
                 }])
@@ -739,11 +749,13 @@
                         
                     };
 
+                    $scope.deletarAuxiliar = function(auxiliar){
+                        console.log(auxiliar);
+                        /*$http.delete('http://dev.vetonline.com:8000/excluirAuxiliar').then(function(success, data){
 
-                    var deletarAuxiliarMedico = function(){
-                        $http.delete("http://localhost:8000/excluirAuxiliar", login(usuario)).success(function(data){
-                            $scope.deleteAuxiliar=data;
-                        })
+                        }, function(error){
+
+                        });*/
                     };
 
                     $scope.ordenarPor = function(campo){
@@ -808,14 +820,16 @@
                                 console.log(error);
                             });
                         
-                    };
+                    };                    
                     
-                    
-                    var adicionarAuxiliar = function(){
-                        $http.post("http://localhost:8000/inserirAuxiliarMedico", inserirAuxiliar).success(function(data){
+                    $scope.adicionarAuxiliar = function(auxiliar){
+                        console.log(auxiliar);
+                        /*$http.post("http://localhost:8000/inserirAuxiliarMedico", inserirAuxiliar).success(function(data){
                             $scope.adicionarAuxiliar = data;
-                        });
+                        });*/
                     };
+
+
 
                     $scope.ordenarPor = function(campo){
                         $scope.criterioOrdenacao = campo;
@@ -949,6 +963,60 @@
                     listaAnimaisMedicos();
                      
                 }])
+
+                .controller('AlunoVeterinariaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
+                    function($scope, $rootScope, $location, $localStorage, $http){
+
+                        $scope.calcular = function(anemia){                        
+                        
+                        var VGM =  (((parseFloat(anemia.VolGlob))*10)/ parseFloat(anemia.NuHema));
+                        var CHGM = (((parseFloat(anemia.TxHemb))*100)/parseFloat(anemia.VolGlob));
+                        console.log(AnimSeus);
+                        console.log("Entrou na Função");
+                            if (anemia.especie == "1") {
+                                console.log("Entrou na seleção 1");
+                                    if (60>= VGM <=72 && 31>= CHGM <=37) {
+                                        var res = "Cehgou aqui ddddddddddddddddccccccccccccccccccccc ccccccccccccccccccccccddddddddddddddddd1";
+                                    }else{
+                                        if (VGM>=72 && CHGM>37) {
+                                            var res = "Chegou aqui 2";
+                                        }else{
+                                                if (VGM<=60 && CHGM<=31) {
+                                                    var res = "chegou aqui 3" ;
+                                                }
+                                             }
+                                        }
+                            }else{
+                                
+                                if (AnimSeus == "2") {
+                                    var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
+                                    var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
+                                        if (VGM>=49 && CHGM<=30) {
+                                        }else{
+                                            if (VGM>=49 && CHGM>30) {
+                                            }else{
+                                                if (37>VGM<49 && CHGM>30) {
+                                                }else{
+                                                    if (VGM<=37 && CHGM<=30) {
+                                                    }else{
+                                                        if (VGM<=37 && CHGM>30) {
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                }
+                            }
+                            document.calcularAnemiaForm.res.value = res;   
+                        };
+
+                        $scope.voltar = function(){
+                            $location.url('/login');
+                        };
+
+
+                    }])
+
                 .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
                     function($scope, $rootScope, $location, $localStorage, $http){
 
@@ -1010,9 +1078,7 @@
 
                         
 
-                        $scope.calcular = function(anemia){
-                        
-                        
+                        $scope.calcular = function(anemia){                        
                         
                         var VGM =  (((parseFloat(anemia.VolGlob))*10)/ parseFloat(anemia.NuHema));
                         var CHGM = (((parseFloat(anemia.TxHemb))*100)/parseFloat(anemia.VolGlob));
@@ -1567,11 +1633,15 @@
                             $location.path('/cadastroClinica');
                         };
 
+                        $scope.voltar = function(){
+                            $location.url('/login');
+                        };
+
                 }])
                 .run(['$rootScope', '$localStorage', '$location', '$cookieStore', '$http', 
                     function ($rootScope, $localStorage, $location, $scope, $http) {
                    
-                   var rotasLivres = ['/login','/selecionarCadastro','/cadastroMedico','/cadastroResponsavel','/cadastroAuxiliar','/cadastroClinica'];
+                   var rotasLivres = ['/login','/selecionarCadastro','/cadastroMedico','/cadastroResponsavel','/cadastroAuxiliar','/cadastroClinica','/aluno'];
 
                    //$http.defaults.headers.common.Authorization = $localStorage.token;
 

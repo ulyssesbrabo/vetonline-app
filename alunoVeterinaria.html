@@ -1,0 +1,173 @@
+<section>
+	
+
+<style>
+	body, html{
+			
+			background-repeat: no-repeat;
+			
+			font-family: 'Oxygen', sans-serif;
+			}
+
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title {
+			    font-family: times new roman;
+			    font-size: 30px;
+			    font-style: italic;
+			    font-weight: 400;
+			    margin-bottom: 20px;
+			}
+
+			.form-horizontal .control-label {
+			    margin-bottom: 10px;
+			    padding-top: 17px;
+			    text-align: right;
+			}
+
+			h2.title{
+				text-align: center;
+				color: #000EB9;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 50px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			body{
+				background: url(img/logomedico.png);
+				
+			}
+			.container-fluid {
+			    background: #cef0cf none repeat scroll 0 0;
+			    margin-left: auto;
+			    margin-right: auto;
+			    padding-left: 15px;
+			    padding-right: 15px;
+			}
+
+			textarea {
+			    border-radius: 7px;
+			    margin-top: 12px;
+			    overflow: auto;
+			}
+
+			.btn-info {
+			    background-color: #5bc0de;
+			    border-color: #46b8da;
+			    color: #fff;
+			    margin: auto auto 30px;
+			    width: 30%;
+			}
+</style>
+
+
+	<div class="main-login main-center">
+
+		<form class="form-horizontal" name="calcularAnemiaForm" method="post" action="#">
+			
+			<div class="panel-title text-center">
+    			<h1 class="title">Determina possivel Anemia</h1>
+    		</div>
+
+			<fieldset>
+				<label for="AnimSeus" class="cols-sm-2 control-label">Selecione a especie de Animal</label>
+					<select name="AnimSeus" id="AnimSeus" ng-model="anemia.especie">
+						<option value="">--</option>
+						<option value="1">Cão</option>
+						<option value="2">Gato</option>
+					</select>
+
+				<label for="VolGlob" class="cols-sm-2 control-label">Qual o Volume Globular?</label>
+				<input type="text" name="VolGlob" id="VolGlob" class="form-control" ng-model="anemia.VolGlob"/>
+
+				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
+				<input type="text" name="NuHema" id="NuHema" class="form-control" ng-model="anemia.NuHema"/>
+
+				<label for="TxHemb" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
+				<input type="text" name="TxHemb" id="TxHemb" class="form-control" ng-model="anemia.Hemacias"/>
+
+
+				<label for="res" class="cols-sm-2 control-label">Resultado:</label>
+				<textarea name="res" id="res" rows="6" style="width: 20em"></textarea>
+
+				<dir>
+					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(anemia)">Calcular</button>
+				</dir>
+
+				<div>
+					<button type="button" class="btn btn-lg btn-info btn-block" ng-click="voltar()">Voltar</button>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+</section>

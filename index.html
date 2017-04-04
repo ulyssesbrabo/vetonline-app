@@ -751,11 +751,11 @@
 
                     $scope.deletarAuxiliar = function(auxiliar){
                         console.log(auxiliar);
-                        /*$http.delete('http://dev.vetonline.com:8000/excluirAuxiliar').then(function(success, data){
+                        $http.delete('http://dev.vetonline.com:8000/excluirAuxiliar', auxiliar).then(function(success, data){
 
                         }, function(error){
-
-                        });*/
+                            console.log(error);
+                        });
                     };
 
                     $scope.ordenarPor = function(campo){
@@ -823,10 +823,13 @@
                     };                    
                     
                     $scope.adicionarAuxiliar = function(auxiliar){
-                        console.log(auxiliar);
-                        /*$http.post("http://localhost:8000/inserirAuxiliarMedico", inserirAuxiliar).success(function(data){
-                            $scope.adicionarAuxiliar = data;
-                        });*/
+                        $http.post("http://localhost:8000/inserirAuxiliarMedico", auxiliar).then(function(success, data){
+                            console.log("Valor auxiliar");
+                            console.log(auxiliar);
+                        }, function(error){
+                            console.log("Chegou aqui");
+                            console.log(error);
+                        });
                     };
 
 

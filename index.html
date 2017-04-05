@@ -393,7 +393,7 @@
                                 
                             })
                         .when('/cadastroAnimal', {
-                            templateUrl: 'cadastroanimal.html',
+                            templateUrl: 'cadastraAnimalResponsavel.html',
                             controller: 'CadastroAnimalController',
                             controllerAs: 'vm'
                             
@@ -545,11 +545,40 @@
                         };
                 }])
 
-                .controller('ResponsavelController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-                        $scope.menuResponsavel = {
-                            
-                        };
+                .controller('ResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $http, $rootScope, $location, $localStorage){
+                        
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
                 }])
 
                 .controller('ClinicaController', ['$scope', '$rootScope', '$location', 
@@ -829,9 +858,6 @@
                     };
 
                     listaAuxiliarMedico();
-
-                    
-
                 }])
                 .controller('AuxiliaresCadastradosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',
                     function($scope, $http, $rootScope, $location, $localStorage){
@@ -891,14 +917,13 @@
                         $http.post("http://localhost:8000/inserirAuxiliarMedico", auxiliar).then(function(success, data){
                             console.log("Valor auxiliar");
                             console.log(auxiliar);
+                            alert("Auxiliar adicionado com sucesso!")
+                            $location.path('/auxiliarDosMedico');
                         }, function(error){
                             console.log("Chegou aqui");
                             console.log(error);
                         });
                     };
-
-
-
                     $scope.ordenarPor = function(campo){
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
@@ -948,7 +973,7 @@
                     $scope.animais=[];
 
                     var listaAnimaisCadastrados = function(){
-                        $http.get('http://dev.vetonline.com:8000/animaisCadastrados')
+                        $http.get('http://localhost:8000/animaisCadastrados')
                         .then(function(success, data){
                             $scope.animais = success.data;
                         }, function(error){
@@ -956,11 +981,11 @@
                         });
                     };
 
-                    
-
-                    var adicionarAnimal = function(animal){
+                    $scope.adicionarAnimal = function(animal){
+                        console.log(animal);
                         $http.post("http://localhost:8000/adicionarAnimal", animal).then(function(success, data){
-
+                            alert("Animal adicionado com sucesso!")
+                            $location.path('/AnimaisDoMedico');
                         }, function(error){
                             console.log("Chegou aqui");
                             console.log(error);
@@ -1015,9 +1040,10 @@
                     
                     var listaAnimaisMedicos = function(){
                         $http.get('http://dev.vetonline.com:8000/animaisMedico').then(function(success, data){
+                            console.log(data);
                             $scope.animais = success.data;
                         }, function(error){
-
+                            console.log(error);
                         });
                     };
 
@@ -1268,16 +1294,46 @@
                             });
                     };
                 }])
-                .controller('CadastroAnimalController', ['$scope', '$rootScope', '$location', 
+                .controller('CadastroAnimalController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){
                     
-                    $scope.novoAnimal = function(animal){
-                        animal.data= new Date();
-                            $http.post("url api", animal).success(function(data){
-                                delete $scope.animal;
-                                $scope.cadastroAnimalrForm.$setPristine();
+                    $scope.especie = [];
+                    $scope.raca = [];
+                    $scope.Especie = [];
+
+                    $scope.novoAnimal = function(animalRes){
+                        animalRes.data= new Date();
+                            $http.post("http://dev.vetonline.com:8000/criarAnimalResponsavel", animalRes)
+                            .then(function(data){
+                                delete $scope.animalRes;
+                                $scope.cadastroAnimalResponsavelForm.$setPristine();
+                                alert("Animal cadastrados com sucesso")
                             });
                     };
+
+                    $scope.carregarEspecie = function(){
+                        $http({
+                            method: 'GET',
+                            url: 'http://dev.vetonline.com:8000/selecionarEspecie'
+                        }).then(function(success, data){
+                            $scope.especie = success.data;
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarRaca = function(data){
+                        $http({
+                            method: 'GET',
+                            url: 'http://dev.vetonline.com:8000/selecionarRaca/'+$scope.animalRes.Especie
+                        }).then(function(success, data){
+                            $scope.raca = success.data;
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.carregarEspecie();
 
                 }])
 
@@ -1472,6 +1528,18 @@
                     };
 
                     $scope.carregarEstados();
+
+                    $scope.validarSenhas = function(){
+                        senha1 = document.cadastroAuxiliarForm.senhaAuxiliar.value
+                        senha2 = document.cadastroAuxiliarForm.senhaAuxiliar2.value
+
+                        if (senha1 == senha2) {
+                            alert("Senhas são iguais")
+                        }else{
+                            alert("Senhas são diferentes")
+                            $scope.cadastroAuxiliarForm.senhaAuxiliar2.$setPristine();
+                        }
+                    }
 
                     $scope.voltarLogin = function(){
                         $location.path('/login');

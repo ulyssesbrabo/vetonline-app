@@ -229,7 +229,7 @@
 			}
 
 			body{
-				background: url(img/fundocadastroauxiliar1.jpg);
+				background: url(img/logomedico.png);
 			}
 
 			.container-fluid {
@@ -239,6 +239,15 @@
 			    padding-left: 15px;
 			    padding-right: 15px;
 			}
+			.btn-warning {
+			    background-color: #003806;
+			    border-color: transparent;
+			    color: #fff;
+			    line-height: 1.5;
+			    margin-bottom: 8px;
+			    margin-left: 1000px;
+			    padding: 5px 25px;
+			}
 
         	
 			}
@@ -246,8 +255,8 @@
 	</style>
 
 
-	<script type="text/javascript">
-
+	<script>
+	
 		$(function() {
 		   var accordionActive = false;
 		  
@@ -320,7 +329,7 @@
 		       }
 		   });
 		  
-		  /**/
+		  
 		  var $menulink = $('.side-menu-link'),       
 		      $wrap = $('.wrap');
 		  
@@ -330,7 +339,7 @@
 		    return false;
 		  });
 		  
-		  /*Accordion*/
+		
 		  var Accordion = function(el, multiple) {
 		    this.el = el || {};
 		    this.multiple = multiple || false;
@@ -359,17 +368,7 @@
 		  
 		});
 
-		$(document).ready(function(){
-			$("#menuResponsavel a").click(function(e){
-				e.preventDefault();
-
-				var href = $(this).attr('href');
-				$("#conteudoCentral").load(href+"#conteudoCentral")
-			});
-		});
-
 	</script>
-
 
 	<div class="wrap">
 		  <nav class="nav-bar navbar-inverse" role="navigation">
@@ -377,6 +376,8 @@
 
 		      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
 
+			      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
+		      	
 		      </div>      
 		  </nav>
 		  <aside id="side-menu" class="aside" role="navigation">            
@@ -388,14 +389,13 @@
 		              <li><a href="/atualizarResponsavel.html">Editar Perfil</a></li>  
 		              <li><a href="/novaSenha.html">Atualizar Senha</a></li>
 		              <li><a href="#">Excluir Perfil</a></li>
-		              <li><a href="#">Sair</a></li>
 		            </ul>
 		          </li>
 		          
 		          <li class="nav-header">
 		            <div class="link"><i class="fa fa-twitter"></i>Animais<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a href="/cadastraAnimalResponsavel.html">Cadastra Animal</a></li>
+		              <li><a ng-click="paginaCadastraAnimal()">Cadastra Animal</a></li>
 		              <li><a href="/atualizarAnimalResponsavel.html">Atualizar Animal</a></li>
 		              <li><a href="/animaisResponsavel.html">Ver meus Animais</a></li>
 		            </ul>

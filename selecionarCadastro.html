@@ -44,7 +44,7 @@
 			    padding-top: 3px;
 			}
 			.main-login{
-			 	background-color: #fff;
+			 	background-color: #eeeeee;
 			    /* shadows and rounded borders */
 			    -moz-border-radius: 2px;
 			    -webkit-border-radius: 2px;
@@ -73,22 +73,34 @@
 			    height: auto;
 			}
 			.btn-block {
-			    background-color: #a9ffa8;
+			    background-color: #003806;
 			    border-radius: 25px;
 			    display: block;
+			    margin-bottom: 15px;
 			    padding-bottom: 20px;
 			    padding-top: 20px;
 			    width: 100%;
-			    margin-bottom: 15px;
 			}
 			.input-group{
 				border-collapse: separate;
 				position: relative;
 			}
-			body{
-				background: url(img/logoresponsavel1.jpg);
-				
+
+			.btn-primary {
+			    background-color: #0a9919;
+			    border-color: #2e6da4;
+			    color: #fff;
+			    margin-top: 20px;
 			}
+
+			h1.title {
+			    font-family: times new roman;
+			    font-size: 30px;
+			    font-style: italic;
+			    font-weight: 400;
+			    margin-bottom: 20px;
+			}
+			
     </style>
 
         <div class="main-login main-center" >
@@ -103,11 +115,10 @@
 
 				<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="cadMedico()">Médico Veterinário</button>
 				<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="cadAuxiliar()">Auxiliar Veterinário</button>
-				<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="cadClinica()">Clinica Veterinária</button>
 				<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="cadResponsavel()">Responsavel Animal</button>
-				<div>
-					<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="voltar()">Voltar</button>
-				</div>
+				<div class="login-register">
+					<button type="button" class="btn btn-primary" ng-click="voltar()">Voltar</button>
+		        </div>
 
 				</div>
 

@@ -467,8 +467,8 @@
 
                 }])
                 
-                .controller('MedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
-                    function($scope, $rootScope, $location, $localStorage, $http){
+                .controller('MedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $http, $rootScope, $location, $localStorage){
                         
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
@@ -501,6 +501,40 @@
                         $scope.paginaDeterminarAnemia = function(){
                             $location.path('/DeternimarAnemia');
                         }
+
+                        $scope.excluirRegistroMedico = function(){
+                            $http({
+                                method: 'DELETE',
+                                url: 'http://dev.vetonline.com:8000/deletarMedico'
+                                
+                            }).then(function(success, data){
+
+                            }, function(error){
+                                console.log(error);
+                            })
+                        }
+
+                        /*
+                            $http.delete('http://dev.vetonline.com:8000/deletarMedico').then(function(){
+                                $location.path('/login');
+                            }, function(error){
+                                console.log(error);
+                            });
+                        $scope.deletarAuxiliar = function(auxiliar){
+                        console.log("Função deletar")
+                        console.log(auxiliar);
+                        console.log("Função deletar")
+                        console.log(auxiliar);
+                        console.log($localStorage.token)
+                        $http.delete('http://dev.vetonline.com:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
+
+                        }, function(error){
+                            console.log(error);
+                        });
+                        */
+
+
+
 
                 }])
 
@@ -644,6 +678,18 @@
                         });
                     };
 
+                    $scope.validarSenhas = function(){
+                        senha1 = document.cadastroMedicoForm.senhaMedico.value
+                        senha2 = document.cadastroMedicoForm.senhaMedico2.value
+
+                        if (senha1 == senha2) {
+                            alert("Senhas são iguais")
+                        }else{
+                            alert("Senhas são diferentes")
+                            $scope.cadastroMedicoForm.senha2.$setPristine();
+                        }
+                    }
+
                     $scope.carregarEstados();
 
                     $scope.voltarLogin = function(){
@@ -704,6 +750,7 @@
                     function($scope, $http, $rootScope, $location, $localStorage){
 
                         $scope.auxiliarMedico = [];
+                        $scope.listaAuxiliarMedico = [] ;
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
@@ -741,17 +788,35 @@
                     //Auxiliar - Meus Auxiliares
                     
                     var listaAuxiliarMedico = function(){
-                        $http.get('http://localhost:8000/auxiliaresMedicos').then(function(success, data){
+                        $http.get('http://dev.vetonline.com:8000/auxiliaresMedicos').then(function(success, 
+                            data){
                             $scope.auxiliarMedico = success.data;
                         }, function(error){
-
+                            console.log(error);
                         });
                         
                     };
 
                     $scope.deletarAuxiliar = function(auxiliar){
+                        /*
+                        console.log("Função deletar")
                         console.log(auxiliar);
-                        $http.delete('http://dev.vetonline.com:8000/excluirAuxiliar', auxiliar).then(function(success, data){
+                        $http({
+                            method: 'DELETE',
+                            url: 'http://dev.vetonline.com:8000/excluirAuxiliar',
+                            data : {
+                                auxiliar: auxiliar
+                            }
+                        }).then(function(success, data){
+
+                        }, function(error){
+                            console.log(error);
+                        })
+                        */
+                        console.log("Função deletar")
+                        console.log(auxiliar);
+                        console.log($localStorage.token)
+                        $http.delete('http://dev.vetonline.com:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
 
                         }, function(error){
                             console.log(error);
@@ -883,7 +948,8 @@
                     $scope.animais=[];
 
                     var listaAnimaisCadastrados = function(){
-                        $http.get('http://dev.vetonline.com:8000/animaisCadastrados').then(function(success, data){
+                        $http.get('http://dev.vetonline.com:8000/animaisCadastrados')
+                        .then(function(success, data){
                             $scope.animais = success.data;
                         }, function(error){
 
@@ -892,9 +958,12 @@
 
                     
 
-                    var adicionarAnimal = function(){
-                        $http.post("http://localhost:8000/adicionarAnimal", inserirAnimalMedico).success(function(data){
-                            $scope.adicionarAnimal=data;
+                    var adicionarAnimal = function(animal){
+                        $http.post("http://localhost:8000/adicionarAnimal", animal).then(function(success, data){
+
+                        }, function(error){
+                            console.log("Chegou aqui");
+                            console.log(error);
                         });
                     };
 

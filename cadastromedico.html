@@ -194,9 +194,7 @@
 				<label for="confirm" class="cols-sm-2 control-label">Confirme sua senha</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
-						<input type="password_c" id="password_c" class="form-control" name="password_c"  placeholder="Confirme sua senha aqui..." valid-password-c required/>
-						<span ng-show="cadastroMedicoForm.$error.required && cadastroMedicoForm.password_c.$dirty">Por favor confirma sua senha!</span>
-						<span ng-show="!cadastroMedicoForm.$error.required && cadastroMedicoForm.password_c.$error.noMatch && cadastroMedicoForm.password.$dirty">A senha não conferem!</span>
+						<input type="password" name="senhaMedico2" ng-model="senha2" placeholder="Confirme Senha" id="confirm_password" ng-blur="validarSenhas()" required>
 					</div>
 				</div>
 			</div>

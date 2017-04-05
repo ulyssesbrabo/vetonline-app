@@ -310,6 +310,15 @@
 			    font-size: 25px;
 			    font-style: italic;
 			}
+			.btn-warning {
+			    background-color: #003806;
+			    border-color: transparent;
+			    color: #fff;
+			    line-height: 1.5;
+			    margin-bottom: 8px;
+			    margin-left: 1000px;
+			    padding: 5px 25px;
+			}
 
         	
 			}
@@ -435,7 +444,9 @@
 	      <div id ="top-menu" class="container-fluid active">
 
 	      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
-
+	      	<div>
+		      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
+		    </div>
 	      </div>      
 	  </nav>
 
@@ -455,7 +466,6 @@
 		          <li class="nav-header">
 		            <div class="link"><i class="fa fa-lg fa-users"></i>Auxiliares<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a href="/cadastroauxiliar.html">Cadastra Auxiliar</a></li>
 		              <li><a ng-click="paginaAuxiliares()">Meus Auxiliares</a></li>
 		              <li><a ng-click="paginaPesquisaAuxiliar()">Pesquisar Auxiliares Cadastrados</a></li>
 		            </ul>
@@ -464,7 +474,6 @@
 		          <li class="nav-header">
 		            <div class="link"><i class="fa fa-twitter"></i>Animais<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a href="/cadastroanimal.html">Cadastra Animal</a></li>
 		              <li><a ng-click="paginaAnimaisCadastrados()">Adicionar Animal</a></li>
 		              <li><a ng-click="paginaAnimaisMedico()">Listar seus Pacientes</a></li>
 		              
@@ -516,7 +525,7 @@
 							<td>{{animal.nomeRaca}}</td>
 							<td>{{animal.nomeResponsavel}}</td>
 							<td>{{animal.telefoneResponsavel}}</td>
-							<td> <button class="btn btn-info btn-xs" ng-click="adicionarAnimal()">Add</button></td>
+							<td> <button class="btn btn-info btn-xs" ng-click="adicionarAnimal(animal)">Add</button></td>
 		    				
 		    			</tr>
 		    		</table>

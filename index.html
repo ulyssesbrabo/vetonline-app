@@ -1065,10 +1065,10 @@
                 .controller('AlunoVeterinariaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
                     function($scope, $rootScope, $location, $localStorage, $http){
 
-                        $scope.calcular = function(anemia){                        
-                        
-                        var VGM =  ((anemia.VolGlob *10)/ anemia.NuHema);
-                        var CHGM = ((anemia.TxHemb*100)/ anemia.VolGlob);
+                        $scope.calcular = function(anemia){
+
+                        var VGM =  ((anemia.VolGlob * 10)/ anemia.NuHema);
+                        var CHGM = ((anemia.TxHemb * 100)/ anemia.VolGlob);
                         console.log(anemia.especie);
                         
                         console.log("Entrou na Função");

@@ -1077,22 +1077,34 @@
                                 console.log(VGM);
                                 console.log(CHGM);
                                     if (60>=VGM<=72 || 31>CHGM<37) {
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Normocitica Normocromica";
                                     }
                                     if (VGM>=72 && CHGM<31) {
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
                                     if (VGM<60 && CHGM<31) {
-                                        var res = "Microcitica Hipocrômica" ;
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                        var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
                                     }
                                     if (VGM >= 72 && 31>= CHGM <=37) {
-                                    var res = "Macrocitica Normocromica";
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    var res = "O Animal possui uma anemia Macrocitica Normocromica";
                                     }
                                     if (60>= VGM <=72 && CHGM<31) {
-                                      var res = "Normocitica Hipocrômica";
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      var res = "O Animal possui uma anemia Normocitica Hipocrômica";
                                     }
                                     if (VGM<60 && 31>= CHGM <=37) {
-                                      var res = "Microcitica Normocromica";
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      var res = "O Animal possui uma anemia Microcitica Normocromica";
                                     }
                                     if (CHGM>37) {
                                       var res = " ";

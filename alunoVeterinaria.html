@@ -140,20 +140,20 @@
 
 			<fieldset>
 				<label for="AnimSeus" class="cols-sm-2 control-label">Selecione a especie de Animal</label>
-					<select name="AnimSeus" id="AnimSeus" ng-model="anemia.especie">
+					<select name="AnimSeus" id="AnimSeus" ng-model="anemia.especie" ng-required="true">
 						<option value="">--</option>
 						<option value="1">Cão</option>
 						<option value="2">Gato</option>
 					</select>
 
-				<label for="VolGlob" class="cols-sm-2 control-label">Qual o Volume Globular?</label>
-				<input type="text" name="VolGlob" id="VolGlob" class="form-control" ng-model="anemia.VolGlob"/>
+				<label for="VolGlob" class="cols-sm-2 control-label" >Qual o Volume Globular?</label>
+				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="anemia.VolGlob"/>
 
 				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias em milhões?</label>
-				<input type="text" name="NuHema" id="NuHema" class="form-control" ng-model="anemia.NuHema"/>
+				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="anemia.NuHema"/>
 
 				<label for="TxHemb" class="cols-sm-2 control-label">Qual a taxa de hemoglobina?</label>
-				<input type="text" name="TxHemb" id="TxHemb" class="form-control" ng-model="anemia.TxHemb"/>
+				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="anemia.TxHemb"/>
 
 				<dir>
 					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(anemia)" ng-disabled="calcularAnemiaForm.$invalid">Calcular</button>

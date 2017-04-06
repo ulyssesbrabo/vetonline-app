@@ -149,19 +149,19 @@
 				<label for="VolGlob" class="cols-sm-2 control-label">Qual o Volume Globular?</label>
 				<input type="text" name="VolGlob" id="VolGlob" class="form-control" ng-model="anemia.VolGlob"/>
 
-				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
+				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias em milhões?</label>
 				<input type="text" name="NuHema" id="NuHema" class="form-control" ng-model="anemia.NuHema"/>
 
-				<label for="TxHemb" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
-				<input type="text" name="TxHemb" id="TxHemb" class="form-control" ng-model="anemia.Hemacias"/>
+				<label for="TxHemb" class="cols-sm-2 control-label">Qual a taxa de hemoglobina?</label>
+				<input type="text" name="TxHemb" id="TxHemb" class="form-control" ng-model="anemia.TxHemb"/>
 
+				<dir>
+					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(anemia)" ng-disabled="calcularAnemiaForm.$invalid">Calcular</button>
+				</dir>
 
 				<label for="res" class="cols-sm-2 control-label">Resultado:</label>
 				<textarea name="res" id="res" rows="6" style="width: 20em"></textarea>
 
-				<dir>
-					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(anemia)">Calcular</button>
-				</dir>
 
 				<div>
 					<button type="button" class="btn btn-lg btn-info btn-block" ng-click="voltar()">Voltar</button>

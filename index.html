@@ -1067,24 +1067,42 @@
 
                         $scope.calcular = function(anemia){                        
                         
-                        var VGM =  (((parseFloat(anemia.VolGlob))*10)/ parseFloat(anemia.NuHema));
-                        var CHGM = (((parseFloat(anemia.TxHemb))*100)/parseFloat(anemia.VolGlob));
-                        console.log(AnimSeus);
+                        var VGM =  ((anemia.VolGlob *10)/ anemia.NuHema);
+                        var CHGM = ((anemia.TxHemb*100)/ anemia.VolGlob);
+                        console.log(anemia.especie);
+                        
                         console.log("Entrou na Função");
                             if (anemia.especie == "1") {
                                 console.log("Entrou na seleção 1");
-                                    if (60>= VGM <=72 && 31>= CHGM <=37) {
-                                        var res = "Cehgou aqui ddddddddddddddddccccccccccccccccccccc ccccccccccccccccccccccddddddddddddddddd1";
-                                    }else{
-                                        if (VGM>=72 && CHGM>37) {
-                                            var res = "Chegou aqui 2";
-                                        }else{
-                                                if (VGM<=60 && CHGM<=31) {
-                                                    var res = "chegou aqui 3" ;
-                                                }
-                                             }
-                                        }
-                            }else{
+                                console.log(VGM);
+                                console.log(CHGM);
+                                    if (60>=VGM<=72 || 31>CHGM<37) {
+                                        var res = "O Animal possui uma anemia Normocitica Normocromica";
+                                    }
+                                    if (VGM>=72 && CHGM<31) {
+                                        var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
+                                    }
+                                    if (VGM<60 && CHGM<31) {
+                                        var res = "Microcitica Hipocrômica" ;
+                                    }
+                                    if (VGM >= 72 && 31>= CHGM <=37) {
+                                    var res = "Macrocitica Normocromica";
+                                    }
+                                    if (60>= VGM <=72 && CHGM<31) {
+                                      var res = "Normocitica Hipocrômica";
+                                    }
+                                    if (VGM<60 && 31>= CHGM <=37) {
+                                      var res = "Microcitica Normocromica";
+                                    }
+                                    if (CHGM>37) {
+                                      var res = " ";
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      alert("Variaveis Erradas!")
+                                    }
+
+                                }
+                           
                                 
                                 if (AnimSeus == "2") {
                                     var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
@@ -1104,7 +1122,7 @@
                                             }
                                         }
                                 }
-                            }
+                            
                             document.calcularAnemiaForm.res.value = res;   
                         };
 

@@ -102,10 +102,6 @@
 
 			}
 
-			body{
-				background: url(img/logomedico.png);
-				
-			}
 			.container-fluid {
 			    background: #cef0cf none repeat scroll 0 0;
 			    margin-left: auto;
@@ -127,6 +123,17 @@
 			    margin: auto auto 30px;
 			    width: 30%;
 			}
+
+			.help-block {
+			    color: #dc0000;
+			    display: block;
+			    margin-bottom: 10px;
+			    margin-top: 5px;
+			}
+
+			.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+			    border-radius: 20px;
+			}
 </style>
 
 
@@ -145,16 +152,19 @@
 						<option value="1">Cão</option>
 						<option value="2">Gato</option>
 					</select>
+					<p ng-show="calcularAnemiaForm.AnimSeus.$invalid && !calcularAnemiaForm.AnimSeus.$pristine" class="help-block">A seleção da Especie é obrigatório</p>
 
 				<label for="VolGlob" class="cols-sm-2 control-label" >Qual o Volume Globular?</label>
-				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="anemia.VolGlob"/>
+				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="anemia.VolGlob" placeholder="Por favor insira o Volume Globular!"/>
+				<p ng-show="calcularAnemiaForm.VolGlob.$invalid && !calcularAnemiaForm.VolGlob.$pristine" class="help-block">Volume Globular é obrigatório</p>
 
-				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias em milhões?</label>
-				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="anemia.NuHema"/>
+				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
+				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="anemia.NuHema" placeholder = "Por favor insira o valor em decimal, exemplo: (xx,xx)"/>
+				<p ng-show="calcularAnemiaForm.NuHema.$invalid && !calcularAnemiaForm.NuHema.$pristine" class="help-block">Numero de Hemacias é obrigatório</p>
 
 				<label for="TxHemb" class="cols-sm-2 control-label">Qual a taxa de hemoglobina?</label>
-				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="anemia.TxHemb"/>
-
+				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="anemia.TxHemb" placeholder="Por favor insira a Taxa de Hemoglobina!"/>
+				<p ng-show="calcularAnemiaForm.TxHemb.$invalid && !calcularAnemiaForm.TxHemb.$pristine" class="help-block">Taxa de Hemoglobina é obrigatório</p>
 				<dir>
 					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(anemia)" ng-disabled="calcularAnemiaForm.$invalid">Calcular</button>
 				</dir>

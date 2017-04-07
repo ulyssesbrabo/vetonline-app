@@ -102,8 +102,8 @@
 			}
 
 			.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
-    border-radius: 20px;
-}
+			    border-radius: 20px;
+			}
 
     </style>
 
@@ -119,6 +119,7 @@
 						<div class="input-group">
 							<label for="cpfResponsavel" class="cols-sm-2 control-label">Digite seu CPF</label>
 							<input type="text" class="form-control" name="cpfResponsavel" id="cpfResponsavel" placeholder="Informe seu Cpf sem pontos traços ou barras..." ng-model="responsavel.cpfResponsavel" ng-pattern = "/^\d{11}$/" ng-required="true" />
+							<p ng-show="cadastroResponsavelForm.cpfResponsavel.$invalid && !cadastroResponsavelForm.cpfResponsavel.$pristine" class="help-block">Seu Cpf é obrigatório</p>
 						</div>
 					</div>
 				</div>

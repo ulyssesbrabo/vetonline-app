@@ -904,15 +904,21 @@
                     };                    
                     
                     $scope.adicionarAuxiliar = function(auxiliar){
+                        $http.get('http://localhost:8000/verificaVinculoMedicoAuxiliar', auxiliar).then(function(success, data){
+                            alert("Auxiliar ja adicionado!")
+                            $location.path('/auxiliarDosMedico');
+                        }, function(error){
+                        });
                         $http.post("http://localhost:8000/inserirAuxiliarMedico", auxiliar).then(function(success, data){
                             console.log("Valor auxiliar");
                             console.log(auxiliar);
                             alert("Auxiliar adicionado com sucesso!")
-                            $location.path('/auxiliarDosMedico');
+                            
                         }, function(error){
                             console.log("Chegou aqui");
                             console.log(error);
-                        });
+                        });                                
+
                     };
                     $scope.ordenarPor = function(campo){
                         $scope.criterioOrdenacao = campo;

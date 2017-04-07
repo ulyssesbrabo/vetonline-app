@@ -631,15 +631,6 @@
                             },function(erro){
                                 $rootScope.error = "Usuário não encontrado!"
                             });
-                        $http.post('http://localhost:8000/autenticacaoClinica',usuario)
-                            .then(function(res){
-                                $localStorage.token = res.data.token;
-                                delete $scope.usuario;
-                                $scope.formLogin.$setPristine();
-                                $location.url('/menuClinica');
-                            },function(erro){
-                                $rootScope.error = "Usuário não encontrado!"
-                            });
 
                         $http.post('http://localhost:8000/autenticacaoResponsavel',usuario)
                             .then(function(res){
@@ -712,7 +703,7 @@
                         senha2 = document.cadastroMedicoForm.senhaMedico2.value
 
                         if (senha1 == senha2) {
-                            alert("Senhas são iguais")
+                            return true;
                         }else{
                             alert("Senhas são diferentes")
                             $scope.cadastroMedicoForm.senha2.$setPristine();
@@ -817,7 +808,7 @@
                     //Auxiliar - Meus Auxiliares
                     
                     var listaAuxiliarMedico = function(){
-                        $http.get('http://dev.vetonline.com:8000/auxiliaresMedicos').then(function(success, 
+                        $http.get('http://localhost:8000/auxiliaresMedicos').then(function(success, 
                             data){
                             $scope.auxiliarMedico = success.data;
                         }, function(error){
@@ -862,6 +853,7 @@
                 .controller('AuxiliaresCadastradosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',
                     function($scope, $http, $rootScope, $location, $localStorage){
 
+                      console.log("Carregou o controller");
                     $scope.auxiliaresCadastrados = [];  
                     $scope.listaTodosAuxiliaresCadastrados = []  ;
 
@@ -899,10 +891,8 @@
                             $location.path('/DeternimarAnemia');
                         }
 
-                    
-
                     var listaTodosAuxiliaresCadastrados = function(){
-                        $http.get('http://dev.vetonline.com:8000/auxiliaresCadastrados').then(function(success, data){
+                        $http.get('http://localhost:8000/auxiliaresCadastrados').then(function(success, data){
                                 console.log("Chegou aqui");
                                 $scope.auxiliaresCadastrados = success.data;
                             
@@ -1039,7 +1029,7 @@
                         }
                     
                     var listaAnimaisMedicos = function(){
-                        $http.get('http://dev.vetonline.com:8000/animaisMedico').then(function(success, data){
+                        $http.get('http://localhost:8000/animaisMedico').then(function(success, data){
                             console.log(data);
                             $scope.animais = success.data;
                         }, function(error){
@@ -1333,7 +1323,7 @@
 
                     $scope.novoAnimal = function(animalRes){
                         animalRes.data= new Date();
-                            $http.post("http://dev.vetonline.com:8000/criarAnimalResponsavel", animalRes)
+                            $http.post("http://localhost:8000/criarAnimalResponsavel", animalRes)
                             .then(function(data){
                                 delete $scope.animalRes;
                                 $scope.cadastroAnimalResponsavelForm.$setPristine();
@@ -1344,7 +1334,7 @@
                     $scope.carregarEspecie = function(){
                         $http({
                             method: 'GET',
-                            url: 'http://dev.vetonline.com:8000/selecionarEspecie'
+                            url: 'http://localhost:8000/selecionarEspecie'
                         }).then(function(success, data){
                             $scope.especie = success.data;
                         }, function(error){
@@ -1355,7 +1345,7 @@
                     $scope.carregarRaca = function(data){
                         $http({
                             method: 'GET',
-                            url: 'http://dev.vetonline.com:8000/selecionarRaca/'+$scope.animalRes.Especie
+                            url: 'http://localhost:8000/selecionarRaca/'+$scope.animalRes.Especie
                         }).then(function(success, data){
                             $scope.raca = success.data;
                         }, function(error){
@@ -1703,6 +1693,8 @@
                     $scope.voltarLogin = function(){
                         $location.path('/login');
                     };
+
+                    
 
                 }])
                 .controller('AtualizarResponsavelController', ['$scope', '$rootScope', '$location', 

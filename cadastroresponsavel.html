@@ -94,6 +94,17 @@
 
 			}
 
+			.help-block {
+			    color: #dc0000;
+			    display: block;
+			    margin-bottom: 10px;
+			    margin-top: 5px;
+			}
+
+			.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+    border-radius: 20px;
+}
+
     </style>
 
     	<div class="main-login main-center">
@@ -107,7 +118,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<label for="cpfResponsavel" class="cols-sm-2 control-label">Digite seu CPF</label>
-							<input type="text" class="form-control" name="cpfResponsavel" id="cpfResponsavel" placeholder="xxx.xxx.xxx-xx" ng-model="responsavel.cpfResponsavel" ng-required="true" />
+							<input type="text" class="form-control" name="cpfResponsavel" id="cpfResponsavel" placeholder="Informe seu Cpf sem pontos traços ou barras..." ng-model="responsavel.cpfResponsavel" ng-pattern = "/^\d{11}$/" ng-required="true" />
 						</div>
 					</div>
 				</div>
@@ -118,6 +129,7 @@
 						<div class="input-group">
 							<label for="nomeResponsavel" class="cols-sm-2 control-label">Digite seu Nome</label>
 							<input type="text" class="form-control" name="nomeResponsavel" id="nomeResponsavel" placeholder="Digite seu nome aqui..." ng-model="responsavel.nomeResponsavel" ng-required="true"/>
+							<p ng-show="cadastroResponsavelForm.nomeResponsavel.$invalid && !cadastroResponsavelForm.nomeResponsavel.$pristine" class="help-block">Seu nome é obrigatório</p>
 						</div>
 					</div>
 				</div>
@@ -136,7 +148,7 @@
 					<label for="telefoneResponsavel" class="cols-sm-2 control-label">Digite seu Telefone</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
-							<input type="text" class="form-control" name="telefoneResponsavel" id="telefoneResponsavel" ng-model="responsavel.telefoneResponsavel"  placeholder="+XX (XX) XXXXX-XXXX" ng-required="true"/>
+							<input type="text" class="form-control" name="telefoneResponsavel" id="telefoneResponsavel" ng-model="responsavel.telefoneResponsavel"  placeholder="Informe seu telefone" ng-required="true"/>
 						</div>
 					</div>
 				</div>
@@ -190,7 +202,7 @@
 					<label for="confirm" class="cols-sm-2 control-label">Confirme sua Senha</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
-							<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirme sua senha..."/>
+							<input type="password" class="form-control" name="confirm" id="confirm"   placeholder="Confirme sua senha..."/>
 						</div>
 					</div>
 				</div>

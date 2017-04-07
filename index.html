@@ -1062,8 +1062,9 @@
                     function($scope, $rootScope, $location, $localStorage, $http){
 
                         $scope.calcular = function(anemia){
-
-                        var VGM =  ((anemia.VolGlob * 10)/ anemia.NuHema);
+                            
+                        var hem = (anemia.NuHema/1000000);    
+                        var VGM =  ((anemia.VolGlob * 10)/ hem);
                         var CHGM = ((anemia.TxHemb * 100)/ anemia.VolGlob);
                         console.log(anemia.especie);
                         
@@ -1072,37 +1073,43 @@
                                 console.log("Entrou na seleção 1");
                                 console.log(VGM);
                                 console.log(CHGM);
-                                    if (60>=VGM<=72 || 31>CHGM<37) {
+                                    if (60>=VGM && VGM<=77 && 31>=CHGM && CHGM<=34) {
+                                        console.log("Função 1");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Normocitica Normocromica";
                                     }
-                                    if (VGM>=72 && CHGM<31) {
+                                    else if (VGM>=77 && CHGM<31) {
+                                        console.log("Função 2");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
-                                    if (VGM<60 && CHGM<31) {
+                                    else if (60>VGM && CHGM<31) {
+                                        console.log("Função 3");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
                                     }
-                                    if (VGM >= 72 && 31>= CHGM <=37) {
+                                    else if (VGM>=77 && 31>=CHGM<=34) {
+                                        console.log("Função 4");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
                                     var res = "O Animal possui uma anemia Macrocitica Normocromica";
                                     }
-                                    if (60>= VGM <=72 && CHGM<31) {
+                                    else if ( 60<=VGM && VGM<=77 && CHGM<31) {
+                                        console.log("Função 5");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
                                       var res = "O Animal possui uma anemia Normocitica Hipocrômica";
                                     }
-                                    if (VGM<60 && 31>= CHGM <=37) {
+                                    else if (VGM<60 && 31<=CHGM && CHGM<=34) {
+                                        console.log("Função 6");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
                                       var res = "O Animal possui uma anemia Microcitica Normocromica";
                                     }
-                                    if (CHGM>37) {
+                                    else if (CHGM>34) {
                                       var res = " ";
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
@@ -1113,22 +1120,48 @@
                            
                                 
                                 if (AnimSeus == "2") {
-                                    var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
-                                    var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
-                                        if (VGM>=49 && CHGM<=30) {
-                                        }else{
-                                            if (VGM>=49 && CHGM>30) {
-                                            }else{
-                                                if (37>VGM<49 && CHGM>30) {
-                                                }else{
-                                                    if (VGM<=37 && CHGM<=30) {
-                                                    }else{
-                                                        if (VGM<=37 && CHGM>30) {
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+                                    if (39>=VGM && VGM<=55 && 31>=CHGM && CHGM<=35) {
+                                        console.log("Função 1");
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                        var res = "O Animal possui uma anemia Normocitica Normocromica";
+                                    }
+                                    else if (VGM>=55 && CHGM<31) {
+                                        console.log("Função 2");
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                        var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
+                                    }
+                                    else if (39>VGM && CHGM<31) {
+                                        console.log("Função 3");
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                        var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
+                                    }
+                                    else if (VGM>=55 && 31>=CHGM<=35) {
+                                        console.log("Função 4");
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    var res = "O Animal possui uma anemia Macrocitica Normocromica";
+                                    }
+                                    else if ( 39<=VGM && VGM<=55 && CHGM<31) {
+                                        console.log("Função 5");
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      var res = "O Animal possui uma anemia Normocitica Hipocrômica";
+                                    }
+                                    else if (VGM<39 && 31<=CHGM && CHGM<=35) {
+                                        console.log("Função 6");
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      var res = "O Animal possui uma anemia Microcitica Normocromica";
+                                    }
+                                    else if (CHGM>35) {
+                                      var res = " ";
+                                      delete $scope.anemia;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      alert("Variaveis Erradas!")
+                                    }
                                 }
                             
                             document.calcularAnemiaForm.res.value = res;   

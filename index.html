@@ -836,8 +836,8 @@
                         console.log("Função deletar")
                         console.log(auxiliar);
                         console.log($localStorage.token)
-                        $http.delete('http://dev.vetonline.com:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
-
+                        $http.delete('http://localhost:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
+                            listaAuxiliarMedico();
                         }, function(error){
                             console.log(error);
                         });

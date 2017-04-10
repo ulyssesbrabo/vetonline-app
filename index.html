@@ -818,21 +818,6 @@
                     };
 
                     $scope.deletarAuxiliar = function(auxiliar){
-                        /*
-                        console.log("Função deletar")
-                        console.log(auxiliar);
-                        $http({
-                            method: 'DELETE',
-                            url: 'http://dev.vetonline.com:8000/excluirAuxiliar',
-                            data : {
-                                auxiliar: auxiliar
-                            }
-                        }).then(function(success, data){
-
-                        }, function(error){
-                            console.log(error);
-                        })
-                        */
                         console.log("Função deletar")
                         console.log(auxiliar);
                         console.log($localStorage.token)
@@ -904,20 +889,15 @@
                     };                    
                     
                     $scope.adicionarAuxiliar = function(auxiliar){
-                        $http.get('http://localhost:8000/verificaVinculoMedicoAuxiliar', auxiliar).then(function(success, data){
-                            alert("Auxiliar ja adicionado!")
-                            $location.path('/auxiliarDosMedico');
-                        }, function(error){
-                        });
                         $http.post("http://localhost:8000/inserirAuxiliarMedico", auxiliar).then(function(success, data){
                             console.log("Valor auxiliar");
                             console.log(auxiliar);
                             alert("Auxiliar adicionado com sucesso!")
-                            
+                            $location.path('/auxiliarDosMedico');
                         }, function(error){
                             console.log("Chegou aqui");
                             console.log(error);
-                        });                                
+                        });
 
                     };
                     $scope.ordenarPor = function(campo){
@@ -1073,7 +1053,7 @@
                                 console.log("Entrou na seleção 1");
                                 console.log(VGM);
                                 console.log(CHGM);
-                                    if (60>=VGM && VGM<=77 && 31>=CHGM && CHGM<=34) {
+                                    if (VGM>=60 && VGM<=77 && CHGM>=31 && CHGM<=34) {
                                         console.log("Função 1");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
@@ -1085,7 +1065,7 @@
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
-                                    else if (60>VGM && CHGM<31) {
+                                    else if (VGM<60 && CHGM<31) {
                                         console.log("Função 3");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
@@ -1120,7 +1100,7 @@
                            
                                 
                                 if (AnimSeus == "2") {
-                                    if (39>=VGM && VGM<=55 && 31>=CHGM && CHGM<=35) {
+                                    if (VGM>=39 && VGM<=55 && CHGM>=31 && CHGM<=35) {
                                         console.log("Função 1");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();
@@ -1132,7 +1112,7 @@
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
-                                    else if (39>VGM && CHGM<31) {
+                                    else if (VGM<39 && CHGM<31) {
                                         console.log("Função 3");
                                       delete $scope.anemia;
                                       $scope.calcularAnemiaForm.$setPristine();

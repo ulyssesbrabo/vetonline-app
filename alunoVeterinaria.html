@@ -229,6 +229,10 @@
 					<h3 class="title">Dados do Leucograma</h3>
 				</div>
 
+				<label for="CGL" class="cols-sm-2 control-label">Informe a contagem global dos leucócitos?</label>
+				<input type="text" name="CGL" id="CGL" ng-required="true" class="form-control" ng-model="hemoga.CGL" placeholder="Informe o valor aqui!"/>
+				<p ng-show="calcularAnemiaForm.CGL.$invalid && !calcularAnemiaForm.CGL.$pristine" class="help-block">A contagem global de leocócitos é obrigatório</p>
+
 				<div class="row">
 					<div class="col-md-4">Valores Absolutos</div>
 					<div class="col-md-4">Valores Relativos</div>

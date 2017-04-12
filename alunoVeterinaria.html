@@ -32,7 +32,7 @@
 			    font-family: times new roman;
 			    font-size: 20px;
 			    margin-top: 9px;
-			    text-align: left;
+			    text-align: center;
 			}
 
 			h3.title {
@@ -40,7 +40,7 @@
 			    font-family: times new roman;
 			    font-size: 20px;
 			    margin-top: 9px;
-			    text-align: left;
+			    text-align: center;
 			}
 
 			h4, .h4 {
@@ -88,7 +88,7 @@
 			.main-center{
 			 	margin-top: 30px;
 			 	margin: 30px auto;
-			 	max-width: 530px;
+			 	max-width: 930px;
 			    padding: 40px 40px;
 
 			}
@@ -169,7 +169,7 @@
 
 			.col-md-4 {
 			    font-family: times new roman;
-			    font-size: 15px;
+			    font-size: 25px;
 			    text-align: center;
 			    width: 50%;
 			}
@@ -182,6 +182,7 @@
 			}
 
 			.col-md-6 {
+			    margin-left: 25px;
 			    margin-right: 60px;
 			    width: 40%;
 			}
@@ -190,7 +191,7 @@
 			    background-color: #6599AF;
 			    border-color: #2e6da4;
 			    color: #fff;
-			    margin-top: 30px;
+			    margin-top: 70px;
 			}
 </style>
 
@@ -205,7 +206,7 @@
 
 			<fieldset>
 				<label for="AnimSeus" class="cols-sm-2 control-label">Selecione a especie de Animal</label>
-					<select name="AnimSeus" id="AnimSeus" ng-model="anemia.especie" ng-required="true">
+					<select name="AnimSeus" id="AnimSeus" ng-model="hemoga.especie" ng-required="true">
 						<option value="">--</option>
 						<option value="1">Cão</option>
 						<option value="2">Gato</option>
@@ -215,15 +216,15 @@
 					<h2 class="title">Dados do Eritrograma</h2>
 				</div>	
 				<label for="VolGlob" class="cols-sm-2 control-label" >Qual o Volume Globular?</label>
-				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="anemia.VolGlob" placeholder="Por favor insira o Volume Globular!"/>
+				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="hemoga.VolGlob" placeholder="Por favor insira o Volume Globular!"/>
 				<p ng-show="calcularAnemiaForm.VolGlob.$invalid && !calcularAnemiaForm.VolGlob.$pristine" class="help-block">Volume Globular é obrigatório</p>
 
 				<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
-				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="anemia.NuHema" placeholder = "Por favor insira o valor em decimal, exemplo: (xx,xx)"/>
+				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="hemoga.NuHema" placeholder = "Por favor insira o valor em decimal, exemplo: (xx,xx)"/>
 				<p ng-show="calcularAnemiaForm.NuHema.$invalid && !calcularAnemiaForm.NuHema.$pristine" class="help-block">Numero de Hemacias é obrigatório</p>
 
 				<label for="TxHemb" class="cols-sm-2 control-label">Qual a taxa de hemoglobina?</label>
-				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="anemia.TxHemb" placeholder="Por favor insira a Taxa de Hemoglobina!"/>
+				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="hemoga.TxHemb" placeholder="Por favor insira a Taxa de Hemoglobina!"/>
 				<p ng-show="calcularAnemiaForm.TxHemb.$invalid && !calcularAnemiaForm.TxHemb.$pristine" class="help-block">Taxa de Hemoglobina é obrigatório</p>
 				<div>
 					<h3 class="title">Dados do Leucograma</h3>
@@ -239,13 +240,13 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-1">Informe os Eosinófilos?</div>
+					<div class="col-md-1" >Informe os Eosinófilos?</div>
 					<div class="col-md-1">Informe os Eosinófilos?</div>
 				</div>
 				
 					<div class="row">
 						<input class="col-md-6" type="text" name="AbsEosino" id="AbsEosino" ng-required="true" ng-model="hemoga.AbsEosino" placeholder="Informe o valor?"/>
-						<input class=".col-xs-6" type="text" name="RelaEosino" id="RelaEosino" ng-required="true" ng-model="hemoga.RelaEosino" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaEosino" id="RelaEosino" ng-required="true" ng-disabled = "calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.RelaEosino" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -255,7 +256,7 @@
 
 					<div class="row">
 						<input class="col-md-6" type="text" name="AbsoluBasof" id="AbsoluBasof" ng-required="true" ng-model="hemoga.AbsoluBasof" placeholder="Informe o valor?"/>
-						<input class=".col-xs-6" type="text" name="RelaBasof" id="RelaBasof" ng-required="true" ng-model="hemoga.RelaBasof" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaBasof" id="RelaBasof" ng-required="true" ng-model="hemoga.RelaBasof" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -265,7 +266,7 @@
 
 					<div class="row">
 						<input class="col-md-6" type="text" name="AbsoluLinfo" id="AbsoluLinfo" ng-required="true" ng-model="hemoga.AbsoluLinfo" placeholder="Informe o valor?"/>
-						<input class=".col-xs-6" type="text" name="RelaLinfo" id="RelaLinfo" ng-required="true" ng-model="hemoga.RelaLinfo" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaLinfo" id="RelaLinfo" ng-required="true" ng-model="hemoga.RelaLinfo" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -275,7 +276,7 @@
 
 					<div class="row">
 						<input class="col-md-6" type="text" name="AbsoluMono" id="AbsoluMono" ng-required="true" ng-model="hemoga.AbsoluMono" placeholder="Informe o valor?"/>
-						<input class=".col-xs-6" type="text" name="RelaMono" id="RelaMono" ng-required="true" ng-model="hemoga.RelaMono" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaMono" id="RelaMono" ng-required="true" ng-model="hemoga.RelaMono" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -285,7 +286,7 @@
 
 					<div class="row">
 						<input class="col-md-6" type="text" name="AbsoluBasto" id="AbsoluBasto" ng-required="true" ng-model="hemoga.AbsoluBasto" placeholder="Informe o valor?"/>
-						<input class=".col-xs-6" type="text" name="RelaBasto" id="RelaBasto" ng-required="true" ng-model="hemoga.RelaBasto" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaBasto" id="RelaBasto" ng-required="true" ng-model="hemoga.RelaBasto" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -295,18 +296,18 @@
 
 					<div class="input-group">
 						<input class="col-md-6" type="text" name="AbsoluSegmen" id="AbsoluSegmen" ng-required="true" ng-model="hemoga.AbsoluSegmen" placeholder="Informe o valor?"/>
-						<input class=".col-xs-6" type="text" name="RelaSegmen" id="RelaSegmen" ng-required="true" ng-model="hemoga.RelaSegmen" ng-disable="calcularAnemiaForm.AbsoluLinfo.$valid" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaSegmen" id="RelaSegmen" ng-required="true" ng-model="hemoga.RelaSegmen" ng-disable="calcularAnemiaForm.AbsoluLinfo.$valid" placeholder="Informe o valor?"/>
 					</div>
 
 				<dir>
-					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(anemia)">Analisar Resultados</button>
+					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(hemoga)">Analisar Resultados</button>
 				</dir>
 
 				<div>
 					<h4 class="title">Resultados</h4>
 				</div>
 
-				<textarea name="res" id="res" rows="6" style="width: 32em"></textarea>
+				<textarea name="res" id="res" rows="6" style="width: 62em"></textarea>
 
 
 				<div>

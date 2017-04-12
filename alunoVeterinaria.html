@@ -28,27 +28,33 @@
 			}
 
 			h2.title {
-			    color: #b8b8b8;
+			    background-color: #d0d3cd;
+			    color: #0e0e0e;
 			    font-family: times new roman;
 			    font-size: 20px;
 			    margin-top: 9px;
 			    text-align: center;
+			    width: 100%;
 			}
 
 			h3.title {
-				color: #b8b8b8;
+				background-color: #d0d3cd;
+			    color: #0e0e0e;
 			    font-family: times new roman;
 			    font-size: 20px;
 			    margin-top: 9px;
 			    text-align: center;
+			    width: 100%;
 			}
 
 			h4, .h4 {
+			    background-color: #d0d3cd;
+			    color: #0e0e0e;
 			    font-family: times new roman;
-			    font-size: 18px;
-			    margin-bottom: 0;
-			    margin-top: 50px;
+			    font-size: 20px;
+			    margin-top: 30px;
 			    text-align: center;
+			    width: 100%;
 			}
 
 			hr{
@@ -245,8 +251,8 @@
 				</div>
 				
 					<div class="row">
-						<input class="col-md-6" type="text" name="AbsEosino" id="AbsEosino" ng-required="true" ng-model="hemoga.AbsEosino" placeholder="Informe o valor?"/>
-						<input class="col-md-6" type="text" name="RelaEosino" id="RelaEosino" ng-required="true" ng-disabled = "calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.RelaEosino" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="AbsoluEosino" id="AbsoluEosino" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluEosino" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaEosino" id="RelaEosino" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-required="true" ng-model="hemoga.RelaEosino" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -255,8 +261,8 @@
 				</div>
 
 					<div class="row">
-						<input class="col-md-6" type="text" name="AbsoluBasof" id="AbsoluBasof" ng-required="true" ng-model="hemoga.AbsoluBasof" placeholder="Informe o valor?"/>
-						<input class="col-md-6" type="text" name="RelaBasof" id="RelaBasof" ng-required="true" ng-model="hemoga.RelaBasof" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="AbsoluBasof" id="AbsoluBasof" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluBasof" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaBasof" id="RelaBasof" ng-required="true" ng-model="hemoga.RelaBasof" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -265,8 +271,8 @@
 				</div>
 
 					<div class="row">
-						<input class="col-md-6" type="text" name="AbsoluLinfo" id="AbsoluLinfo" ng-required="true" ng-model="hemoga.AbsoluLinfo" placeholder="Informe o valor?"/>
-						<input class="col-md-6" type="text" name="RelaLinfo" id="RelaLinfo" ng-required="true" ng-model="hemoga.RelaLinfo" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="AbsoluLinfo" id="AbsoluLinfo" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluLinfo" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaLinfo" id="RelaLinfo" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-required="true" ng-model="hemoga.RelaLinfo" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -275,8 +281,8 @@
 				</div>
 
 					<div class="row">
-						<input class="col-md-6" type="text" name="AbsoluMono" id="AbsoluMono" ng-required="true" ng-model="hemoga.AbsoluMono" placeholder="Informe o valor?"/>
-						<input class="col-md-6" type="text" name="RelaMono" id="RelaMono" ng-required="true" ng-model="hemoga.RelaMono" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="AbsoluMono" id="AbsoluMono" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluMono" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaMono" id="RelaMono" ng-required="true" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-model="hemoga.RelaMono" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -285,8 +291,8 @@
 				</div>
 
 					<div class="row">
-						<input class="col-md-6" type="text" name="AbsoluBasto" id="AbsoluBasto" ng-required="true" ng-model="hemoga.AbsoluBasto" placeholder="Informe o valor?"/>
-						<input class="col-md-6" type="text" name="RelaBasto" id="RelaBasto" ng-required="true" ng-model="hemoga.RelaBasto" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="AbsoluBasto" id="AbsoluBasto" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluBasto" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaBasto" id="RelaBasto" ng-required="true" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-model="hemoga.RelaBasto" placeholder="Informe o valor?"/>
 					</div>
 
 				<div class="row">
@@ -295,13 +301,13 @@
 				</div>
 
 					<div class="input-group">
-						<input class="col-md-6" type="text" name="AbsoluSegmen" id="AbsoluSegmen" ng-required="true" ng-model="hemoga.AbsoluSegmen" placeholder="Informe o valor?"/>
-						<input class="col-md-6" type="text" name="RelaSegmen" id="RelaSegmen" ng-required="true" ng-model="hemoga.RelaSegmen" ng-disable="calcularAnemiaForm.AbsoluLinfo.$valid" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="AbsoluSegmen" id="AbsoluSegmen" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid"	 ng-model="hemoga.AbsoluSegmen" placeholder="Informe o valor?"/>
+						<input class="col-md-6" type="text" name="RelaSegmen" id="RelaSegmen" ng-required="true" ng-model="hemoga.RelaSegmen" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" placeholder="Informe o valor?"/>
 					</div>
 
-				<dir>
+				<div>
 					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(hemoga)">Analisar Resultados</button>
-				</dir>
+				</div>
 
 				<div>
 					<h4 class="title">Resultados</h4>

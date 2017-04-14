@@ -313,8 +313,27 @@
 					<h4 class="title">Resultados</h4>
 				</div>
 
-				<textarea name="res" id="res" rows="6" style="width: 62em"></textarea>
+				<div class="jumbotron">
 
+					<table class="table table-striped">
+						<tr>
+		    				<th>Tipo da Anemia</th>
+		    				<th>Descrição Anemia</th>
+		    				<th>Analise dos Leucocitos</th>
+		    				<th>Descrição da Doença</th>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': auxiliar.selecionado}" ng-repeat="auxiliar in auxiliaresCadastrados | 
+						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
+							<td><input type="checkbox" ng-model="auxiliar.selecionado"></td>
+							<td>{{auxiliar.nomeAuxiliar}}</td>
+							<td>{{auxiliar.telefoneAuxiliar}}</td>
+							<td>{{auxiliar.emailAuxiliar}}</td>
+							<td> <button class="btn btn-info btn-xs" ng-click="adicionarAuxiliar(auxiliar)">Add</button></td>
+		    				
+		    			</tr>
+					</table>
+										
+				</div>
 
 				<div>
 					<button type="button" class="btn btn-lg btn-info btn-block" ng-click="voltar()">Voltar</button>

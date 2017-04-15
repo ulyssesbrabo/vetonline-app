@@ -904,11 +904,8 @@
                         $scope.criterioOrdenacao = campo;
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
-                    
                     listaTodosAuxiliaresCadastrados();
-
                 }])
-
                 .controller('AdicionarAnimalMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',
                     function($scope, $http, $rootScope, $location, $localStorage){
 
@@ -974,8 +971,6 @@
                     };
 
                     listaAnimaisCadastrados();
-                    
-
                 }])
                 .controller('ListarAnimaisDoMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
                     function($scope, $http, $rootScope, $location, $localStorage){
@@ -1035,17 +1030,20 @@
                     };
 
                     listaAnimaisMedicos();
-                     
                 }])
-
                 .controller('AlunoVeterinariaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
                     function($scope, $rootScope, $location, $localStorage, $http){
 
                         $scope.calcular = function(hemoga){
+
+                        $scope.anemiaResultado = [];
+                        $scope.leucocitoResultado = [];
                             
                         var hem = (hemoga.NuHema/1000000);    
                         var VGM =  ((hemoga.VolGlob * 10)/ hem);
                         var CHGM = ((hemoga.TxHemb * 100)/ hemoga.VolGlob);
+                        var CGL = hemoga.CGL;
+
                         console.log(hemoga);
                         
                         console.log("Entrou na Função");
@@ -1054,42 +1052,61 @@
                                 console.log(VGM);
                                 console.log(CHGM);
                                     if (VGM>=60 && VGM<=77 && CHGM>=31 && CHGM<=34) {
+                                        var listarAnemia = function(){
+                                            $http.get('')
+                                            .then(function(success, data){
+                                                $scope.anemiaResultado = success.data;
+                                            }, function(error){
+
+                                            });
+                                        };
+                                        listarAnemia();
                                         console.log("Função 1");
-                                      delete $scope.hemoga;
-                                      $scope.calcularAnemiaForm.$setPristine();
-                                        var res = "O Animal possui uma anemia Normocitica Normocromica";
+                                      
+                                        //var res = "O Animal possui uma anemia Normocitica Normocromica";
                                     }
-                                    else if (VGM>=77 && CHGM<31) {
+                                    if (CGL<=6000) {
+                                        var listarLeucocito = function(){
+                                            $http.get('').then(function(success, data){
+                                                $scope.leucocitoResultado = success.data;
+                                                delete $scope.hemoga;
+                                                $scope.calcularAnemiaForm.$setPristine();
+                                            }, function(error){
+                                            });
+                                        };
+                                    }
+
+                                    if (VGM>=77 && CHGM<31) {
                                         console.log("Função 2");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
-                                    else if (VGM<60 && CHGM<31) {
+                                    if (VGM<60 && CHGM<31) {
                                         console.log("Função 3");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
                                     }
-                                    else if (VGM>=77 && 31>=CHGM<=34) {
+                                    if (VGM>=77 && CHGM>=31 && CHGM<=34) {
                                         console.log("Função 4");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                     var res = "O Animal possui uma anemia Macrocitica Normocromica";
                                     }
-                                    else if ( 60<=VGM && VGM<=77 && CHGM<31) {
+                                    if ( 60<=VGM && VGM<=77 && CHGM<31) {
                                         console.log("Função 5");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                       var res = "O Animal possui uma anemia Normocitica Hipocrômica";
                                     }
-                                    else if (VGM<60 && 31<=CHGM && CHGM<=34) {
+                                    if (VGM<60 && 31<=CHGM && CHGM<=34) {
                                         console.log("Função 6");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                       var res = "O Animal possui uma anemia Microcitica Normocromica";
                                     }
-                                    else if (CHGM>34) {
+                                    if (CHGM>34) {
                                       var res = " ";
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
@@ -1145,7 +1162,7 @@
                                 }
                             
                             document.calcularAnemiaForm.res.value = res;   
-                        };
+                        }
 
                         $scope.voltar = function(){
                             $location.url('/login');

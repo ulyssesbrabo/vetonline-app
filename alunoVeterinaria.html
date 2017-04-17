@@ -199,6 +199,9 @@
 			    color: #fff;
 			    margin-top: 70px;
 			}
+			th {
+			    text-align: center;
+			}
 </style>
 
 
@@ -323,14 +326,12 @@
 		    				<th>Analise dos Leucocitos</th>
 		    				<th>Descrição da Doença</th>
 		    			</tr>
-		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': auxiliar.selecionado}" ng-repeat="auxiliar in auxiliaresCadastrados | 
+		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': anemia.selecionado}" ng-repeat="anemia in anemiaResultado | 
 						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
-							<td><input type="checkbox" ng-model="auxiliar.selecionado"></td>
-							<td>{{auxiliar.nomeAuxiliar}}</td>
-							<td>{{auxiliar.telefoneAuxiliar}}</td>
-							<td>{{auxiliar.emailAuxiliar}}</td>
-							<td> <button class="btn btn-info btn-xs" ng-click="adicionarAuxiliar(auxiliar)">Add</button></td>
-		    				
+							<td>{{anemia.tipoAnemia}}</td>
+							<td>{{anemia.descricaoAnemia}}</td>
+							<td>{{anemia.emailAuxiliar}}</td>
+							<td>{{anemia.descricao}}</td>
 		    			</tr>
 					</table>
 										

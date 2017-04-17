@@ -1031,18 +1031,30 @@
 
                     listaAnimaisMedicos();
                 }])
-                .controller('AlunoVeterinariaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage',
-                    function($scope, $rootScope, $location, $localStorage, $http){
+                .controller('AlunoVeterinariaController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',
+                    function($scope, $http, $rootScope, $location, $localStorage){
+
+                        var listarAnemiaMacroHipo = function(){
+                            $http.get('http://localhost:8000/anemiaMacrociticaHipocromica')
+                            .then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
 
                         $scope.calcular = function(hemoga){
 
                         $scope.anemiaResultado = [];
+                        $scope.listarAnemiaMacroHipo = [];
                         $scope.leucocitoResultado = [];
                             
                         var hem = (hemoga.NuHema/1000000);    
                         var VGM =  ((hemoga.VolGlob * 10)/ hem);
                         var CHGM = ((hemoga.TxHemb * 100)/ hemoga.VolGlob);
                         var CGL = hemoga.CGL;
+
+                        
 
                         console.log(hemoga);
                         
@@ -1052,7 +1064,7 @@
                                 console.log(VGM);
                                 console.log(CHGM);
                                     if (VGM>=60 && VGM<=77 && CHGM>=31 && CHGM<=34) {
-                                        var listarAnemia = function(){
+                                        var listarAnemiaNormo = function(){
                                             $http.get('')
                                             .then(function(success, data){
                                                 $scope.anemiaResultado = success.data;
@@ -1060,14 +1072,14 @@
 
                                             });
                                         };
-                                        listarAnemia();
+                                        listarAnemiaNormo();
                                         console.log("Função 1");
-                                      
                                         //var res = "O Animal possui uma anemia Normocitica Normocromica";
                                     }
                                     if (CGL<=6000) {
                                         var listarLeucocito = function(){
-                                            $http.get('').then(function(success, data){
+                                            $http.get('')
+                                            .then(function(success, data){
                                                 $scope.leucocitoResultado = success.data;
                                                 delete $scope.hemoga;
                                                 $scope.calcularAnemiaForm.$setPristine();
@@ -1077,30 +1089,68 @@
                                     }
 
                                     if (VGM>=77 && CHGM<31) {
+                                        
+                                        listarAnemiaMacroHipo();
                                         console.log("Função 2");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
                                     if (VGM<60 && CHGM<31) {
+                                        var listarAnemiaMicroHipo = function(){
+                                            http.get('http://localhost:8000/')
+                                            .then(function(success, data){
+                                                $scope.anemiaResultado = success.data;
+                                            }, function(error){
+
+                                            });
+                                        };
+                                        listarAnemiaMicroHipo();
                                         console.log("Função 3");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                         var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
                                     }
                                     if (VGM>=77 && CHGM>=31 && CHGM<=34) {
+                                        var listarAnemiaMacroNormo = function(){
+                                            http.get('')
+                                            .then(function(success, data){
+                                                $scope.anemiaResultado = success.data;
+                                            }, function(error){
+
+                                            });
+                                        };
+                                        listarAnemiaMacroNormo();
                                         console.log("Função 4");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                     var res = "O Animal possui uma anemia Macrocitica Normocromica";
                                     }
                                     if ( 60<=VGM && VGM<=77 && CHGM<31) {
+                                        var listarAnemiaNormoHipo = function(){
+                                            http.get('')
+                                            .then(function(success, data){
+                                                $scope.anemiaResultado = success.data;
+                                            }, function(error){
+
+                                            });
+                                        };
+                                        listarAnemiaNormoHipo();
                                         console.log("Função 5");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                       var res = "O Animal possui uma anemia Normocitica Hipocrômica";
                                     }
                                     if (VGM<60 && 31<=CHGM && CHGM<=34) {
+                                        var listarAnemiaMicroNormo = function(){
+                                            http.get('')
+                                            .then(function(success, data){
+                                                $scope.anemiaResultado = success.data;
+                                            }, function(error){
+
+                                            });
+                                        };
+                                        listarAnemiaMicroNormo();
                                         console.log("Função 6");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
@@ -1161,7 +1211,6 @@
                                     }
                                 }
                             
-                            document.calcularAnemiaForm.res.value = res;   
                         }
 
                         $scope.voltar = function(){

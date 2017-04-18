@@ -377,6 +377,30 @@
 							<td>{{linfocitose.tipoleucocitos}}</td>
 							<td>{{linfocitose.doencaleucocito}}</td>
 		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="monocitopenia in leucocitoMonocitopeniaResultado">
+		    				<td>{{monocitopenia.tipoleucocitos}}</td>
+		    				<td>{{monocitopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="monocitose in leucocitoMonocitoseResultado">
+		    				<td>{{monocitose.tipoleucocitos}}</td>
+		    				<td>{{monocitose.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="basofilia in leucocitoBasofiliaResultado">
+		    				<td>{{basofilia.tipoleucocitos}}</td>
+		    				<td>{{basofilia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="segmentadosmenor in leucocitoSegmentadosMenorResultado">
+		    				<td>{{segmentadosmenor.tipoleucocitos}}</td>
+		    				<td>{{segmentadosmenor.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="segmentadosmaior in leucocitoSegmentadosMaiorResultado">
+		    				<td>{{segmentadosmaior.tipoleucocitos}}</td>
+		    				<td>{{segmentadosmaior.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="bastonetesmaior in leucocitoBastonetesMaiorResultado">
+		    				<td>{{bastonetesmaior.tipoleucocitos}}</td>
+		    				<td>{{bastonetesmaior.doencaleucocito}}</td>
+		    			</tr>
 					</table>
 				</div>
 

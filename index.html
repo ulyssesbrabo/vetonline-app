@@ -975,6 +975,14 @@
                 .controller('ListarAnimaisDoMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
                     function($scope, $http, $rootScope, $location, $localStorage){
 
+                        $scope.deletarAnimal = function(animal){
+                            $http.delete('http://localhost:8000/excluirAnimal/'+animal.idAnimal).then(function(success, data){
+                                listaAnimaisMedicos();
+                            }, function(error){
+
+                            });
+                        };
+
                         $scope.animais=[];
                         
                         $scope.paginaAtualiza = function(){
@@ -1199,35 +1207,14 @@
                         var ABSMONO = hemoga.AbsoluMono;
                         var ABSBASTO = hemoga.AbsoluBasto;
                         var ABSSEGMEN = hemoga.AbsoluSegmen;
-                        
                         var RELAEOSI = ((CGL*hemoga.RelaEosino)/100);
                         var RELABASO = ((CGL*hemoga.RelaBasof)/100);
                         var RELALINFO = ((CGL*hemoga.RelaLinfo)/100);
                         var RELAMONO = ((CGL*hemoga.RelaMono)/100);
                         var RELABASTO = ((CGL*hemoga.RelaBasto)/100);
                         var RELASEGMEN = ((CGL*hemoga.RelaSegmen)/100);
-
-                        console.log(hemoga);
-                        
-                        console.log("Entrou na Função");
+////////////////////////////Cachorro/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             if (hemoga.especie == "1") {
-                                console.log("Entrou na seleção 1");
-                                console.log(VGM);
-                                console.log(CHGM);
-                                console.log(ABSEOSI);
-                                console.log(ABSBASO);
-                                console.log(ABSLINFO);
-                                console.log(ABSMONO);
-                                console.log(ABSBASTO);
-                                console.log(ABSSEGMEN);
-                                
-                                console.log(RELAEOSI);
-                                console.log(RELABASO);
-                                console.log(RELALINFO);
-                                console.log(RELAMONO);
-                                console.log(RELABASTO);
-                                console.log(RELASEGMEN);
-
                                     if (VGM>=60 && VGM<=77 && CHGM>=31 && CHGM<=34) {
                                         var listarAnemiaNormo = function(){
                                             $http.get('')
@@ -1247,7 +1234,6 @@
                                         delete $scope.hemoga;
                                         $scope.calcularAnemiaForm.$setPristine();
                                     }
-
                                     if (CGL>=18000) {
 
                                         listarLeucocitose();
@@ -1421,60 +1407,169 @@
                                       alert("Variaveis Erradas!")
                                     }
                                 }
-                           
-                                
+////////////////////////////////Gato///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
                                 if (hemoga.especie == "2") {
+                                    if (CGL<=8000) {
+                                        console.log("Função leocopenia");
+                                        listarLeucopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (CGL>=25000) {
+                                        listarLeucocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Valores Absolutos//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (ABSEOSI<=160) {
+                                        listarEosinopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSEOSI>=3000) {
+                                        console.log("Função eosinofilia");
+                                        listarEosinofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSLINFO<=1600) {
+                                        listarLinfocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSLINFO>=13750) {
+                                        listarLinfocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSMONO<=80) {
+                                        listarMonocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSMONO>=1000) {
+                                        listarMonocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSSEGMEN<=2800) {
+                                        listarSegmentadosMenor();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSSEGMEN>=18750) {
+                                        listarSegmentadosMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSBASTO>=750) {
+                                        listarBastonetesMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSBASO>=0) {
+                                        listarBasofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Valores Relativos/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (RELAEOSI<=160) {
+                                        listarEosinopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELAEOSI>=3000) {
+                                        console.log("Função eosinofilia");
+                                        listarEosinofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELALINFO<=1600) {
+                                        listarLinfocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELALINFO>=13750) {
+                                        listarLinfocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELAMONO<=80) {
+                                        listarMonocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELAMONO>=1000) {
+                                        listarMonocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELASEGMEN<=2800) {
+                                        listarSegmentadosMenor();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELASEGMEN>=18750) {
+                                        listarSegmentadosMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELABASTO>=750) {
+                                        listarBastonetesMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELABASO>=0) {
+                                        listarBasofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Anemia/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     if (VGM>=39 && VGM<=55 && CHGM>=31 && CHGM<=35) {
                                         console.log("Função 1");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
-                                        var res = "O Animal possui uma anemia Normocitica Normocromica";
                                     }
-                                    else if (VGM>=55 && CHGM<31) {
-                                        console.log("Função 2");
+                                    if (VGM>=55 && CHGM<31) {
+                                    listarAnemiaMacroHipo();
+                                    console.log("Função 2");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
-                                        var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
-                                    else if (VGM<39 && CHGM<31) {
-                                        console.log("Função 3");
+                                    if (VGM<39 && CHGM<31) {
+                                    listarAnemiaMicroHipo();
+                                    console.log("Função 3");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
-                                        var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
                                     }
-                                    else if (VGM>=55 && 31>=CHGM<=35) {
-                                        console.log("Função 4");
+                                    if (VGM>=55 && 31>=CHGM<=35) {
+                                    listarAnemiaMacroNormo();
+                                    console.log("Função 4");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
-                                    var res = "O Animal possui uma anemia Macrocitica Normocromica";
                                     }
-                                    else if ( 39<=VGM && VGM<=55 && CHGM<31) {
-                                        console.log("Função 5");
+                                    if ( 39<=VGM && VGM<=55 && CHGM<31) {
+                                    listarAnemiaNormoHipo();
+                                    console.log("Função 5");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
-                                      var res = "O Animal possui uma anemia Normocitica Hipocrômica";
                                     }
-                                    else if (VGM<39 && 31<=CHGM && CHGM<=35) {
-                                        console.log("Função 6");
+                                    if (VGM<39 && 31<=CHGM && CHGM<=35) {
+                                    listarAnemiaMicroNormo();
+                                    console.log("Função 6");
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
-                                      var res = "O Animal possui uma anemia Microcitica Normocromica";
                                     }
-                                    else if (CHGM>35) {
-                                      var res = " ";
+                                    if (CHGM>35) {
                                       delete $scope.hemoga;
                                       $scope.calcularAnemiaForm.$setPristine();
                                       alert("Variaveis Erradas!")
                                     }
                                 }
-                            
                         }
-
                         $scope.voltar = function(){
                             $location.url('/login');
                         };
-
-
                     }])
 
                 .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
@@ -1512,141 +1607,492 @@
                             $location.path('/DeternimarAnemia');
                         }
 
-                        var anemiaMacrociticaNormocromica = function(){
-                            $http.get("http://localhost:8000/anemiaMacrocitica").success(function(data){
-                                $scope.anemia=data;
+                        var listarAnemiaMacroHipo = function(){
+                            $http.get('http://localhost:8000/anemiaMacrociticaHipocromica').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
                             });
                         };
-
-                        var anemiaMacrociticaHipocromica = function(){
-                            $http.get("http://localhost:8000/anemiaMacrociticaHipocromica").success(function(data){
-                                $scope.anemia=data;
+                        var listarAnemiaMicroHipo = function(){
+                            $http.get('http://localhost:8000/anemiaMicrociticoHipocromico').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
                             });
                         };
-
-                        var anemiaMicrocitico = function(){
-                            $http.get("http://localhost:8000/anemiaMicrocitico").success(function(data){
-                                $scope.anemia=data;
+                        var listarAnemiaMacroNormo = function(){
+                            $http.get('http://localhost:8000/anemiaMacrociticaNormocromica').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
                             });
                         };
-
-                        var anemiaMicrociticoHipocromico = function(){
-                            $http.get("http://localhost:8000/anemiaMicrociticoHipocromico").success(function(data){
-                                $scope.anemia=data;
+                        var listarAnemiaMicroNormo = function(){
+                            $http.get('http://localhost:8000/anemiaMicrociticoNormocromico').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
                             });
                         };
+                        var listarAnemiaNormoHipo = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarLeucopenia = function(){
+                            $http.get('http://localhost:8000/leucocitosLeucopenia').then(function(success, data){
+                                $scope.leucocitoLeucopeniaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarLeucocitose = function(){
+                            $http.get('http://localhost:8000/leucocitosLeucocitose').then(function(success, data){
+                            $scope.leucocitoLeucocitoseResultado = success.data;
+                            }, function(error){
+                            });  
+                        };
+                        var listarEosinopenia = function(){
+                            $http.get('http://localhost:8000/leucocitosEosinopenia').then(function(success, data){
+                                $scope.leucocitoEosinopeniaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarEosinofilia = function(){
+                            $http.get('http://localhost:8000/leucocitosEosinofilia').then(function(success, data){
+                                $scope.leucocitoEosinofiliaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarLinfocitopenia = function(){
+                            $http.get('http://localhost:8000/leucocitosLinfocitopenia').then(function(success, data){
+                                $scope.leucocitoLinfocitopeniaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarLinfocitose = function(){
+                            $http.get('http://localhost:8000/leucocitosLinfocitose').then(function(success, data){
+                                $scope.leucocitoLinfocitoseResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarMonocitopenia = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.leucocitoMonocitopeniaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarMonocitose = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.leucocitoMonocitoseResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarSegmentadosMenor = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.leucocitoSegmentadosMenorResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarSegmentadosMaior = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.leucocitoSegmentadosMaiorResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarBastonetesMaior = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.leucocitoBastonetesMaiorResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                        var listarBasofilia = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.leucocitoBasofiliaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+                    $scope.calcular = function(hemoga){
+                        $scope.anemiaResultado = [];
+                        $scope.leucocitoLeucopeniaResultado = [];
+                        $scope.leucocitoLeucocitoseResultado = [];
+                        $scope.leucocitoEosinopeniaResultado = [];
+                        $scope.leucocitoEosinofiliaResultado = [];
+                        $scope.leucocitoLinfocitopeniaResultado =[];
+                        $scope.leucocitoLinfocitoseResultado = [];
+                        $scope.leucocitoMonocitopeniaResultado = [];
+                        $scope.leucocitoMonocitoseResultado = [];
+                        $scope.leucocitoBasofiliaResultado = [];
+                        $scope.leucocitoSegmentadosMenorResultado = [];
+                        $scope.leucocitoSegmentadosMaiorResultado = [];
+                        $scope.leucocitoBastonetesMaiorResultado = [];
+                        var hem = (hemoga.NuHema/1000000);    
+                        var VGM =  ((hemoga.VolGlob * 10)/ hem);
+                        var CHGM = ((hemoga.TxHemb * 100)/ hemoga.VolGlob);
+                        var CGL = hemoga.CGL;
+                        var ABSEOSI = hemoga.AbsoluEosino;
+                        var ABSBASO = hemoga.AbsoluBasof;
+                        var ABSLINFO = hemoga.AbsoluLinfo;
+                        var ABSMONO = hemoga.AbsoluMono;
+                        var ABSBASTO = hemoga.AbsoluBasto;
+                        var ABSSEGMEN = hemoga.AbsoluSegmen;
+                        var RELAEOSI = ((CGL*hemoga.RelaEosino)/100);
+                        var RELABASO = ((CGL*hemoga.RelaBasof)/100);
+                        var RELALINFO = ((CGL*hemoga.RelaLinfo)/100);
+                        var RELAMONO = ((CGL*hemoga.RelaMono)/100);
+                        var RELABASTO = ((CGL*hemoga.RelaBasto)/100);
+                        var RELASEGMEN = ((CGL*hemoga.RelaSegmen)/100);
+////////////////////////////Cachorro/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            if (hemoga.especie == "1") {
+                                    if (VGM>=60 && VGM<=77 && CHGM>=31 && CHGM<=34) {
+                                        var listarAnemiaNormo = function(){
+                                            $http.get('')
+                                            .then(function(success, data){
+                                                $scope.anemiaResultado = success.data;
+                                            }, function(error){
 
-                        
+                                            });
+                                        };
+                                        listarAnemiaNormo();
+                                        console.log("Função 1");
+                                        //var res = "O Animal possui uma anemia Normocitica Normocromica";
+                                    }
+                                    if (CGL<=6000) {
+                                        console.log("Função leocopenia");
+                                        listarLeucopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (CGL>=18000) {
 
-                        $scope.calcular = function(anemia){                        
-                        
-                        var VGM =  (((parseFloat(anemia.VolGlob))*10)/ parseFloat(anemia.NuHema));
-                        var CHGM = (((parseFloat(anemia.TxHemb))*100)/parseFloat(anemia.VolGlob));
-                        console.log(AnimSeus);
-                        console.log("Entrou na Função");
-                            if (anemia.especie == "1") {
-                                console.log("Entrou na seleção 1");
-                                    if (60>= VGM <=72 && 31>= CHGM <=37) {
-                                        var res = "Cehgou aqui ddddddddddddddddccccccccccccccccccccc ccccccccccccccccccccccddddddddddddddddd1";
-                                    }else{
-                                        if (VGM>=72 && CHGM>37) {
-                                            var res = "Chegou aqui 2";
-                                        }else{
-                                                if (VGM<=60 && CHGM<=31) {
-                                                    var res = "chegou aqui 3" ;
-                                                }
-                                             }
-                                        }
-                            }else{
-                                
-                                if (AnimSeus == "2") {
-                                    var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
-                                    var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
-                                        if (VGM>=49 && CHGM<=30) {
-                                        }else{
-                                            if (VGM>=49 && CHGM>30) {
-                                            }else{
-                                                if (37>VGM<49 && CHGM>30) {
-                                                }else{
-                                                    if (VGM<=37 && CHGM<=30) {
-                                                    }else{
-                                                        if (VGM<=37 && CHGM>30) {
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+                                        listarLeucocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Valores Absolutos//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (ABSEOSI<=120) {
+                                        listarEosinopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSEOSI>=1800) {
+                                        console.log("Função eosinofilia");
+                                        listarEosinofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSLINFO<=720) {
+                                        listarLinfocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSLINFO>=5400) {
+                                        listarLinfocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSMONO<=180) {
+                                        listarMonocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSMONO>=1800) {
+                                        listarMonocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSSEGMEN<=3600) {
+                                        listarSegmentadosMenor();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSSEGMEN>=13860) {
+                                        listarSegmentadosMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSBASTO>=540) {
+                                        listarBastonetesMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSBASO>=0) {
+                                        listarBasofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Valores Relativos/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (RELAEOSI<=120) {
+                                        listarEosinopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELAEOSI>=1800) {
+                                        console.log("Função eosinofilia");
+                                        listarEosinofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELALINFO<=720) {
+                                        listarLinfocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELALINFO>=5400) {
+                                        listarLinfocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELAMONO<=180) {
+                                        listarMonocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELAMONO>=1800) {
+                                        listarMonocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELASEGMEN<=3600) {
+                                        listarSegmentadosMenor();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELASEGMEN>=13860) {
+                                        listarSegmentadosMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELABASTO>=540) {
+                                        listarBastonetesMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (RELABASO>=0) {
+                                        listarBasofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Anemias//////////////////////////////////////////////////////////////////////////////////////////////                                    
+                                    if (VGM>=77 && CHGM<31) {
+                                        listarAnemiaMacroHipo();
+                                        console.log("Função 2");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                        var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
+                                    }
+                                    if (VGM<60 && CHGM<31) {
+                                        
+                                        listarAnemiaMicroHipo();
+                                        console.log("Função 3");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                        var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
+                                    }
+                                    if (VGM>=77 && CHGM>=31 && CHGM<=34) {
+                                        
+                                        listarAnemiaMacroNormo();
+                                        console.log("Função 4");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    var res = "O Animal possui uma anemia Macrocitica Normocromica";
+                                    }
+                                    if ( 60<=VGM && VGM<=77 && CHGM<31) {
+                                        
+                                        listarAnemiaNormoHipo();
+                                        console.log("Função 5");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      var res = "O Animal possui uma anemia Normocitica Hipocrômica";
+                                    }
+                                    if (VGM<60 && 31<=CHGM && CHGM<=34) {
+                                        
+                                        listarAnemiaMicroNormo();
+                                        console.log("Função 6");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      var res = "O Animal possui uma anemia Microcitica Normocromica";
+                                    }
+                                    if (CHGM>34) {
+                                      var res = " ";
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      alert("Variaveis Erradas!")
+                                    }
                                 }
-                            }
-                            document.calcularAnemiaForm.res.value = res;   
-                        };
-                        
-                    /*
-                    $scope.calcular =  function(anemia){
-
-                        if (anemia.tipo = "1") {
-                            var VGM = ((anemia.VolGlob * 10)/ anemia.NuHema);
-                            var CHGM = ((anemia.TxHemb * 100)/ anemia.VolGlob);
-                            if (VGM>=72 && 31>=CHGM<=37) {
-                                var res = anemiaMacrociticaNormocromica();
-                            } else {
-
-                            }
-                        } else {}
-
-
-                        
-
-                            if (AnimSeus == "1") {
-                                var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
-                                var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
-
-                                    if (VGM>=72 && CHGM<=37) {
-                                        var res = anemiaMacrociticaNormocromica();
-                                    }else{
-                                        if (VGM>=72 && CHGM>31) {
-                                            var res = anemiaMacrociticaHipocromica();
-                                        }else{
-                                                if (VGM<=60 && CHGM<=37) {
-                                                    var res = anemiaMicrociticoHipocromico();
-                                                }else{
-                                                    if (VGM<=60 && CHGM>31) {
-                                                        var res = anemiaMicrocitico();
-                                                    }
-                                                }
-                                            }
-                                        }
-                            }else{
-                                
-                                if (AnimSeus == "2") {
-                                    var VGM =  ((parseFloat(VolGlob.toFixed(2)))*10)/ parseFloat(NuHema.toFixed(2)) ;
-                                    var CHGM = ((parseFloat(TxHemb.toFixed(2)))*100)/parseFloat(VolGlob.toFixed(2));
-                                        if (VGM>=49 && CHGM<=30) {
-
-                                        }else{
-                                            if (VGM>=49 && CHGM>30) {
-
-                                            }else{
-                                                if (37>VGM<49 && CHGM>30) {
-
-                                                }else{
-                                                    if (VGM<=37 && CHGM<=30) {
-
-                                                    }else{
-                                                        if (VGM<=37 && CHGM>30) {
-
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                        }
+////////////////////////////////Gato///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+                                if (hemoga.especie == "2") {
+                                    if (CGL<=8000) {
+                                        console.log("Função leocopenia");
+                                        listarLeucopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (CGL>=25000) {
+                                        listarLeucocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Valores Absolutos//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (ABSEOSI<=160) {
+                                        listarEosinopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSEOSI>=3000) {
+                                        console.log("Função eosinofilia");
+                                        listarEosinofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSLINFO<=1600) {
+                                        listarLinfocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSLINFO>=13750) {
+                                        listarLinfocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSMONO<=80) {
+                                        listarMonocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSMONO>=1000) {
+                                        listarMonocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSSEGMEN<=2800) {
+                                        listarSegmentadosMenor();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSSEGMEN>=18750) {
+                                        listarSegmentadosMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSBASTO>=750) {
+                                        listarBastonetesMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSBASO>=0) {
+                                        listarBasofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Valores Relativos/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (RELAEOSI<=160) {
+                                        listarEosinopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELAEOSI>=3000) {
+                                        console.log("Função eosinofilia");
+                                        listarEosinofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELALINFO<=1600) {
+                                        listarLinfocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELALINFO>=13750) {
+                                        listarLinfocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELAMONO<=80) {
+                                        listarMonocitopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELAMONO>=1000) {
+                                        listarMonocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELASEGMEN<=2800) {
+                                        listarSegmentadosMenor();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELASEGMEN>=18750) {
+                                        listarSegmentadosMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELABASTO>=750) {
+                                        listarBastonetesMaior();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (RELABASO>=0) {
+                                        listarBasofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+///////////////////////////////////////Anemia/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (VGM>=39 && VGM<=55 && CHGM>=31 && CHGM<=35) {
+                                        console.log("Função 1");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (VGM>=55 && CHGM<31) {
+                                    listarAnemiaMacroHipo();
+                                    console.log("Função 2");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (VGM<39 && CHGM<31) {
+                                    listarAnemiaMicroHipo();
+                                    console.log("Função 3");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (VGM>=55 && 31>=CHGM<=35) {
+                                    listarAnemiaMacroNormo();
+                                    console.log("Função 4");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if ( 39<=VGM && VGM<=55 && CHGM<31) {
+                                    listarAnemiaNormoHipo();
+                                    console.log("Função 5");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (VGM<39 && 31<=CHGM && CHGM<=35) {
+                                    listarAnemiaMicroNormo();
+                                    console.log("Função 6");
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (CHGM>35) {
+                                      delete $scope.hemoga;
+                                      $scope.calcularAnemiaForm.$setPristine();
+                                      alert("Variaveis Erradas!")
+                                    }
                                 }
-                            }
-
-                            document.calcularAnemiaForm.AnimSeus.value = res;   
-                    };*/
-
+                        }    
                     //Deternimar Anemia / Calcular
                     $scope.novaAnemia = function(inserirAnemia){
                         inserirAnemia.data= new Date();

@@ -57,6 +57,14 @@
 			    width: 100%;
 			}
 
+			h5, .h5 {
+			    background: #d2d2d2 none repeat scroll 0 0;
+			    font-family: times new roman;
+			    font-size: 24px;
+			    text-align: center;
+			    margin-bottom: 0;
+			}
+
 			hr{
 				width: 10%;
 				color: #fff;
@@ -317,24 +325,59 @@
 					<h4 class="title">Resultados</h4>
 				</div>
 
-				<div class="jumbotron">
-
+				<div class="table-responsive">
+					<div>
+						<h5 class="title">Hemograma</h4>
+					</div>
 					<table class="table table-striped">
 						<tr>
 		    				<th>Tipo da Anemia</th>
 		    				<th>Descrição Anemia</th>
-		    				<th>Analise dos Leucocitos</th>
-		    				<th>Descrição da Doença</th>
 		    			</tr>
 		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': anemia.selecionado}" ng-repeat="anemia in anemiaResultado | 
 						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
 							<td>{{anemia.tipoAnemia}}</td>
 							<td>{{anemia.descricaoAnemia}}</td>
-							<td>{{anemia.emailAuxiliar}}</td>
-							<td>{{anemia.descricao}}</td>
 		    			</tr>
 					</table>
 										
+				</div>
+
+				<div class="table-responsive">
+					<div>
+						<h5 class="title">Leucograma</h4>
+					</div>
+					<table class="table table-striped">
+						<tr>
+		    				<th>Tipo de alteração dos Leucocitos</th>
+		    				<th>Doenças causadas pelas alterações nos Leucocitos</th>
+
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="leucopenia in leucocitoLeucopeniaResultado">
+							<td>{{leucopenia.tipoleucocitos}}</td>
+							<td>{{leucopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="leucocitose in leucocitoLeucocitoseResultado">
+							<td>{{leucocitose.tipoleucocitos}}</td>
+							<td>{{leucocitose.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="eosinopenia in leucocitoEosinopeniaResultado">
+							<td>{{eosinopenia.tipoleucocitos}}</td>
+							<td>{{eosinopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="eosinofilia in leucocitoEosinofiliaResultado">
+							<td>{{eosinofilia.tipoleucocitos}}</td>
+							<td>{{eosinofilia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="linfocitopenia in leucocitoLinfocitopeniaResultado">
+							<td>{{linfocitopenia.tipoleucocitos}}</td>
+							<td>{{linfocitopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="linfocitose in leucocitoLinfocitoseResultado">
+							<td>{{linfocitose.tipoleucocitos}}</td>
+							<td>{{linfocitose.doencaleucocito}}</td>
+		    			</tr>
+					</table>
 				</div>
 
 				<div>

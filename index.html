@@ -1035,25 +1035,124 @@
                     function($scope, $http, $rootScope, $location, $localStorage){
 
                         var listarAnemiaMacroHipo = function(){
-                            $http.get('http://localhost:8000/anemiaMacrociticaHipocromica')
-                            .then(function(success, data){
+                            $http.get('http://localhost:8000/anemiaMacrociticaHipocromica').then(function(success, data){
                                 $scope.anemiaResultado = success.data;
                             }, function(error){
 
                             });
                         };
 
+                        var listarAnemiaMicroHipo = function(){
+                            $http.get('http://localhost:8000/anemiaMicrociticoHipocromico').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        var listarAnemiaMacroNormo = function(){
+                            $http.get('http://localhost:8000/anemiaMacrociticaNormocromica').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        var listarAnemiaMicroNormo = function(){
+                            $http.get('http://localhost:8000/anemiaMicrociticoNormocromico').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        var listarAnemiaNormoHipo = function(){
+                            $http.get('http://localhost:8000').then(function(success, data){
+                                $scope.anemiaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        var listarLeucopenia = function(){
+                            $http.get('http://localhost:8000/leucocitosLeucopenia').then(function(success, data){
+                                $scope.leucocitoLeucopeniaResultado = success.data;
+                            }, function(error){
+                            });
+                        };
+
+
+                        var listarLeucocitose = function(){
+                            $http.get('http://localhost:8000/leucocitosLeucocitose').then(function(success, data){
+                            $scope.leucocitoLeucocitoseResultado = success.data;
+                            }, function(error){
+                            
+                            });  
+                        };
+
+                        var listarEosinopenia = function(){
+                            $http.get('http://localhost:8000/leucocitosEosinopenia').then(function(success, data){
+                                $scope.leucocitoEosinopeniaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        var listarEosinofilia = function(){
+                            $http.get('http://localhost:8000/leucocitosEosinofilia').then(function(success, data){
+                                $scope.leucocitoEosinofiliaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        var listarLinfocitopenia = function(){
+                            $http.get('http://localhost:8000/leucocitosLinfocitopenia').then(function(success, data){
+                                $scope.leucocitoLinfocitopeniaResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        var listarLinfocitose = function(){
+                            $http.get('http://localhost:8000/leucocitosLinfocitose').then(function(success, data){
+                                $scope.leucocitoLinfocitoseResultado = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+
+
                         $scope.calcular = function(hemoga){
 
                         $scope.anemiaResultado = [];
-                        $scope.listarAnemiaMacroHipo = [];
-                        $scope.leucocitoResultado = [];
+                        $scope.leucocitoLeucopeniaResultado = [];
+                        $scope.leucocitoLeucocitoseResultado = [];
+                        $scope.leucocitoEosinopeniaResultado = [];
+                        $scope.leucocitoEosinofiliaResultado = [];
+                        $scope.leucocitoLinfocitopeniaResultado =[];
+                        $scope.leucocitoLinfocitoseResultado = [];
                             
                         var hem = (hemoga.NuHema/1000000);    
                         var VGM =  ((hemoga.VolGlob * 10)/ hem);
                         var CHGM = ((hemoga.TxHemb * 100)/ hemoga.VolGlob);
+                        
                         var CGL = hemoga.CGL;
 
+                        var ABSEOSI = hemoga.AbsoluEosino;
+                        var ABSBASO = hemoga.AbsoluBasof;
+                        var ABSLINFO = hemoga.AbsoluLinfo;
+                        var ABSMONO = hemoga.AbsoluMono;
+                        var ABSBASTO = hemoga.AbsoluBasto;
+                        var ABSSEGMEN = hemoga.AbsoluSegmen;
+
+                        var RELAEOSI = ((CGL*hemoga.RelaEosino)/100);
+                        var RELABASO = ((CGL*hemoga.RelaBasof)/100);
+                        var RELALINFO = ((CGL*hemoga.RelaLinfo)/100);
+                        var RELAMONO = ((CGL*hemoga.RelaMono)/100);
+                        var RELABASTO = ((CGL*hemoga.RelaBasto)/100);
+                        var RELASEGMEN = ((CGL*hemoga.RelaSegmen)/100);
                         
 
                         console.log(hemoga);
@@ -1063,6 +1162,13 @@
                                 console.log("Entrou na seleção 1");
                                 console.log(VGM);
                                 console.log(CHGM);
+                                console.log(ABSEOSI);
+                                console.log(ABSBASO);
+                                console.log(ABSLINFO);
+                                console.log(ABSMONO);
+                                console.log(ABSBASTO);
+                                console.log(ABSSEGMEN);
+
                                     if (VGM>=60 && VGM<=77 && CHGM>=31 && CHGM<=34) {
                                         var listarAnemiaNormo = function(){
                                             $http.get('')
@@ -1077,19 +1183,32 @@
                                         //var res = "O Animal possui uma anemia Normocitica Normocromica";
                                     }
                                     if (CGL<=6000) {
-                                        var listarLeucocito = function(){
-                                            $http.get('')
-                                            .then(function(success, data){
-                                                $scope.leucocitoResultado = success.data;
-                                                delete $scope.hemoga;
-                                                $scope.calcularAnemiaForm.$setPristine();
-                                            }, function(error){
-                                            });
-                                        };
+                                        console.log("Função leocopenia");
+                                        listarLeucopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (CGL>=18000) {
+
+                                        listarLeucocitose();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+
+                                    if (ABSEOSI<=120) {
+                                        listarEosinopenia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
+                                    }
+                                    if (ABSEOSI>=1800) {
+                                        console.log("Função eosinofilia");
+                                        listarEosinofilia();
+                                        delete $scope.hemoga;
+                                        $scope.calcularAnemiaForm.$setPristine();
                                     }
 
                                     if (VGM>=77 && CHGM<31) {
-                                        
                                         listarAnemiaMacroHipo();
                                         console.log("Função 2");
                                       delete $scope.hemoga;
@@ -1097,14 +1216,7 @@
                                         var res = "O Animal possui uma anemia Macrocitica Hipocrômica";
                                     }
                                     if (VGM<60 && CHGM<31) {
-                                        var listarAnemiaMicroHipo = function(){
-                                            http.get('http://localhost:8000/')
-                                            .then(function(success, data){
-                                                $scope.anemiaResultado = success.data;
-                                            }, function(error){
-
-                                            });
-                                        };
+                                        
                                         listarAnemiaMicroHipo();
                                         console.log("Função 3");
                                       delete $scope.hemoga;
@@ -1112,14 +1224,7 @@
                                         var res = "O Animal possui uma anemia Microcitica Hipocrômica" ;
                                     }
                                     if (VGM>=77 && CHGM>=31 && CHGM<=34) {
-                                        var listarAnemiaMacroNormo = function(){
-                                            http.get('')
-                                            .then(function(success, data){
-                                                $scope.anemiaResultado = success.data;
-                                            }, function(error){
-
-                                            });
-                                        };
+                                        
                                         listarAnemiaMacroNormo();
                                         console.log("Função 4");
                                       delete $scope.hemoga;
@@ -1127,14 +1232,7 @@
                                     var res = "O Animal possui uma anemia Macrocitica Normocromica";
                                     }
                                     if ( 60<=VGM && VGM<=77 && CHGM<31) {
-                                        var listarAnemiaNormoHipo = function(){
-                                            http.get('')
-                                            .then(function(success, data){
-                                                $scope.anemiaResultado = success.data;
-                                            }, function(error){
-
-                                            });
-                                        };
+                                        
                                         listarAnemiaNormoHipo();
                                         console.log("Função 5");
                                       delete $scope.hemoga;
@@ -1142,14 +1240,7 @@
                                       var res = "O Animal possui uma anemia Normocitica Hipocrômica";
                                     }
                                     if (VGM<60 && 31<=CHGM && CHGM<=34) {
-                                        var listarAnemiaMicroNormo = function(){
-                                            http.get('')
-                                            .then(function(success, data){
-                                                $scope.anemiaResultado = success.data;
-                                            }, function(error){
-
-                                            });
-                                        };
+                                        
                                         listarAnemiaMicroNormo();
                                         console.log("Função 6");
                                       delete $scope.hemoga;

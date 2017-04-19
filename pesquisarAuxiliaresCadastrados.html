@@ -110,6 +110,7 @@
 				background: #cef0cf none repeat scroll 0 0;
 			    display: block;
 			    float: left;
+			    border-radius: 25px;
 			    height: auto;
 			    padding-left: 10px;
 			    padding-right: 10px;
@@ -264,18 +265,14 @@
         	}
 
         	.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-		 		height: 120px;
-			    margin-bottom: 10px;
-			    margin-left: 350px;
-			    margin-top: 10px;
-			    max-width: 100%;
+			    height: 190px;
+			    margin-left: 300px;
+			    width: 50%;
 			}
 
-			body{
-				background: url(img/logomedico.png);
-			}
 
 			.container-fluid {
+				border-radius: 25px;
 			    background: #cef0cf none repeat scroll 0 0;
 			    margin-left: auto;
 			    margin-right: auto;
@@ -299,7 +296,9 @@
 			    padding-top: 38px;
 			}
 			.container .jumbotron, .container-fluid .jumbotron {
+			    background-color: #f5faff;
 			    border-radius: 36px;
+			    margin-top: 10px;
 			}
 
 			.form-control {
@@ -322,7 +321,7 @@
 			    font-style: italic;
 			}
 			.btn-warning {
-			    background-color: #003806;
+			    background-color: #FF0000;
 			    border-color: transparent;
 			    color: #fff;
 			    line-height: 1.5;
@@ -343,6 +342,34 @@
 			    margin-right: auto;
 			    padding-left: 15px;
 			    padding-right: 15px;
+			}
+
+			h2, .h2 {
+			    color: #0069D1;
+			    font-family: times new roman;
+			    font-size: 20px;
+			    margin-bottom: 1px;
+			    margin-top: 30px;
+			    text-align: center;
+			}
+
+			table {
+			    background-color: #d9eaff;
+			}
+
+			th {
+			    font-family: times new roman;
+			    font-size: 15px;
+			    text-align: center;
+			}
+
+			td, th {
+			    text-align: center;
+			}
+
+			.navbar-inverse {
+			    background-color: transparent;
+			    border-color: transparent;
 			}
 
         	
@@ -508,9 +535,9 @@
 		          </li>  
 		          
 		           <li class="nav-header">
-		            <div class="link"><i class="fa fa-lg fa-map-marker"></i>Deternimar Anemia<i class="fa fa-chevron-down"></i></div>
+		            <div class="link"><i class="fa fa-lg fa-map-marker"></i>Analisar Hemograma<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a ng-click="paginaDeterminarAnemia()">Calcular</a></li>
+		              <li><a ng-click="paginaDeterminarAnemia()">Analisar</a></li>
 		              
 		            </ul>
 		          </li>
@@ -534,7 +561,7 @@
 	    			<h1 class="title">Auxiliares Cadastrados</h1>
 	    		</div>
 		    		<input class="form-control" type="text" ng-model="buscarAuxiliar" placeholder="Qual Auxiliar você procura?" >
-		    		<table class="table table-striped">
+		    		<table class="table table-responsive">
 		    			<tr>
 		    				<th></th>
 		    				<th>Nome Auxiliar</th>
@@ -549,11 +576,8 @@
 							<td>{{auxiliar.telefoneAuxiliar}}</td>
 							<td>{{auxiliar.emailAuxiliar}}</td>
 							<td> <button class="btn btn-info btn-xs" ng-click="adicionarAuxiliar(auxiliar)">Add</button></td>
-		    				
 		    			</tr>
-		    			
 		    		</table>
-		    		
 		    	</div>
 		    </section>
 		  </div>  

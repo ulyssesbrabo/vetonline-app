@@ -975,14 +975,6 @@
                 .controller('ListarAnimaisDoMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
                     function($scope, $http, $rootScope, $location, $localStorage){
 
-                        $scope.deletarAnimal = function(animal){
-                            $http.delete('http://localhost:8000/excluirAnimal/'+animal.idAnimal).then(function(success, data){
-                                listaAnimaisMedicos();
-                            }, function(error){
-
-                            });
-                        };
-
                         $scope.animais=[];
                         
                         $scope.paginaAtualiza = function(){
@@ -1019,10 +1011,18 @@
                     
                     var listaAnimaisMedicos = function(){
                         $http.get('http://localhost:8000/animaisMedico').then(function(success, data){
-                            console.log(data);
                             $scope.animais = success.data;
                         }, function(error){
                             console.log(error);
+                        });
+                    };
+
+                    $scope.deletarAnimal = function(animal){
+                        $http.delete('http://localhost:8000/excluirAnimal/'+animal.idAnimal).then(function(success, data){
+                            alert("Animal excluido com sucesso!")
+                            listaAnimaisMedicos();
+                        }, function(error){
+
                         });
                     };
 
@@ -1572,8 +1572,10 @@
                         };
                     }])
 
-                .controller('DeternimarAnemiaController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
-                    function($scope, $rootScope, $location, $localStorage, $http){
+                .controller('DeternimarAnemiaController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.animais=[];
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
@@ -1606,6 +1608,14 @@
                         $scope.paginaDeterminarAnemia = function(){
                             $location.path('/DeternimarAnemia');
                         }
+
+                        var listaAnimaisMedicos = function(){
+                            $http.get('http://localhost:8000/listarAnimaisAnemia').then(function(success, data){
+                                $scope.animais = success.data;
+                            }, function(error){
+                                console.log(error);
+                            });
+                        };
 
                         var listarAnemiaMacroHipo = function(){
                             $http.get('http://localhost:8000/anemiaMacrociticaHipocromica').then(function(success, data){
@@ -1740,7 +1750,7 @@
                         var RELABASTO = ((CGL*hemoga.RelaBasto)/100);
                         var RELASEGMEN = ((CGL*hemoga.RelaSegmen)/100);
 ////////////////////////////Cachorro/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            if (hemoga.especie == "1") {
+                            if (hemoga.especie == "2") {
                                     if (VGM>=60 && VGM<=77 && CHGM>=31 && CHGM<=34) {
                                         var listarAnemiaNormo = function(){
                                             $http.get('')
@@ -1934,7 +1944,7 @@
                                     }
                                 }
 ////////////////////////////////Gato///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-                                if (hemoga.especie == "2") {
+                                if (hemoga.especie == "3") {
                                     if (CGL<=8000) {
                                         console.log("Função leocopenia");
                                         listarLeucopenia();
@@ -2101,6 +2111,8 @@
                                 $scope.cadastroAnemiaForm.$setPristine();
                             });
                     };
+
+                    listaAnimaisMedicos();
                 }])
                 .controller('CadastroAnimalController', ['$scope', '$rootScope', '$location', '$http',
                     function($scope, $rootScope, $location, $http, urlBase){

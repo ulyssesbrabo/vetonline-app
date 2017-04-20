@@ -44,8 +44,99 @@
 			font-weight: bold;
 		}
 
+		body, html{
+			
+			background-repeat: no-repeat;
+			
+			font-family: 'Oxygen', sans-serif;
+			}
 
-		.wrap {
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title { 
+				font-size: 50px;
+				font-family: 'Passion One', cursive; 
+				font-weight: 400; 
+			}
+
+			h2.title{
+				text-align: center;
+				color: #000EB9;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 50px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			.wrap {
 			  position: relative;
 			}
 			.wrap .nav-bar .navbar-brand {
@@ -308,6 +399,7 @@
 			    font-family: times new roman;
 			    font-size: 25px;
 			    font-style: italic;
+			    margin-bottom: 40px;
 			}
 			.btn-warning {
 			    background-color: #FF0000;
@@ -346,8 +438,29 @@
 			    background-color: transparent;
 			    border-color: transparent;
 			}
+
+			.btn-block {
+			    display: block;
+			    width: 50%;
+			}
+
+			.btn-info {
+			    background-color: #64D5FF;
+			    border-color: #46b8da;
+			    color: #fff;
+			    margin: auto auto 1px;
+			    width: 30%;
+			}
+
+			.btn-info:hover {
+			  color: #fff;
+			  background-color: red;
+			  border-color: #269abc;
+			}
+
         	
 			}
+
 
 	</style>
 
@@ -420,7 +533,7 @@
 		            $ddl.find('.submenu').removeClass('submenu').addClass('dropdown-menu');
 		            
 		             $('#side-menu #qform').detach().addClass('navbar-form').appendTo($topMenu.find('.nav'));
-		            $ddl.appendTo($topMenu.find('.nav')); 
+		            $ddl.appendTo($topMenu.find('.nav'));
 		          }
 		       }
 		   });
@@ -464,18 +577,19 @@
 		  
 		});
 
+	
 	</script>
 
 	<div class="wrap">
-	  <nav class="nav-bar navbar-inverse" role="navigation">
-	      <div id ="top-menu" class="container-fluid active">
+		  <nav class="nav-bar navbar-inverse" role="navigation">
+		      <div id ="top-menu" class="container-fluid active">
 
-	      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
-	      	<div>
+		      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
+		      <div>
 		      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
-		    </div>
-	      </div>      
-	  </nav>
+		      </div>
+		      </div>      
+		  </nav>
 
 		  <aside id="side-menu" class="aside" role="navigation">            
 		        <ul id="menuMedico" class="nav nav-list accordion">                    
@@ -528,54 +642,18 @@
 		      </a>      
 		    </div>
 		    <section class="content-inner">
+		   		 <div class="jumbotron">
+		   		 	<div class="panel-title text-center">
+	    				<h1 class="title">Você realmente deseja excluir seu perfil?</h1>
+	    			</div>
 
-		    	<div class="jumbotron">
-		    	<div class="panel-title text-center">
-	    			<h1 class="title">Seus Animais</h1>
-	    		</div>
-		    		<input class="form-control" type="text" ng-model="buscarAuxiliar" placeholder="Qual Animal você procura?" >
-		    		<table class="table table-responsive">
-		    			<tr>
-		    				<th>#</th>
-		    				<th>Nome Animal</th>
-		    				<th>Especie</th>
-		    				<th>Raça</th>
-		    				<th>Nome do Responsavel</th>
-		    				<th>Telefone Responsavel</th>
-		    				<th>Ação</th>
-		    			</tr>
-		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': animal.selecionado}" ng-repeat="animal in animais | 
-						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
-							<td><input type="checkbox" ng-model="animal.selecionado"></td>
-							<td>{{animal.nomeAnimal}}</td>
-							<td>{{animal.nomeEspecie}}</td>
-							<td>{{animal.nomeRaca}}</td>
-							<td>{{animal.nomeResponsavel}}</td>
-							<td>{{animal.telefoneResponsavel}}</td>
-							<td><button class="btn btn-info btn-xs" ng-click="">Historico</button><button class="btn btn-danger btn-xs" ng-click="deletarAnimal(animal)">Deletar</button></td>
-		    			</tr>
-		    		</table>
-		    		<div>
-		    			<h2 class="title">Historico do Animal</h2>
-		    		</div>
-		    		<table class="table table-responsive">
-		    			<tr>
-		    				<th>Nome do animal</th>
-		    				<th>Tipo de Anemia</th>
-		    				<th>Descrição da Anemia</th>
-		    				<th>Leucocitos</th>
-		    				<th>Doença Leucocitos</th>
-		    				<th>Data do Resultado</th>
-		    			</tr>
-		    			<tr class="table table-responsive">
-		    				<th>{{}}</th>
-		    			</tr>
-		    		</table>
+	    			<table class="table table-responsive">
+	    				<tr><button type="button" class="btn btn-lg btn-info btn-block" ng-click="excluirPerfilMedico()">Excluir</button></tr>
+	    			</table>
 		    	</div>
-
 		    </section>
 		  </div>  
 		  
-	</div>
+		</div>
 
 </section>

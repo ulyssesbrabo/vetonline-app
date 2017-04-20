@@ -478,7 +478,7 @@
                             $location.path('/excluirMedico');
                         }
 
-                        $scope.sair = function(data){
+                        $scope.sair = function(){
                             $location.path('/login');
                         }
                         
@@ -762,8 +762,50 @@
                     }
                     
                 }])
-                .controller('ExcluirMedicoController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('ExcluirMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $http.delete('http://localhost:8000/deletarMedicoCompleto')
+                            .then(function(success, data){
+                                alert("Seu registro foi excluido com sucesso!");
+                                $location.path('/login');
+                            }, function(error){
+                                console.log(error);
+                            });
+                        };
                     
                 }])
                 .controller('AuxiliaresDosMedicosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
@@ -822,6 +864,7 @@
                         console.log(auxiliar);
                         console.log($localStorage.token)
                         $http.delete('http://localhost:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
+                            alert("Auxiliar excluido com sucesso!");
                             listaAuxiliarMedico();
                         }, function(error){
                             console.log(error);

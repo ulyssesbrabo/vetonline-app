@@ -235,6 +235,11 @@
                             controllerAs: 'vm'
                             
                         })
+                        .when('/atualizarSenhaMedico',{
+                            templateUrl: 'atualizarSenhaMedico.html',
+                            controller: 'AtualizarSenhaMedicoController',
+                            controllerAs: 'vm'
+                        })
                         .when('/excluirMedico', {
                             templateUrl: 'excluirmedico.html',
                             controller: 'ExcluirMedicoController',
@@ -478,6 +483,10 @@
                             $location.path('/excluirMedico');
                         }
 
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
+                        }
+
                         $scope.sair = function(){
                             $location.path('/login');
                         }
@@ -501,41 +510,18 @@
                         $scope.paginaDeterminarAnemia = function(){
                             $location.path('/DeternimarAnemia');
                         }
-
-                        $scope.excluirRegistroMedico = function(){
-                            $http({
-                                method: 'DELETE',
-                                url: 'http://dev.vetonline.com:8000/deletarMedico'
-                                
-                            }).then(function(success, data){
-
-                            }, function(error){
-                                console.log(error);
-                            })
-                        }
-
                         /*
-                            $http.delete('http://dev.vetonline.com:8000/deletarMedico').then(function(){
-                                $location.path('/login');
+                        $scope.nome = [];
+                        $scope.nomeMedico = [];
+                        var nomeMedico = function(){
+                            $http.get('http://localhost:8000/nomeMedico').then(function(success, data){
+                                $scope.nome = success.data;
                             }, function(error){
-                                console.log(error);
+
                             });
-                        $scope.deletarAuxiliar = function(auxiliar){
-                        console.log("Função deletar")
-                        console.log(auxiliar);
-                        console.log("Função deletar")
-                        console.log(auxiliar);
-                        console.log($localStorage.token)
-                        $http.delete('http://dev.vetonline.com:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
-
-                        }, function(error){
-                            console.log(error);
-                        });
+                        };
+                        nomeMedico();
                         */
-
-
-
-
                 }])
 
                 .controller('AuxiliarController', ['$scope', '$rootScope', '$location', 
@@ -588,21 +574,75 @@
                         };    
                 }])
                 
-                .controller('novaSenhaAuxiliarController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
+                .controller('novaSenhaAuxiliarController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
      
                 }])
                 
-                .controller('novaSenhaMedicoController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
+                .controller('AtualizarSenhaMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
+                        }
+
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
+
+                        $scope.validarSenhas = function(){
+                        senha1 = document.cadastroMedicoForm.senhaMedico.value
+                        senha2 = document.cadastroMedicoForm.senhaMedico2.value
+
+                        if (senha1 == senha2) {
+                            return true;
+                        }else{
+                            alert("Senhas são diferentes")
+                            $scope.cadastroMedicoForm.senha2.$setPristine();
+                        }
+                    }
+
+                    $scope.atualizarsenha = function(medico){
+                        $http.put('http://localhost:8000/atualizaSenhaMedico', medico).then(function(success, data){
+                            alert("Senha atualizada com sucesso!")
+                            $location.path('/menuMedico');
+                        }, function(error){
+
+                        });
+                    };
      
                 }])
 
-                .controller('novaSenhaResponsavelController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
+                .controller('novaSenhaResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
      
                 }])
 
-                .controller('novaSenhaClinicaController', ['$scope', '$rootScope', '$location',  function($scope, $rootScope, $location, $http, urlBase){
-     
-                }])
                 .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', '$http', '$timeout', 
                     function($scope, $rootScope, $location, $localStorage, $http){
 
@@ -728,6 +768,10 @@
                             $location.path('/excluirMedico');
                         }
 
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
+                        }
+
                         $scope.sair = function(data){
                             $location.path('/login');
                         }
@@ -773,6 +817,10 @@
                             $location.path('/excluirMedico');
                         }
 
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
+                        }
+
                         $scope.sair = function(data){
                             $location.path('/login');
                         }
@@ -798,12 +846,17 @@
                         }
 
                         $scope.excluirPerfilMedico = function(){
-                            $http.delete('http://localhost:8000/deletarMedicoCompleto')
+                            $http.put('http://localhost:8000/deletarMedicoCompleto')
                             .then(function(success, data){
                                 alert("Seu registro foi excluido com sucesso!");
                                 $location.path('/login');
                             }, function(error){
                                 console.log(error);
+                            });
+                            $http.put('http://localhost:8000/deletarMedico').then(function(success, data){
+                                $location.path('/login');
+                            }, function(error){
+
                             });
                         };
                     
@@ -820,6 +873,10 @@
 
                         $scope.excluirPerfilMedico = function(){
                             $location.path('/excluirMedico');
+                        }
+
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
                         }
 
                         $scope.sair = function(data){
@@ -863,7 +920,7 @@
                         console.log("Função deletar")
                         console.log(auxiliar);
                         console.log($localStorage.token)
-                        $http.delete('http://localhost:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
+                        $http.put('http://localhost:8000/excluirAuxiliar/'+auxiliar.idusuario).then(function(success, data){
                             alert("Auxiliar excluido com sucesso!");
                             listaAuxiliarMedico();
                         }, function(error){
@@ -893,6 +950,10 @@
 
                         $scope.excluirPerfilMedico = function(){
                             $location.path('/excluirMedico');
+                        }
+
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
                         }
 
                         $scope.sair = function(data){
@@ -929,8 +990,8 @@
                                 console.log(error);
                             });
                         
-                    };                    
-                    
+                    };    
+
                     $scope.adicionarAuxiliar = function(auxiliar){
                         $http.post("http://localhost:8000/inserirAuxiliarMedico", auxiliar).then(function(success, data){
                             console.log("Valor auxiliar");
@@ -958,6 +1019,10 @@
 
                         $scope.excluirPerfilMedico = function(){
                             $location.path('/excluirMedico');
+                        }
+
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
                         }
 
                         $scope.sair = function(data){
@@ -1028,6 +1093,10 @@
                             $location.path('/excluirMedico');
                         }
 
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
+                        }
+
                         $scope.sair = function(data){
                             $location.path('/login');
                         }
@@ -1061,7 +1130,7 @@
                     };
 
                     $scope.deletarAnimal = function(animal){
-                        $http.delete('http://localhost:8000/excluirAnimal/'+animal.idAnimal).then(function(success, data){
+                        $http.put('http://localhost:8000/excluirAnimal/'+animal.idAnimal).then(function(success, data){
                             alert("Animal excluido com sucesso!")
                             listaAnimaisMedicos();
                         }, function(error){
@@ -1626,6 +1695,10 @@
 
                         $scope.excluirPerfilMedico = function(){
                             $location.path('/excluirMedico');
+                        }
+
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
                         }
 
                         $scope.sair = function(data){

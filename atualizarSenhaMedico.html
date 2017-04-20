@@ -1,50 +1,95 @@
 <section>
-	
-	<style type="text/css">
-		
-		.custab{
-		    border: 1px solid #ccc;
-		    padding: 5px;
-		    margin: 5% 0;
-		    box-shadow: 3px 3px 2px #ccc;
-		    transition: 0.5s;
-		    }
-		.custab:hover{
-		    box-shadow: 3px 3px 0px transparent;
-		    transition: 0.5s;
-		    }
-	    .col-md-offset-2 {
-		    background-color: #fff;
-		    border-radius: 50px;
-		    margin-left: 6%;
-		    margin-top: 10px;
-		    width: 750px;
-		}
-		.well {
-		    
-		    border: 1px solid #000000;
-		    border-radius: 40px;
-		    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05) inset;
-		    margin-bottom: 20px;
-		    margin-left: 10px;
-		    margin-top: 10px;
-		    min-height: 20px;
-		    padding: 19px;
-		}
-		.table > thead > tr > th {
-		    border-bottom: 1px solid #ddd;
-		    border-right: 2px solid #ddd;
-		    padding: 5px;
-		    text-align: center;
-		}
-		.selecionado{
-			background-color: yellow;
-		}
-		.negrito{
-			font-weight: bold;
-		}
 
-		.wrap {
+	<style>
+
+			body, html{
+			
+			background-repeat: no-repeat;
+			
+			font-family: 'Oxygen', sans-serif;
+			}
+
+			.main{
+			 	margin-top: 70px;
+			}
+
+			h1.title {
+			    color: blue;
+			    font-family: times new roman;
+			    font-size: 30px;
+			    font-weight: 400;
+			}
+
+			h2.title{
+				text-align: center;
+				color: #000EB9;
+				font-size: 20px;
+				font-family: 'Passion One', cursive;
+				font-weight: 30;
+				margin-top: 5px;
+			}
+
+			hr{
+				width: 10%;
+				color: #fff;
+			}
+
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			label{
+				margin-bottom: 15px;
+			}
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login {
+			    background-color: #dee8eb;
+			    border-radius: 50px;
+			    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 30px auto;
+			 	max-width: 530px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			.wrap {
 			  position: relative;
 			}
 			.wrap .nav-bar .navbar-brand {
@@ -106,9 +151,9 @@
 			  top: 20px;
 			}
 			.wrap #side-menu {
-				background: #cef0cf none repeat scroll 0 0;
+			    background: #cef0cf none repeat scroll 0 0;
+			    border-radius: 20px;
 			    display: block;
-			    border-radius: 25px;
 			    float: left;
 			    height: auto;
 			    padding-left: 10px;
@@ -264,52 +309,25 @@
         	}
 
         	.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-		 		height: 120px;
-			    margin-bottom: 10px;
-			    margin-left: 350px;
-			    margin-top: 10px;
-			    max-width: 100%;
+			    height: 190px;
+			    margin-left: 300px;
+			    width: 50%;
 			}
 
-			
 			.container-fluid {
 			    background: #cef0cf none repeat scroll 0 0;
+			    border-radius: 25px;
 			    margin-left: auto;
 			    margin-right: auto;
 			    padding-left: 15px;
 			    padding-right: 15px;
 			}
-
-			.jumbotron {
-			    margin-left: 60px;
-			    padding-bottom: 38px;
-			    padding-top: 38px;
-			}
-			.container .jumbotron, .container-fluid .jumbotron {
-			    border-radius: 36px;
-			}
-
-			.form-control {
-			    background-color: #fff;
-			    background-image: none;
-			    border: 1px solid #ccc;
-			    border-radius: 44px;
-			    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-			    color: #555;
-			    display: block;
-			    line-height: 1.42857;
-			    margin-bottom: 24px;
-			    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-			    width: 100%;
-			}
-			.jumbotron h1, .jumbotron .h1 {
-			    color: red;
-			    font-family: times new roman;
-			    font-size: 25px;
-			    font-style: italic;
+			.navbar-inverse {
+			    background-color: transparent;
+			    border-color: #080808;
 			}
 			.btn-warning {
-			    background-color: #003806;
+			    background-color: #FF0000;
 			    border-color: transparent;
 			    color: #fff;
 			    line-height: 1.5;
@@ -318,13 +336,20 @@
 			    padding: 5px 25px;
 			}
 
-        	
+			.form-horizontal .control-label {
+			    font-family: times new roman;
+			    font-size: 17px;
+			    margin-bottom: 0;
+			    padding-top: 7px;
+			    text-align: right;
 			}
 
+        	
+			}
+    </style>
 
-	</style>
-
-	<script>
+    <script>
+	
 		$(function() {
 		   var accordionActive = false;
 		  
@@ -435,18 +460,20 @@
 		  
 		  
 		});
+
 	</script>
 
-	<div class="wrap">
-	  <nav class="nav-bar navbar-inverse" role="navigation">
-	      <div id ="top-menu" class="container-fluid active">
 
-	      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
-	      	<div>
-		      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
-		    </div>
-	      </div>      
-	  </nav>
+	<div class="wrap">
+		  <nav class="nav-bar navbar-inverse" role="navigation">
+		      <div id ="top-menu" class="container-fluid active">
+
+		      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
+		      	<div>
+			      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
+			    </div>
+		      </div>      
+		  </nav>
 
 		  <aside id="side-menu" class="aside" role="navigation">            
 		        <ul id="menuMedico" class="nav nav-list accordion">                    
@@ -455,7 +482,7 @@
 		            <ul class="submenu">
 		              <li><a href="#">Ver Perfil</a></li>  
 		              <li><a ng-click="paginaAtualiza()">Editar Perfil</a></li>  
-		              <li><a ng-click="atualizarsenha()">Atualizar Senha</a></li>
+		              <li><a href="/novaSenha.html">Atualizar Senha</a></li>
 		              <li><a ng-click="excluirPerfilMedico()">Excluir Perfil</a></li>
 		            </ul>
 		          </li>
@@ -473,15 +500,13 @@
 		            <ul class="submenu">
 		              <li><a ng-click="paginaAnimaisCadastrados()">Adicionar Animal</a></li>
 		              <li><a ng-click="paginaAnimaisMedico()">Listar seus Pacientes</a></li>
-		              
-		              
 		            </ul>
 		          </li>  
 		          
 		           <li class="nav-header">
-		            <div class="link"><i class="fa fa-lg fa-map-marker"></i>Analisar Hemograma<i class="fa fa-chevron-down"></i></div>
+		            <div class="link"><i class="fa fa-lg fa-map-marker"></i>Deternimar Anemia<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a ng-click="paginaDeterminarAnemia()">Analisar</a></li>
+		              <li><a ng-click="paginaDeterminarAnemia()">Calcular</a></li>
 		              
 		            </ul>
 		          </li>
@@ -499,46 +524,40 @@
 		      </a>      
 		    </div>
 		    <section class="content-inner">
-		    	<div class="jumbotron">
-		    	<div class="panel-title text-center">
-	    			<h1 class="title">Animais Cadastrados</h1>
+		        <div class="main-login main-center">
+				<form class="form-horizontal" name="atualizaMedicoForm" method="post" action="#">
+					<div class="panel-title text-center">
+	    			<h1 class="title">Nova Senha</h1>
 	    		</div>
-		    		<input class="form-control" type="text" ng-model="buscarAuxiliar" placeholder="Qual Animal você procura?" >
-		    		<table class="table table-responsive">
-		    			<tr>
-		    				<th></th>
-		    				<th>Nome Animal</th>
-		    				<th>Especie</th>
-		    				<th>Raça</th>
-		    				<th>Nome do Responsavel</th>
-		    				<th>Telefone Responsavel</th>
-		    				<th>Ação</th>
-		    			</tr>
-		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': animal.selecionado}" ng-repeat="animal in animais | 
-						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
-							<td><input type="checkbox" ng-model="animal.selecionado"></td>
-							<td>{{animal.nomeAnimal}}</td>
-							<td>{{animal.nomeEspecie}}</td>
-							<td>{{animal.nomeRaca}}</td>
-							<td>{{animal.nomeResponsavel}}</td>
-							<td>{{animal.telefoneResponsavel}}</td>
-							<td> <button class="btn btn-info btn-xs" ng-click="adicionarAnimal(animal)">Add</button></td>
-		    				
-		    			</tr>
-		    		</table>
-		    	</div>
 
+				<div class="form-group">
+					<label for="password" class="cols-sm-2 control-label">Senha</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<input type="password" id="password" class="form-control" name="senhaMedico" ng-model="medico.senhaMedico"  placeholder="Digite sua senha aqui..." ng-required="true"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="confirm" class="cols-sm-2 control-label">Confirme sua senha</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<input type="password" class="form-control" name="senhaMedico2" ng-model="senha2" placeholder="Confirme Senha" id="confirm_password" ng-blur="validarSenhas()" required>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="atualizarsenha(medico)" ng-disabled="atualizaMedicoForm.$invalid" >Salvar</button>
+				</div>
+
+				</form>
+			</div>
+		      
 		    </section>
-
 		  </div>  
 		  
-	</div>
-
-
-
-
-
-
-			
-
+		</div>
+	
 </section>

@@ -2,86 +2,6 @@
 
 	<style>
 
-			body, html{
-			
-			background-repeat: no-repeat;
-			
-			font-family: 'Oxygen', sans-serif;
-			}
-
-			.main{
-			 	margin-top: 70px;
-			}
-
-			
-
-			.form-horizontal .control-label {
-			    margin-bottom: 10px;
-			    padding-top: 17px;
-			    text-align: right;
-			}
-
-			
-
-			.form-group{
-				margin-bottom: 15px;
-				padding: center;
-				margin-left: auto;
-				margin-right: auto;
-			}
-
-			label{
-				margin-bottom: 15px;
-			}
-
-			input,
-			input::-webkit-input-placeholder {
-			    font-size: 11px;
-			    padding-top: 3px;
-			}
-
-			.main-login{
-			 	background-color: #fff;
-			    /* shadows and rounded borders */
-			    -moz-border-radius: 2px;
-			    -webkit-border-radius: 2px;
-			    border-radius: 50px;
-			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-
-			}
-
-			.main-center {
-			    margin-left: 80px;
-			    margin-top: 10px;
-			    padding: 40px;
-			}
-
-			.login-button{
-				margin-top: 5px;
-			}
-
-			.login-register{
-				font-size: 20px;
-				text-align: center;
-
-			}
-
-
-			.container.img{
-				max-width:200px;
-			    max-height:150px;
-			    width: auto;
-			    height: auto;
-			}
-
-			.input-group{
-				border-collapse: separate;
-				position: relative;
-
-			}
-
 			.wrap {
 			  position: relative;
 			}
@@ -143,19 +63,7 @@
 			.wrap .burger #bgrThree {
 			  top: 20px;
 			}
-			.wrap #side-menu {
-				background: #cef0cf none repeat scroll 0 0;
-			    display: block;
-			    float: left;
-			    border-radius: 25px;
-			    height: auto;
-			    padding-left: 10px;
-			    padding-right: 10px;
-			    padding-top: 10px;
-			    position: fixed;
-			    width: 26em;
-			    z-index: -1;
-			}
+			
 			.wrap .content {
 			  position: absolute;
 			  right: 0;
@@ -180,19 +88,6 @@
 			.wrap ul.accordion {
 			  width: 100%;
 			  background: transparent;
-			}
-			.wrap ul.accordion .link {
-			  cursor: pointer;
-			  display: block;
-			  padding: 15px 15px 15px 42px;
-			  color: #1c5c2b;
-			  font-size: 14px;
-			  font-weight: 700;
-			  border-bottom: 1px solid #303030;
-			  position: relative;
-			  -webkit-transition: all 0.4s ease;
-			  -o-transition: all 0.4s ease;
-			  transition: all 0.4s ease;
 			}
 			.wrap ul.accordion li:not(open) last-child .link {
 			  border-bottom: 0;
@@ -233,16 +128,6 @@
 			.wrap ul.accordion ul.submenu li {
 			  border-bottom: 1px solid #4b4a5e;
 			  list-style: none;
-			}
-			.wrap ul.accordion ul.submenu li a {
-			  display: block;
-			  text-decoration: none;
-			  color: #2d6bdf;
-			  padding: 12px;
-			  padding-left: 42px;
-			  -webkit-transition: all 0.25s ease;
-			  -o-transition: all 0.25s ease;
-			  transition: all 0.25s ease;
 			}
 			.wrap ul.accordion ul.submenu li a:hover {
 			  background: #2EA762;
@@ -302,37 +187,26 @@
         	}
 
         	.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-		 		height: 120px;
-			    margin-bottom: 10px;
-			    margin-left: 350px;
-			    margin-top: 10px;
-			    max-width: 100%;
+			    height: 190px;
+			    margin-left: 300px;
+			    width: 50%;
 			}
 
 			.container-fluid {
-				border-radius: 25px;
 			    background: #cef0cf none repeat scroll 0 0;
+			    border-radius: 25px;
 			    margin-left: auto;
 			    margin-right: auto;
 			    padding-left: 15px;
 			    padding-right: 15px;
+			    margin-top: 8px;
 			}
-
-			textarea {
-			    border-radius: 7px;
-			    margin-top: 12px;
-			    overflow: auto;
-			}
-
-			.btn-info {
-			    background-color: #5bc0de;
-			    border-color: #46b8da;
-			    color: #fff;
-			    margin: auto auto 30px;
-			    width: 30%;
+			.navbar-inverse {
+			    background-color: transparent;
+			    border-color: #080808;
 			}
 			.btn-warning {
-			    background-color: #003806;
+			    background-color: #166304;
 			    border-color: transparent;
 			    color: #fff;
 			    line-height: 1.5;
@@ -340,35 +214,54 @@
 			    margin-left: 1000px;
 			    padding: 5px 25px;
 			}
-
-			.col-md-4 {
+			.btn-warning:hover {
+			  color: #fff;
+			  background-color: #FC1515;
+			  border-color: #d58512;
+			}
+			.wrap ul.accordion ul.submenu li a {
+			    color: #1c5c2b;
+			    display: block;
 			    font-family: times new roman;
-			    font-size: 25px;
-			    text-align: center;
-			    width: 50%;
+			    font-size: 15px;
+			    padding: 12px 12px 12px 42px;
+			    text-decoration: none;
+			    transition: all 0.25s ease 0s;
 			}
-
-			.col-md-1 {
+			.wrap ul.accordion .link {
+			    border-bottom: 1px solid #303030;
+			    color: #1c5c2b;
+			    cursor: pointer;
+			    display: block;
 			    font-family: times new roman;
-			    margin-bottom: 3px;
-			    margin-top: 7px;
-			    width: 50%;
+			    font-size: 17px;
+			    font-weight: 700;
+			    padding: 15px 15px 15px 42px;
+			    position: relative;
+			    transition: all 0.4s ease 0s;
+			}
+			.wrap #side-menu {
+				background: #cef0cf none repeat scroll 0 0;
+				border-radius: 20px;
+				display: block;
+				float: left;
+				height: auto;
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-top: 10px;
+				position: fixed;
+				width: 26em;
+				z-index: -1;
 			}
 
-			.col-md-6 {
-			    margin-left: 25px;
-			    margin-right: 60px;
-			    width: 40%;
+			body {
+			    background: #f8f8f8 none repeat scroll 0 0;
 			}
 
-			.btn-primary {
-			    background-color: #6599AF;
-			    border-color: #2e6da4;
-			    color: #fff;
-			    margin-top: 20px;
 			}
-			th {
-			    text-align: center;
+
+			.main{
+			 	margin-top: 70px;
 			}
 
 			h1.title {
@@ -377,6 +270,15 @@
 			    font-style: italic;
 			    font-weight: 400;
 			    margin-bottom: 20px;
+			}
+
+			.form-horizontal .control-label {
+			    font-family: times new roman;
+			    font-size: 18px;
+			    font-weight: normal;
+			    margin-bottom: 10px;
+			    padding-top: 0;
+			    text-align: right;
 			}
 
 			h2.title {
@@ -422,19 +324,154 @@
 				color: #fff;
 			}
 
-			input, button, select, textarea {
-			    font-family: inherit;
-			    font-size: inherit;
-			    line-height: inherit;
-			    margin-left: 15px;
-			    margin-right: 150px;
+			.form-group{
+				margin-bottom: 15px;
+				padding: center;
+				margin-left: auto;
+				margin-right: auto;
 			}
 
-			.navbar-inverse {
-			    background-color: transparent;
-			    border-color: #080808;
+			label{
+				margin-bottom: 15px;
 			}
-        	
+
+			input,
+			input::-webkit-input-placeholder {
+			    font-size: 11px;
+			    padding-top: 3px;
+			}
+
+			.main-login{
+			 	background-color: #fff;
+			    /* shadows and rounded borders */
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    border-radius: 50px;
+			    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+			}
+
+			.main-center{
+			 	margin-top: 30px;
+			 	margin: 20px auto 20px 75px;
+			 	max-width: 930px;
+			    padding: 40px 40px;
+
+			}
+
+			.login-button{
+				margin-top: 5px;
+			}
+
+			.login-register{
+				font-size: 20px;
+				text-align: center;
+
+			}
+
+
+			.container.img{
+				max-width:200px;
+			    max-height:150px;
+			    width: auto;
+			    height: auto;
+			}
+
+			.input-group{
+				border-collapse: separate;
+				position: relative;
+
+			}
+
+			.container-fluid {
+			    background: #cef0cf none repeat scroll 0 0;
+			    margin-left: auto;
+			    margin-right: auto;
+			    padding-left: 15px;
+			    padding-right: 15px;
+			}
+
+			textarea {
+			    border-radius: 7px;
+			    margin: 12px auto 15px;
+			    overflow: auto;
+			}
+
+			.btn-info {
+			    background-color: #5bc0de;
+			    border-color: #46b8da;
+			    color: #fff;
+			    margin: auto auto 30px;
+			    width: 30%;
+			}
+
+			.help-block {
+			    color: #dc0000;
+			    display: block;
+			    margin-bottom: 10px;
+			    margin-top: 5px;
+			}
+
+			.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+			    border-radius: 20px;
+			}
+
+			.form-control {
+			    background-color: #fff;
+			    background-image: none;
+			    border: 1px solid #ccc;
+			    border-radius: 4px;
+			    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+			    color: #555;
+			    display: block;
+			    font-size: 14px;
+			    height: 34px;
+			    line-height: 1.42857;
+			    margin-bottom: 10px;
+			    padding: 6px 12px;
+			    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+			    width: 50%;
+			}
+
+			.btn-primary {
+			    background-color: #6599AF;
+			    border-color: #2e6da4;
+			    color: #fff;
+			    margin-top: 20px;
+			}
+			th {
+			    text-align: center;
+			}
+			.col-xs-4 {
+			    float: none;
+			    margin-left: 20%;
+			    width: 25%;
+			}
+			.col-xs-3 {
+			    margin-left: 80px;
+			    width: 25%;
+			}
+			.col-xs-5 {
+			    font-family: times new roman;
+			    font-size: 25px;
+			    text-align: center;
+			    width: 45%;
+			}
+			.col-xs-6 {
+			    font-family: times new roman;
+			    font-size: 15px;
+			    margin-left: 70px;
+			    text-align: left;
+			    width: 35%;
+			}
+			.center-block {
+				background: #b2df9c none repeat scroll 0 0;
+			    display: block;
+			    margin-bottom: 5px;
+			    margin-left: auto;
+			    margin-right: auto;
 			}
 
 	</style>
@@ -620,217 +657,203 @@
 		      
 			    <div class="main-login main-center">
 
-					<form class="form-horizontal" name="calcularAnemiaForm" method="post" action="#">
-						
-						<div class="panel-title text-center">
-			    			<h1 class="title">Analisar Hemograma</h1>
-			    		</div>
+		<form class="form-horizontal" name="calcularAnemiaForm" method="post" action="#">
+			
+			<div class="panel-title text-center">
+    			<h1 class="title">Analisar Hemograma</h1>
+    		</div>
+    		<form>
+			
+				<label for="AnimSeus" class="cols-sm-2 control-label">Selecione um Animal</label>
+					<select name="AnimSeus" id="AnimSeus" ng-model="hemoga.especie" ng-required="true">
+						<option value="">Selecione um Animal</option>
+						<option ng-repeat="option in animais" value="{{option.idEspecie}}">{{option.nomeAnimal}}</option>
+					</select>
+					<p ng-show="calcularAnemiaForm.AnimSeus.$invalid && !calcularAnemiaForm.AnimSeus.$pristine" class="help-block">É obrigatorio selecionar um Animal</p>
+				<div>
+					<h2 class="title">Dados do Eritrograma</h2>
+				</div>	
+				<label for="VolGlob" class="cols-xs-2 control-label" >Qual o Volume Globular?</label>
+				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="hemoga.VolGlob" placeholder="Por favor insira o Volume Globular!"/>
+				<p ng-show="calcularAnemiaForm.VolGlob.$invalid && !calcularAnemiaForm.VolGlob.$pristine" class="help-block">Volume Globular é obrigatório</p>
 
-						<fieldset>
-							<label for="AnimSeus" class="cols-sm-2 control-label">Selecione um Animal</label>
-								<select name="AnimSeus" id="AnimSeus" ng-model="hemoga.especie" ng-required="true">
-									<option value="">Selecione um Animal</option>
-									<option ng-repeat="option in animais" value="{{option.idEspecie}}">{{option.nomeAnimal}}</option>
-								</select>
-								<p ng-show="calcularAnemiaForm.AnimSeus.$invalid && !calcularAnemiaForm.AnimSeus.$pristine" class="help-block">É obrigatorio selecionar um Animal</p>
-							<div>
-								<h2 class="title">Dados do Eritrograma</h2>
-							</div>	
-							<label for="VolGlob" class="cols-sm-2 control-label" >Qual o Volume Globular?</label>
-							<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="hemoga.VolGlob" placeholder="Por favor insira o Volume Globular!"/>
-							<p ng-show="calcularAnemiaForm.VolGlob.$invalid && !calcularAnemiaForm.VolGlob.$pristine" class="help-block">Volume Globular é obrigatório</p>
+				<label for="NuHema" class="cols-xs-2 control-label">Qual o número de Hemacias?</label>
+				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="hemoga.NuHema" placeholder = "Por favor insira o valor em decimal, exemplo: (xx,xx)"/>
+				<p ng-show="calcularAnemiaForm.NuHema.$invalid && !calcularAnemiaForm.NuHema.$pristine" class="help-block">Numero de Hemacias é obrigatório</p>
 
-							<label for="NuHema" class="cols-sm-2 control-label">Qual o número de Hemacias?</label>
-							<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="hemoga.NuHema" placeholder = "Por favor insira o valor em decimal, exemplo: (xx,xx)"/>
-							<p ng-show="calcularAnemiaForm.NuHema.$invalid && !calcularAnemiaForm.NuHema.$pristine" class="help-block">Numero de Hemacias é obrigatório</p>
-
-							<label for="TxHemb" class="cols-sm-2 control-label">Qual a taxa de hemoglobina?</label>
-							<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="hemoga.TxHemb" placeholder="Por favor insira a Taxa de Hemoglobina!"/>
-							<p ng-show="calcularAnemiaForm.TxHemb.$invalid && !calcularAnemiaForm.TxHemb.$pristine" class="help-block">Taxa de Hemoglobina é obrigatório</p>
-							<div>
-								<h3 class="title">Dados do Leucograma</h3>
-							</div>
-
-							<label for="CGL" class="cols-sm-2 control-label">Informe a contagem global dos leucócitos?</label>
-							<input type="text" name="CGL" id="CGL" ng-required="true" class="form-control" ng-model="hemoga.CGL" placeholder="Informe o valor aqui!"/>
-							<p ng-show="calcularAnemiaForm.CGL.$invalid && !calcularAnemiaForm.CGL.$pristine" class="help-block">A contagem global de leocócitos é obrigatório</p>
-
-							<div class="row">
-								<div class="col-md-4">Valores Absolutos</div>
-								<div class="col-md-4">Valores Relativos</div>
-							</div>
-
-							<div class="row">
-								<div class="col-md-1" >Informe os Eosinófilos?</div>
-								<div class="col-md-1">Informe os Eosinófilos?</div>
-							</div>
-
-							<div class="row">
-								<table class="table table-responsive">
-									<tr><input type="text" name="AbsoluEosino" id="AbsoluEosino" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluEosino" placeholder="Informe o valor?"/></tr>
-									<tr><input type="text" name="RelaEosino" id="RelaEosino" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-required="true" ng-model="hemoga.RelaEosino" placeholder="Informe o valor?"/></tr>
-								</table>
-							</div>
-
-							<div class="row">
-								<div class="col-md-1">Informe os Basófilos?</div>
-								<div class="col-md-1">Informe os Basófilos?</div>
-							</div>
-
-								<div class="row">
-									<table class="table table-responsive">
-										<tr><input type="text" name="AbsoluBasof" id="AbsoluBasof" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluBasof" placeholder="Informe o valor?"/></tr>
-										<tr><input type="text" name="RelaBasof" id="RelaBasof" ng-required="true" ng-model="hemoga.RelaBasof" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" placeholder="Informe o valor?"/></tr>
-									</table>
-								</div>
-
-							<div class="row">
-								<div class="col-md-1">Informe os Linfócitos?</div>
-								<div class="col-md-1">Informe os Linfócitos?</div>
-							</div>
-
-								<div class="row">
-									<table class="table table-responsive">
-										<tr><input type="text" name="AbsoluLinfo" id="AbsoluLinfo" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluLinfo" placeholder="Informe o valor?"/></tr>
-										<tr><input type="text" name="RelaLinfo" id="RelaLinfo" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-required="true" ng-model="hemoga.RelaLinfo" placeholder="Informe o valor?"/></tr>
-									</table>
-								</div>
-
-							<div class="row">
-								<table class="table table-responsive">
-									<tr></tr>
-									<tr></tr>
-								</table>
-								<div class="col-md-1">Informe os Monócitos?</div>
-								<div class="col-md-1">Informe os Monócitos?</div>
-							</div>
-
-								<div class="row">
-									<table class="table table-responsive">
-										<tr><input type="text" name="AbsoluMono" id="AbsoluMono" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluMono" placeholder="Informe o valor?"/></tr>
-										<tr><input type="text" name="RelaMono" id="RelaMono" ng-required="true" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-model="hemoga.RelaMono" placeholder="Informe o valor?"/></tr>
-									</table>
-								</div>
-
-							<div class="row">
-								<div class="col-md-1">Informe os Bastonetes?</div>
-								<div class="col-md-1">Informe os Bastonetes?</div>
-							</div>
-
-								<div class="row">
-									<table class="table table-responsive">
-										<tr><input type="text" name="AbsoluBasto" id="AbsoluBasto" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluBasto" placeholder="Informe o valor?"/></tr>
-										<tr><input type="text" name="RelaBasto" id="RelaBasto" ng-required="true" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-model="hemoga.RelaBasto" placeholder="Informe o valor?"/></tr>
-									</table>
-								</div>
-
-							<div class="row">
-								<div class="col-md-1">Informe os Segmentados?</div>
-								<div class="col-md-1">Informe os Segmentados?</div>
-							</div>
-
-								<div class="row">
-									<table class="table table-responsive">
-										<tr><input type="text" name="AbsoluSegmen" id="AbsoluSegmen" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid"	ng-model="hemoga.AbsoluSegmen" placeholder="Informe o valor?"/></tr>
-										<tr><input type="text" name="RelaSegmen" id="RelaSegmen" ng-required="true" ng-model="hemoga.RelaSegmen" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" placeholder="Informe o valor?"/></tr>
-									</table>
-								</div>
-
-							<div>
-								<button type="button" class="btn btn-primary btn-block" ng-click="calcular(hemoga)">Analisar Resultados</button>
-							</div>
-
-							<div>
-								<h4 class="title">Resultados</h4>
-							</div>
-
-							<div class="table-responsive">
-								<div>
-									<h5 class="title">Hemograma</h4>
-								</div>
-								<table class="table table-responsive">
-									<tr>
-					    				<th>Tipo da Anemia</th>
-					    				<th>Descrição Anemia</th>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-class="{'selecionado negrito': anemia.selecionado}" ng-repeat="anemia in anemiaResultado | 
-									            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
-										<td>{{anemia.tipoAnemia}}</td>
-										<td>{{anemia.descricaoAnemia}}</td>
-					    			</tr>
-								</table>
-													
-							</div>
-
-							<div class="table-responsive">
-								<div>
-									<h5 class="title">Leucograma</h4>
-								</div>
-								<table class="table table-responsive">
-									<tr>
-					    				<th>Tipo de alteração dos Leucocitos</th>
-					    				<th>Doenças causadas pelas alterações nos Leucocitos</th>
-
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="leucopenia in leucocitoLeucopeniaResultado">
-										<td>{{leucopenia.tipoleucocitos}}</td>
-										<td>{{leucopenia.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="leucocitose in leucocitoLeucocitoseResultado">
-										<td>{{leucocitose.tipoleucocitos}}</td>
-										<td>{{leucocitose.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="eosinopenia in leucocitoEosinopeniaResultado">
-										<td>{{eosinopenia.tipoleucocitos}}</td>
-										<td>{{eosinopenia.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="eosinofilia in leucocitoEosinofiliaResultado">
-										<td>{{eosinofilia.tipoleucocitos}}</td>
-										<td>{{eosinofilia.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="linfocitopenia in leucocitoLinfocitopeniaResultado">
-										<td>{{linfocitopenia.tipoleucocitos}}</td>
-										<td>{{linfocitopenia.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="linfocitose in leucocitoLinfocitoseResultado">
-										<td>{{linfocitose.tipoleucocitos}}</td>
-										<td>{{linfocitose.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="monocitopenia in leucocitoMonocitopeniaResultado">
-					    				<td>{{monocitopenia.tipoleucocitos}}</td>
-					    				<td>{{monocitopenia.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="monocitose in leucocitoMonocitoseResultado">
-					    				<td>{{monocitose.tipoleucocitos}}</td>
-					    				<td>{{monocitose.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="basofilia in leucocitoBasofiliaResultado">
-					    				<td>{{basofilia.tipoleucocitos}}</td>
-					    				<td>{{basofilia.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="segmentadosmenor in leucocitoSegmentadosMenorResultado">
-					    				<td>{{segmentadosmenor.tipoleucocitos}}</td>
-					    				<td>{{segmentadosmenor.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="segmentadosmaior in leucocitoSegmentadosMaiorResultado">
-					    				<td>{{segmentadosmaior.tipoleucocitos}}</td>
-					    				<td>{{segmentadosmaior.doencaleucocito}}</td>
-					    			</tr>
-					    			<tr class="table table-responsive" ng-repeat="bastonetesmaior in leucocitoBastonetesMaiorResultado">
-					    				<td>{{bastonetesmaior.tipoleucocitos}}</td>
-					    				<td>{{bastonetesmaior.doencaleucocito}}</td>
-					    			</tr>
-								</table>
-							</div>
-
-							<div>
-								<button type="button" class="btn btn-lg btn-info btn-block" ng-click="voltar()">Voltar</button>
-							</div>
-
-						</fieldset>
-					</form>
+				<label for="TxHemb" class="cols-xs-2 control-label">Qual a taxa de hemoglobina?</label>
+				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="hemoga.TxHemb" placeholder="Por favor insira a Taxa de Hemoglobina!"/>
+				<p ng-show="calcularAnemiaForm.TxHemb.$invalid && !calcularAnemiaForm.TxHemb.$pristine" class="help-block">Taxa de Hemoglobina é obrigatório</p>
+				<div>
+					<h3 class="title">Dados do Leucograma</h3>
 				</div>
 
+				<label for="CGL" class="cols-xs-2 control-label">Informe a contagem global dos leucócitos?</label>
+				<input type="text" name="CGL" id="CGL" ng-required="true" class="form-control" ng-model="hemoga.CGL" placeholder="Informe o valor aqui!"/>
+				<p ng-show="calcularAnemiaForm.CGL.$invalid && !calcularAnemiaForm.CGL.$pristine" class="help-block">A contagem global de leocócitos é obrigatório</p>
+
+				<div class="row">
+					<div class="col-xs-5">Valores Absolutos</div>
+					<div class="col-xs-5">Valores Relativos</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6" >Informe os Eosinófilos?</div>
+					<div class="col-xs-6">Informe os Eosinófilos?</div>
+				</div>
+				
+					<div class="row">
+						<input class="col-xs-3" type="text" name="AbsoluEosino" id="AbsoluEosino" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluEosino" placeholder="Informe o valor?"/>
+						<input class="col-xs-4" type="text" name="RelaEosino" id="RelaEosino" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-required="true" ng-model="hemoga.RelaEosino" placeholder="Informe o valor?"/>
+					</div>
+
+				<div class="row">
+					<div class="col-xs-6">Informe os Basófilos?</div>
+					<div class="col-xs-6">Informe os Basófilos?</div>
+				</div>
+
+					<div class="row">
+						<input class="col-xs-3" type="text" name="AbsoluBasof" id="AbsoluBasof" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluBasof" placeholder="Informe o valor?"/>
+						<input class="col-xs-4" type="text" name="RelaBasof" id="RelaBasof" ng-required="true" ng-model="hemoga.RelaBasof" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" placeholder="Informe o valor?"/>
+					</div>
+
+				<div class="row">
+					<div class="col-xs-6">Informe os Linfócitos?</div>
+					<div class="col-xs-6">Informe os Linfócitos?</div>
+				</div>
+
+					<div class="row">
+						<input class="col-xs-3" type="text" name="AbsoluLinfo" id="AbsoluLinfo" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluLinfo" placeholder="Informe o valor?"/>
+						<input class="col-xs-4" type="text" name="RelaLinfo" id="RelaLinfo" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-required="true" ng-model="hemoga.RelaLinfo" placeholder="Informe o valor?"/>
+					</div>
+
+				<div class="row">
+					<div class="col-xs-6">Informe os Monócitos?</div>
+					<div class="col-xs-6">Informe os Monócitos?</div>
+				</div>
+
+					<div class="row">
+						<input class="col-xs-3" type="text" name="AbsoluMono" id="AbsoluMono" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluMono" placeholder="Informe o valor?"/>
+						<input class="col-xs-4" type="text" name="RelaMono" id="RelaMono" ng-required="true" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-model="hemoga.RelaMono" placeholder="Informe o valor?"/>
+					</div>
+
+				<div class="row">
+					<div class="col-xs-6">Informe os Bastonetes?</div>
+					<div class="col-xs-6">Informe os Bastonetes?</div>
+				</div>
+
+					<div class="row">
+						<input class="col-xs-3" type="text" name="AbsoluBasto" id="AbsoluBasto" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid" ng-model="hemoga.AbsoluBasto" placeholder="Informe o valor?"/>
+						<input class="col-xs-4" type="text" name="RelaBasto" id="RelaBasto" ng-required="true" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" ng-model="hemoga.RelaBasto" placeholder="Informe o valor?"/>
+					</div>
+
+				<div class="row">
+					<div class="col-xs-6">Informe os Segmentados?</div>
+					<div class="col-xs-6">Informe os Segmentados?</div>
+				</div>
+
+					<div class="row">
+						<input class="col-xs-3" type="text" name="AbsoluSegmen" id="AbsoluSegmen" ng-required="true" ng-disabled="calcularAnemiaForm.RelaEosino.$valid"
+						ng-model="hemoga.AbsoluSegmen" placeholder="Informe o valor?"/>
+						<input class="col-xs-4" type="text" name="RelaSegmen" id="RelaSegmen" ng-required="true" ng-model="hemoga.RelaSegmen" ng-disabled = "calcularAnemiaForm.AbsoluEosino.$valid" placeholder="Informe o valor?"/>
+					</div>
+
+				<div>
+					<button type="button" class="btn btn-primary btn-block" ng-click="calcular(hemoga)">Analisar Resultados</button>
+				</div>
+
+				<div>
+					<h4 class="title">Resultados</h4>
+				</div>
+
+				<div class="table-responsive">
+					<div>
+						<h5 class="title">Hemograma</h4>
+					</div>
+					<table class="table table-striped">
+						<tr>
+		    				<th>Tipo da Anemia</th>
+		    				<th>Descrição Anemia</th>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': anemia.selecionado}" ng-repeat="anemia in anemiaResultado | 
+						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
+							<td>{{anemia.tipoAnemia}}</td>
+							<td>{{anemia.descricaoAnemia}}</td>
+		    			</tr>
+					</table>
+										
+				</div>
+
+				<div class="table-responsive">
+					<div>
+						<h5 class="title">Leucograma</h4>
+					</div>
+					<table class="table table-striped">
+						<tr>
+		    				<th>Tipo de alteração dos Leucocitos</th>
+		    				<th>Doenças causadas pelas alterações nos Leucocitos</th>
+
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="leucopenia in leucocitoLeucopeniaResultado">
+							<td>{{leucopenia.tipoleucocitos}}</td>
+							<td>{{leucopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="leucocitose in leucocitoLeucocitoseResultado">
+							<td>{{leucocitose.tipoleucocitos}}</td>
+							<td>{{leucocitose.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="eosinopenia in leucocitoEosinopeniaResultado">
+							<td>{{eosinopenia.tipoleucocitos}}</td>
+							<td>{{eosinopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="eosinofilia in leucocitoEosinofiliaResultado">
+							<td>{{eosinofilia.tipoleucocitos}}</td>
+							<td>{{eosinofilia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="linfocitopenia in leucocitoLinfocitopeniaResultado">
+							<td>{{linfocitopenia.tipoleucocitos}}</td>
+							<td>{{linfocitopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="linfocitose in leucocitoLinfocitoseResultado">
+							<td>{{linfocitose.tipoleucocitos}}</td>
+							<td>{{linfocitose.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="monocitopenia in leucocitoMonocitopeniaResultado">
+		    				<td>{{monocitopenia.tipoleucocitos}}</td>
+		    				<td>{{monocitopenia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="monocitose in leucocitoMonocitoseResultado">
+		    				<td>{{monocitose.tipoleucocitos}}</td>
+		    				<td>{{monocitose.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="basofilia in leucocitoBasofiliaResultado">
+		    				<td>{{basofilia.tipoleucocitos}}</td>
+		    				<td>{{basofilia.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="segmentadosmenor in leucocitoSegmentadosMenorResultado">
+		    				<td>{{segmentadosmenor.tipoleucocitos}}</td>
+		    				<td>{{segmentadosmenor.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="segmentadosmaior in leucocitoSegmentadosMaiorResultado">
+		    				<td>{{segmentadosmaior.tipoleucocitos}}</td>
+		    				<td>{{segmentadosmaior.doencaleucocito}}</td>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-repeat="bastonetesmaior in leucocitoBastonetesMaiorResultado">
+		    				<td>{{bastonetesmaior.tipoleucocitos}}</td>
+		    				<td>{{bastonetesmaior.doencaleucocito}}</td>
+		    			</tr>
+					</table>
+				</div>
+
+				<div>
+					<button type="button" class="btn btn-lg btn-warning center-block" name="imprimir" value="imprimir" onclick="window.print()">Imprimir</button>
+					<button type="button" class="btn btn-lg btn-info btn-block" ng-click="voltar()">Voltar</button>
+				</div>
+				
+
+			</form>
+		</form>
+	</div>
 		    </section>
 		  </div>  
 		  

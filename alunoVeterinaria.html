@@ -245,15 +245,15 @@
 					<h2 class="title">Dados do Eritrograma</h2>
 				</div>	
 				<label for="VolGlob" class="cols-xs-2 control-label" >Qual o Volume Globular?</label>
-				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="hemoga.VolGlob" placeholder="Por favor insira o Volume Globular!"/>
+				<input type="text" name="VolGlob" id="VolGlob" ng-required="true" class="form-control" ng-model="hemoga.VolGlob" placeholder="Por favor insira o Volume Globular usando o separador ponto!"/>
 				<p ng-show="calcularAnemiaForm.VolGlob.$invalid && !calcularAnemiaForm.VolGlob.$pristine" class="help-block">Volume Globular é obrigatório</p>
 
-				<label for="NuHema" class="cols-xs-2 control-label">Qual o número de Hemacias?</label>
-				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="hemoga.NuHema" placeholder = "Por favor insira o valor em decimal, exemplo: (xx,xx)"/>
+				<label for="NuHema" class="cols-xs-2 control-label">Qual o número de Hemácias em milhões?</label>
+				<input type="text" name="NuHema" id="NuHema" ng-required="true" class="form-control" ng-model="hemoga.NuHema" placeholder = "Informe os valores sem pontos, vírgulas, traços ou barras"/>
 				<p ng-show="calcularAnemiaForm.NuHema.$invalid && !calcularAnemiaForm.NuHema.$pristine" class="help-block">Numero de Hemacias é obrigatório</p>
 
 				<label for="TxHemb" class="cols-xs-2 control-label">Qual a taxa de hemoglobina?</label>
-				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="hemoga.TxHemb" placeholder="Por favor insira a Taxa de Hemoglobina!"/>
+				<input type="text" name="TxHemb" id="TxHemb" ng-required="true" class="form-control" ng-model="hemoga.TxHemb" placeholder="Por favor insira a Taxa de Hemoglobina usando o separador ponto!"/>
 				<p ng-show="calcularAnemiaForm.TxHemb.$invalid && !calcularAnemiaForm.TxHemb.$pristine" class="help-block">Taxa de Hemoglobina é obrigatório</p>
 				<div>
 					<h3 class="title">Dados do Leucograma</h3>

@@ -1132,6 +1132,14 @@
                         });
                     };
 
+                    $scope.detalhesAnimais = function(animal){
+                        $http.get('http://localhost:8000', animal).then(function(success, data){
+                            $scope.detalhesAnimais = success.data;
+                        }, function (error){
+
+                        });
+                    }
+
                     $scope.deletarAnimal = function(animal){
                         $http.put('http://localhost:8000/excluirAnimal/'+animal.idAnimal).then(function(success, data){
                             alert("Animal excluido com sucesso!")
@@ -1846,13 +1854,52 @@
                                 }
                         }    
                     //Deternimar Anemia / Calcular
-                    $scope.novaAnemia = function(inserirAnemia){
-                        inserirAnemia.data= new Date();
-                            $http.post("http://localhost:8000/inserirAnemia", inserirAnemia).success(function(data){
-                                delete $scope.inserirAnemia;
-                                $scope.cadastroAnemiaForm.$setPristine();
+                    /*
+                    $scope.adicionarResultados = function(leucocitoBasofiliaResultado, leucocitoMonocitoseResultado, leucocitoMonocitopeniaResultado, leucocitoLinfocitoseResultado, leucocitoLinfocitopeniaResultado, leucocitoEosinofiliaResultado, leucocitoEosinopeniaResultado, leucocitoLeucocitoseResultado, leucocitoLeucopeniaResultado, anemiaResultado, option){
+
+                        console.log(option);
+                        var basofilia = leucocitoBasofiliaResultado;
+                        var monocitose = leucocitoMonocitoseResultado;
+                        var monocitopenia= leucocitoMonocitopeniaResultado
+                        var linfocitose = leucocitoLinfocitoseResultado
+                        var linfocitopenia = leucocitoLinfocitopeniaResultado;
+                        var eosinofilia = leucocitoEosinofiliaResultado;
+                        var eosinopenia = leucocitoEosinopeniaResultado;
+                        var leucocitose = leucocitoLeucocitoseResultado;
+                        var leucocitopenia = leucocitoLeucopeniaResultado;
+
+                            $http.post("http://localhost:8000/inserirBasofilia/:animais"+option, basofilia)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, monocitose)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, monocitopenia)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, linfocitose)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, linfocitopenia)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, eosinofilia)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, eosinopenia)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, leucocitose)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, leucocitopenia)
+                            .then(function(data){
+                            });
+                            $http.post("http://localhost:8000/"+animais, anemiaResultado)
+                            .then(function(data){
                             });
                     };
+                    */
 
                     listaAnimaisMedicos();
                 }])

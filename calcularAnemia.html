@@ -772,7 +772,7 @@
 				    				<th>Descrição Anemia</th>
 				    			</tr>
 				    			<tr class="table table-responsive" ng-class="{'selecionado negrito': anemia.selecionado}" ng-repeat="anemia in anemiaResultado | 
-								            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
+								            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao" ng-model="result.anemia">
 									<td>{{anemia.tipoAnemia}}</td>
 									<td>{{anemia.descricaoAnemia}}</td>
 				    			</tr>
@@ -826,24 +826,12 @@
 				    				<td>{{basofilia.tipoleucocitos}}</td>
 				    				<td>{{basofilia.doencaleucocito}}</td>
 				    			</tr>
-				    			<tr class="table table-responsive" ng-repeat="segmentadosmenor in leucocitoSegmentadosMenorResultado">
-				    				<td>{{segmentadosmenor.tipoleucocitos}}</td>
-				    				<td>{{segmentadosmenor.doencaleucocito}}</td>
-				    			</tr>
-				    			<tr class="table table-responsive" ng-repeat="segmentadosmaior in leucocitoSegmentadosMaiorResultado">
-				    				<td>{{segmentadosmaior.tipoleucocitos}}</td>
-				    				<td>{{segmentadosmaior.doencaleucocito}}</td>
-				    			</tr>
-				    			<tr class="table table-responsive" ng-repeat="bastonetesmaior in leucocitoBastonetesMaiorResultado">
-				    				<td>{{bastonetesmaior.tipoleucocitos}}</td>
-				    				<td>{{bastonetesmaior.doencaleucocito}}</td>
-				    			</tr>
 							</table>
 						</div>
 
 						<div>
 							<button type="button" class="btn btn-lg btn-warning center-block" name="imprimir" value="imprimir" onclick="window.print()">Imprimir</button>
-							<button type="button" class="btn btn-lg btn-info btn-block" ng-click="voltar()">Voltar</button>
+							
 						</div>
 						
 

@@ -9,6 +9,11 @@
 		    box-shadow: 3px 3px 2px #ccc;
 		    transition: 0.5s;
 		    }
+
+		body {
+		    background: #d4d8d2 none repeat scroll 0 0;
+		}
+
 		.custab:hover{
 		    box-shadow: 3px 3px 0px transparent;
 		    transition: 0.5s;
@@ -144,17 +149,16 @@
 			  background: transparent;
 			}
 			.wrap ul.accordion .link {
-			  cursor: pointer;
-			  display: block;
-			  padding: 15px 15px 15px 42px;
-			  color: #1c5c2b;
-			  font-size: 14px;
-			  font-weight: 700;
-			  border-bottom: 1px solid #303030;
-			  position: relative;
-			  -webkit-transition: all 0.4s ease;
-			  -o-transition: all 0.4s ease;
-			  transition: all 0.4s ease;
+			    border-bottom: 1px solid #303030;
+			    color: #1c5c2b;
+			    cursor: pointer;
+			    display: block;
+			    font-family: times new roman;
+			    font-size: 17px;
+			    font-weight: 700;
+			    padding: 15px 15px 15px 42px;
+			    position: relative;
+			    transition: all 0.4s ease 0s;
 			}
 			.wrap ul.accordion li:not(open) last-child .link {
 			  border-bottom: 0;
@@ -197,14 +201,13 @@
 			  list-style: none;
 			}
 			.wrap ul.accordion ul.submenu li a {
-			  display: block;
-			  text-decoration: none;
-			  color: #2d6bdf;
-			  padding: 12px;
-			  padding-left: 42px;
-			  -webkit-transition: all 0.25s ease;
-			  -o-transition: all 0.25s ease;
-			  transition: all 0.25s ease;
+			    color: #1c5c2b;
+			    display: block;
+			    font-family: times new roman;
+			    font-size: 15px;
+			    padding: 12px 12px 12px 42px;
+			    text-decoration: none;
+			    transition: all 0.25s ease 0s;
 			}
 			.wrap ul.accordion ul.submenu li a:hover {
 			  background: #2EA762;
@@ -286,7 +289,9 @@
 			    padding-top: 38px;
 			}
 			.container .jumbotron, .container-fluid .jumbotron {
+			    background-color: #f5faff;
 			    border-radius: 36px;
+			    margin-top: 10px;
 			}
 
 			.form-control {
@@ -316,6 +321,27 @@
 			    margin-bottom: 8px;
 			    margin-left: 1000px;
 			    padding: 5px 25px;
+			}
+
+			table {
+			    background-color: #d9eaff;
+			}
+
+			th {
+			    font-family: times new roman;
+			    font-size: 15px;
+			    text-align: center;
+			}
+
+			td, th {
+			    text-align: center;
+			}
+
+			.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+			    border-top: 1px solid #ddd;
+			    line-height: 1.42857;
+			    padding: 8px;
+			    vertical-align: middle;
 			}
 
         	

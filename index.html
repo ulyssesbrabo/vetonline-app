@@ -1519,6 +1519,8 @@
                             $location.path('/DeternimarAnemia');
                         }
 
+
+
                         var listarAnemiaMacroHipo = function(){
                             $http.get('http://localhost:8000/anemiaMacrociticaHipocromica').then(function(success, data){
                                 $scope.anemiaResultado = success.data;
@@ -1631,6 +1633,15 @@
                             });
                         };
 
+                        var listaAnimaisMedicos = function(){
+                            $http.get('http://localhost:8000/listarAnimaisAnemia').then(function(success, data){
+                                $scope.animais = success.data;
+                            }, function(error){
+                                console.log(error);
+                            });
+                        };
+
+                        listaAnimaisMedicos();
 
 
                         $scope.calcular = function(hemoga){

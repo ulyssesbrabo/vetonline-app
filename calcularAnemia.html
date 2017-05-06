@@ -187,14 +187,13 @@
         	}
 
         	.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-			    
-			    margin-left: 300px;
-			    width: 50%;
+			    height: 120px;
+			    margin: 1% 20% 1% 35%;
+    			max-width: 100%;
 			}
 
 			.container-fluid {
 			    background: #cef0cf none repeat scroll 0 0;
-			    border-radius: 25px;
 			    margin-left: auto;
 			    margin-right: auto;
 			    padding-left: 15px;
@@ -211,7 +210,6 @@
 			    color: #fff;
 			    line-height: 1.5;
 			    margin-bottom: 8px;
-			    margin-left: 1000px;
 			    padding: 5px 25px;
 			}
 			.btn-warning:hover {
@@ -241,21 +239,19 @@
 			    transition: all 0.4s ease 0s;
 			}
 			.wrap #side-menu {
-				background: #cef0cf none repeat scroll 0 0;
-				border-radius: 20px;
-				display: block;
-				float: left;
-				height: auto;
-				padding-left: 10px;
-				padding-right: 10px;
-				padding-top: 10px;
-				position: fixed;
-				width: 26em;
-				z-index: -1;
+			    background: #cef0cf none repeat scroll 0 0;
+			    display: block;
+			    float: left;
+			    height: auto;
+			    padding-left: 10px;
+			    padding-right: 10px;
+			    padding-top: 10px;
+			    width: 20em;
+			    z-index: -1;
 			}
 
 			body {
-			    background: #D4D8D2 none repeat scroll 0 0;
+		    	background: #fff none repeat scroll 0 0;
 			}
 
 			}
@@ -597,9 +593,8 @@
 	      <div id ="top-menu" class="container-fluid active">
 
 	      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
-	      	<div>
 		      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
-		    </div>
+	      	
 	      </div>      
 	  </nav>
 
@@ -608,10 +603,10 @@
 		          <li class="nav-header">
 		            <div class="link"><i class="fa fa-lg fa-globe"></i>Meus dados<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a href="#">Ver Perfil</a></li>  
+		              <li><a ng-click="perfilMedico()">Ver Perfil</a></li>  
 		              <li><a ng-click="paginaAtualiza()">Editar Perfil</a></li>  
-		              <li><a href="/novaSenha.html">Atualizar Senha</a></li>
-		              <li><a href="#">Excluir Perfil</a></li>
+		              <li><a ng-click ="atualizarsenha()">Atualizar Senha</a></li>
+		              <li><a ng-click = "excluirPerfilMedico()">Excluir Perfil</a></li>
 		            </ul>
 		          </li>
 		          

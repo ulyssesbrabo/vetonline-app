@@ -1,14 +1,18 @@
 <section>
 	
-	<style type="text/css">
-		
-		.custab{
+	<style>
+			.custab{
 		    border: 1px solid #ccc;
 		    padding: 5px;
 		    margin: 5% 0;
 		    box-shadow: 3px 3px 2px #ccc;
 		    transition: 0.5s;
 		    }
+
+		body {
+		    background: #fff none repeat scroll 0 0;
+		}
+
 		.custab:hover{
 		    box-shadow: 3px 3px 0px transparent;
 		    transition: 0.5s;
@@ -43,52 +47,498 @@
 		.negrito{
 			font-weight: bold;
 		}
-	</style> 
 
+		.wrap {
+			  position: relative;
+			}
+			.wrap .nav-bar .navbar-brand {
+			  margin-top: 15px;
+			}
+			.wrap .nav-bar .navbar-form {
+			  margin-top: 35px;
+			}
+			.wrap .nav-bar .nav {
+			  float: right !important;
+			}
+			.wrap .nav-bar .nav .dropdown span.fa,
+			.wrap .nav-bar .nav .dropdown span.caret {
+			  margin-right: 10px;
+			}
+			.wrap .nav-bar .nav .dropdown-menu {
+			  background: #222;
+			  left: auto;
+			  width: 200px;
+			  right: 0;
+			}
+			.wrap .nav-bar .nav .dropdown-menu > li > a {
+			  color: #ddd;
+			  padding: 8px;
+			}
+			.wrap .nav-bar .nav .dropdown-menu > li > a:hover {
+			  background: #3355ff;
+			}
+			.wrap .side-menu-link {
+			  left: 21em;
+			}
+			.wrap .burger {
+			  position: relative;
+			  width: 35px;
+			  height: 30px;
+			  left: 10px;
+			  top: 5px;
+			  z-index: 500000;
+			}
+			.wrap .burger .burger_inside {
+			  position: absolute;
+			  background-color: #222;
+			  width: 30px;
+			  height: 5px;
+			  left: 2.5px;
+			  -webkit-transition: all 0.5s ease-out;
+			  -moz-transition: all 0.5s ease-out;
+			  -ms-transition: all 0.5s ease-out;
+			  -o-transition: all 0.5s ease-out;
+			  transition: all 0.5s ease-out;
+			}
+			.wrap .burger #bgrOne {
+			  top: 0;
+			}
+			.wrap .burger #bgrTwo {
+			  top: 10px;
+			}
+			.wrap .burger #bgrThree {
+			  top: 20px;
+			}
+			.wrap #side-menu {
+			    background: #cef0cf none repeat scroll 0 0;
+			    display: block;
+			    float: left;
+			    height: auto;
+			    padding-left: 10px;
+			    padding-right: 10px;
+			    padding-top: 10px;
+			    width: 20em;
+			    z-index: -1;
+			}
+			.wrap .content {
+			  position: absolute;
+			  right: 0;
+			  min-width: 400px;
+			  -webkit-transition: all 0.3s ease-out;
+			  -moz-transition: all 0.3s ease-out;
+			  -ms-transition: all 0.3s ease-out;
+			  -o-transition: all 0.3s ease-out;
+			  transition: all 0.3s ease-out;
+			}
+			.wrap .content .top-bar {
+			  
+			  background: #ddd;
+			}
+			.wrap .content .content-inner {
+			    display: block;
+			    height: auto;
+			    margin-left: 5px;
+			    padding: 0 0 0 10px;
+			}
+			.wrap ul.accordion {
+			  width: 100%;
+			  background: transparent;
+			}
+			.wrap ul.accordion .link {
+			    border-bottom: 1px solid #303030;
+			    color: #1c5c2b;
+			    cursor: pointer;
+			    display: block;
+			    font-family: times new roman;
+			    font-size: 17px;
+			    font-weight: 700;
+			    padding: 15px 15px 15px 42px;
+			    position: relative;
+			    transition: all 0.4s ease 0s;
+			}
+			.wrap ul.accordion li:not(open) last-child .link {
+			  border-bottom: 0;
+			}
+			.wrap ul.accordion li i {
+			  position: absolute;
+			  top: 16px;
+			  left: 12px;
+			  font-size: 18px;
+			  color: #999;
+			  -webkit-transition: all 0.4s ease;
+			  -o-transition: all 0.4s ease;
+			  transition: all 0.4s ease;
+			}
+			.wrap ul.accordion li i.fa-chevron-down {
+			  right: 12px;
+			  left: auto;
+			  font-size: 16px;
+			}
+			.wrap ul.accordion li.open .link {
+			  color: #e52c2c;
+			}
+			.wrap ul.accordion li.open i {
+			  color: #FFB266;
+			}
+			.wrap ul.accordion li.open i.fa-chevron-down {
+			  -webkit-transform: rotate(180deg);
+			  -ms-transform: rotate(180deg);
+			  -o-transform: rotate(180deg);
+			  transform: rotate(180deg);
+			}
+			.wrap ul.accordion ul.submenu {
+			  display: none;
+			  background: transparent;
+			  font-size: 14px;
+			  padding: 0;
+			}
+			.wrap ul.accordion ul.submenu li {
+			  border-bottom: 1px solid #4b4a5e;
+			  list-style: none;
+			}
+			.wrap ul.accordion ul.submenu li a {
+			    color: #1c5c2b;
+			    display: block;
+			    font-family: times new roman;
+			    font-size: 15px;
+			    padding: 12px 12px 12px 42px;
+			    text-decoration: none;
+			    transition: all 0.25s ease 0s;
+			}
+			.wrap ul.accordion ul.submenu li a:hover {
+			  background: #2EA762;
+			  color: #fff;
+			}
+			@media screen and (max-width: 768px) {
+			  .wrap .nav-bar .navbar-brand {
+			    margin-top: 0;
+			    padding-left: 0;
+			  }
+			  .wrap .side-menu-link {
+			    display: inline-block;
+			  }
+			  .wrap #side-menu #qform {
+			    position: absolute;
+			    top: 10px;
+			  }
+			  .wrap .content {
+			    left: 0;
+			  }
+			  .wrap.active .content {
+			    left: 21em;
+			  }
+			  .wrap.active .content #bgrOne {
+			    top: 10px;
+			    transform: rotate(225deg);
+			  }
+			  .wrap.active .content #bgrTwo {
+			    opacity: 0;
+			  }
+			  .wrap.active .content #bgrThree {
+			    top: 10px;
+			    transform: rotate(315deg);
+			  }
+			}
+			@media screen and (min-width: 769px) {
+			  .side-menu-link {
+			    display: none;
+			  }
+			  .wrap {
+			    position: relative;
+			  }
+			  .wrap .content {
+			    left: 21em;
+			    right: 0;
+			  }
+
+			.warp.top-menu{
+				background-color: #fff;
+			}
+
+			* {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            
+        	}
+
+        	.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+			    height: 120px;
+			    margin: 1% 20% 1% 35%;
+    			max-width: 100%;
+			}
+
+			
+			.container-fluid {
+			    background: #cef0cf none repeat scroll 0 0;
+			    margin-left: auto;
+			    margin-right: auto;
+			    padding-left: 15px;
+			    padding-right: 15px;
+			}
+
+			.jumbotron {
+			    margin-left: 60px;
+			    padding-bottom: 38px;
+			    padding-top: 38px;
+			}
+			.container .jumbotron, .container-fluid .jumbotron {
+			    background-color: #fff;
+			    margin-left: 1%;
+			}
+
+			.form-control {
+			    background-color: #fff;
+			    background-image: none;
+			    border: 1px solid #ccc;
+			    border-radius: 44px;
+			    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+			    color: #555;
+			    display: block;
+			    line-height: 1.42857;
+			    margin-bottom: 24px;
+			    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+			    width: 100%;
+			}
+			.jumbotron h1, .jumbotron .h1 {
+			    font-family: times new roman;
+			    font-size: 25px;
+			    font-style: italic;
+			}
+			.btn-warning {
+			    background-color: #003806;
+			    border-color: transparent;
+			    color: #fff;
+			    line-height: 1.5;
+			    padding: 5px 25px;
+			}
+
+			table {
+			    background-color: #E3F9E3;
+			}
+
+			th {
+			    font-family: times new roman;
+			    font-size: 15px;
+			    text-align: center;
+			}
+
+			td, th {
+			    text-align: center;
+			}
+
+			.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+			    border-top: 1px solid #ddd;
+			    line-height: 1.42857;
+			    padding: 8px;
+			    vertical-align: middle;
+			}
+			.btn-info {
+			    background-color: #457845;
+			    border-color: #457845;
+			    color: #fff;
+			}
+
+        	
+			}
+
+	</style>
+
+
+	<script>
 	
+		$(function() {
+		   var accordionActive = false;
+		  
+		   $(window).on('resize', function() {
+		       var windowWidth = $(window).width();
+		       var $topMenu = $('#top-menu');
+		       var $sideMenu = $('#side-menu');     
+		       
+		       if (windowWidth < 768) {
+		          if ($topMenu.hasClass("active")) {             
+		            $topMenu.removeClass("active");
+		            $sideMenu.addClass("active");
+		            
+		            var $ddl = $('#top-menu .movable.dropdown');
+		            $ddl.detach();
+		            $ddl.removeClass('dropdown');
+		            $ddl.addClass('nav-header');
+		            
+		            $ddl.find('.dropdown-toggle').removeClass('dropdown-toggle').addClass('link');
+		            $ddl.find('.dropdown-menu').removeClass('dropdown-menu').addClass('submenu');
+		                        
+		            $ddl.prependTo($sideMenu.find('.accordion'));
+		            $('#top-menu #qform').detach().removeClass('navbar-form').prependTo($sideMenu);
+		            
+		            if (!accordionActive) {
+		               var Accordion2 = function(el, multiple) {
+		                 this.el = el || {};
+		                 this.multiple = multiple || false;
+
+		                  // Variables privadas
+		                 var links = this.el.find('.movable .link');
+		                 // Evento
+		                 links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
+		                }
+
+		              Accordion2.prototype.dropdown = function(e) {
+		                var $el = e.data.el;
+		                $this = $(this),
+		                  $next = $this.next();
+
+		                $next.slideToggle();
+		                $this.parent().toggleClass('open');
+
+		                if (!e.data.multiple) {
+		                  $el.find('.movable .submenu').not($next).slideUp().parent().removeClass('open');
+		                };
+		              }    
+
+		              var accordion = new Accordion2($('ul.accordion'), false); 
+		              accordionActive = true;
+		            }
+		          }
+		       }
+		       else {
+		          if ($sideMenu.hasClass("active")) {              
+		            $sideMenu.removeClass('active');
+		            $topMenu.addClass('active');
+		            
+		            var $ddl = $('#side-menu .movable.nav-header');
+		            $ddl.detach();
+		            $ddl.removeClass('nav-header');
+		            $ddl.addClass('dropdown');
+		            
+		            $ddl.find('.link').removeClass('link').addClass('dropdown-toggle');
+		            $ddl.find('.submenu').removeClass('submenu').addClass('dropdown-menu');
+		            
+		             $('#side-menu #qform').detach().addClass('navbar-form').appendTo($topMenu.find('.nav'));
+		            $ddl.appendTo($topMenu.find('.nav'));
+		          }
+		       }
+		   });
+		  
+		  
+		  var $menulink = $('.side-menu-link'),       
+		      $wrap = $('.wrap');
+		  
+		  $menulink.click(function() {    
+		    $menulink.toggleClass('active');
+		    $wrap.toggleClass('active');    
+		    return false;
+		  });
+		  
+		
+		  var Accordion = function(el, multiple) {
+		    this.el = el || {};
+		    this.multiple = multiple || false;
+
+		    // Variables privadas
+		    var links = this.el.find('.link');
+		    // Evento
+		    links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
+		  }
+
+		  Accordion.prototype.dropdown = function(e) {
+		     var $el = e.data.el;
+		     $this = $(this),
+		      $next = $this.next();
+
+		    $next.slideToggle();
+		    $this.parent().toggleClass('open');
+
+		    if (!e.data.multiple) {
+		      $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+		    };
+		  }	
+
+		  var accordion = new Accordion($('ul.accordion'), false); 
+		  
+		  
+		});
+
 	</script>
 
-	<div class="container">
-	    <div class="row col-md-6 col-md-offset-2 custyle">
-			    <div class="well">
-			    	<label>Qual médico você procura?<input type="text" ng-model="buscaMedico" placeholder="Digite o nome do Médico aqui...."></label>
-			    </div>
+	<div class="wrap">
+		  <nav class="nav-bar navbar-inverse" role="navigation">
+		      <div id ="top-menu" class="container-fluid active">
 
-				    <table class="table table-striped custab">
-					    <thead>
-					    
-					        <tr>
-					        	<th></th>
-					            <th><a href="" ng-click="ordenarPor('nomeAnimal')">Nome do Animal</a></th>
-					            <th><a href="" ng-click="ordenarPor('crmv')">Crmv do Médico</a></th>
-					            <th><a href="" ng-click="ordenarPor('nomeMedico')">Nome do Medico</a></th>
-					            <th><a href="" ng-click="ordenarPor('telefoneMedico')">Telefone do Medico</a></th>
-					            <th><a href="" ng-click="ordenarPor('nomeAuxiliar')">Nome do Auxiliar</a></th>
-					            <th><a href="" ng-click="ordenarPor('telefoneAuxiliar')">Telefone do Auxiliar</a></th>
-					            <th class="text-center">Ação</th>
-					        </tr>
-					    </thead>
-				            
-				            <tr ng-class="{'selecionado negrito': animal.selecionado}" ng-repeat="animal in listaMedicoResponsavelAnimal | 
-				            	filter: buscaMedico | orderBy:criterioOrdenacao:direcaoOrdenacao">
-				                
-				                <td> <imput type = "checkbox" ng-model="animal.selecionado" /> </td>
-				                <td> <p class="nomeAnimal"></p> </td>
-				                <td> <p class="crmv"></p> </td>
-				                <td> <p class="nomeMedico"></p> </td>
-				                <td> <p class="telefoneMedico"></p> </td>
-				                <td> <p class="nomeAuxiliar"></p> </td>
-				                <td> <p class="telefoneAuxiliar"></p> </td>
-				                <td class="text-center">
-				                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Perfil</a> 
-				                <a class="btn btn-danger btn-xs" ng-click="deletarAnimal(animal)" ng-disabled="!animalSelecionado(animal)" ><span class="glyphicon glyphicon-remove"></span> Deletar</a></td>
-				            </tr>
-				            
-				    </table>
-				    
-	    </div>
+		      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
 
+			      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
+		      	
+		      </div>      
+		  </nav>
+		  <aside id="side-menu" class="aside" role="navigation">            
+		        <ul id="menuResponsavel" class="nav nav-list accordion">                    
+		          <li class="nav-header">
+		            <div class="link"><i class="fa fa-lg fa-globe"></i>Meus dados<i class="fa fa-chevron-down"></i></div>
+		            <ul class="submenu">
+		              <li><a ng-click = "visualizarPerfilResponsavel()">Ver Perfil</a></li>  
+		              <li><a ng-click = "atualizarDadosResponsavel()">Editar Perfil</a></li>  
+		              <li><a ng-click = "atualizarSenhaResponsavel()">Atualizar Senha</a></li>
+		              <li><a ng-click = "excluirPerfilResponsavel()">Excluir Perfil</a></li>
+		            </ul>
+		          </li>
+		          
+		          <li class="nav-header">
+		            <div class="link"><i class="fa fa-twitter"></i>Animais<i class="fa fa-chevron-down"></i></div>
+		            <ul class="submenu">
+		              <li><a ng-click = "paginaCadastraAnimal()">Cadastra Animal</a></li>
+		              <li><a ng-click = "atualizarAnimal()">Atualizar Animal</a></li>
+		              <li><a ng-click = "meusAnimaisResponsavel()">Ver meus Animais</a></li>
+		            </ul>
+		          </li>
+		          
+		          <li class="nav-header">
+		            <div class="link"><i class="fa fa-lg fa-users"></i>Veterinários<i class="fa fa-chevron-down"></i></div>
+		            <ul class="submenu">
+		              <li><a ng-click = "medicosMeusAnimais()">Médicos dos seus Animais</a></li>
+		              <li><a ng-click = "pesquisaMedicos()">Pesquisar veterinários</a></li>
+		            </ul>
+		          </li>
+		          
+		      </ul>
+		  </aside>
+		  
+		  <!--Body content-->
+		  <div class="content">
+		    <div class="top-bar">       
+		      <a href="#menu" class="side-menu-link burger"> 
+		        <span class='burger_inside' id='bgrOne'></span>
+		        <span class='burger_inside' id='bgrTwo'></span>
+		        <span class='burger_inside' id='bgrThree'></span>
+		      </a>      
+		    </div>
+		    <section class="content-inner">
+		      	<div class="jumbotron">
+		    	<div class="panel-title text-center">
+	    			<h1 class="title">Médicos dos seus Animais</h1>
+	    		</div>
+		    		<input class="form-control" type="text" ng-model="buscarAuxiliar" placeholder="Qual Animal você procura?" >
+		    		<table class="table table-responsive">
+		    			<tr>
+		    				<th>#</th>
+		    				<th>Nome Animal</th>
+		    				<th>Especie</th>
+		    				<th>Raça</th>
+		    				<th>Ação</th>
+		    			</tr>
+		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': animal.selecionado}" ng-repeat="medico in medicoAnimal | 
+						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
+							<td><input type="checkbox" ng-model="animal.selecionado"></td>
+							<td>{{medico.nomeAnimal}}</td>
+							<td>{{medico.nomeEspecie}}</td>
+							<td>{{medico.nomeRaca}}</td>
+							<td><button class="btn btn-danger btn-xs" ng-click="deletarAnimal(animal)">Deletar</button></td>
+		    			</tr>
+		    		</table>
+		    		
+		    	</div>
+		    </section>
+		  </div>  
+		  
 	</div>
-			
 
 </section>

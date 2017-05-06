@@ -1,8 +1,7 @@
 <section>
-
+	
 	<style>
-
-			.custab{
+		.custab{
 		    border: 1px solid #ccc;
 		    padding: 5px;
 		    margin: 5% 0;
@@ -122,11 +121,14 @@
 			    z-index: -1;
 			}
 			.wrap .content {
-			    margin-left: 10%;
-			    margin-right: 10%;
-			    min-width: 400px;
-			    position: absolute;
-			    transition: all 0.3s ease-out 0s;
+			  position: absolute;
+			  right: 0;
+			  min-width: 400px;
+			  -webkit-transition: all 0.3s ease-out;
+			  -moz-transition: all 0.3s ease-out;
+			  -ms-transition: all 0.3s ease-out;
+			  -o-transition: all 0.3s ease-out;
+			  transition: all 0.3s ease-out;
 			}
 			.wrap .content .top-bar {
 			  
@@ -336,23 +338,14 @@
 			    border-color: #457845;
 			    color: #fff;
 			}
-			label {
-			    display: inline-block;
-			    font-family: times new roman;
-			    font-size: 18px;
-			    font-weight: bold;
-			    max-width: 100%;
-			}
-			h1, .h1 {
-			    font-family: times new roman;
-			    font-size: 36px;
-			}
 
         	
 			}
-    </style>
 
-    <script>
+	</style>
+
+
+	<script>
 	
 		$(function() {
 		   var accordionActive = false;
@@ -467,57 +460,49 @@
 
 	</script>
 
-
 	<div class="wrap">
 		  <nav class="nav-bar navbar-inverse" role="navigation">
 		      <div id ="top-menu" class="container-fluid active">
 
 		      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
+
 			      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
 		      	
 		      </div>      
 		  </nav>
-
 		  <aside id="side-menu" class="aside" role="navigation">            
-		        <ul id="menuMedico" class="nav nav-list accordion">                    
+		        <ul id="menuResponsavel" class="nav nav-list accordion">                    
 		          <li class="nav-header">
 		            <div class="link"><i class="fa fa-lg fa-globe"></i>Meus dados<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a ng-click="perfilMedico()">Ver Perfil</a></li>  
-		              <li><a ng-click="paginaAtualiza()">Editar Perfil</a></li>  
-		              <li><a ng-click="atualizarsenha()">Atualizar Senha</a></li>
-		              <li><a ng-click="excluirPerfilMedico()">Excluir Perfil</a></li>
-		            </ul>
-		          </li>
-		          
-		          <li class="nav-header">
-		            <div class="link"><i class="fa fa-lg fa-users"></i>Auxiliares<i class="fa fa-chevron-down"></i></div>
-		            <ul class="submenu">
-		              <li><a ng-click="paginaAuxiliares()">Meus Auxiliares</a></li>
-		              <li><a ng-click="paginaPesquisaAuxiliar()">Pesquisar Auxiliares Cadastrados</a></li>
+		              <li><a ng-click = "visualizarPerfilResponsavel()">Ver Perfil</a></li>  
+		              <li><a ng-click = "atualizarDadosResponsavel()">Editar Perfil</a></li>  
+		              <li><a ng-click = "atualizarSenhaResponsavel()">Atualizar Senha</a></li>
+		              <li><a ng-click = "excluirPerfilResponsavel()">Excluir Perfil</a></li>
 		            </ul>
 		          </li>
 		          
 		          <li class="nav-header">
 		            <div class="link"><i class="fa fa-twitter"></i>Animais<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a ng-click="paginaAnimaisCadastrados()">Adicionar Animal</a></li>
-		              <li><a ng-click="paginaAnimaisMedico()">Listar seus Pacientes</a></li>
+		              <li><a ng-click = "paginaCadastraAnimal()">Cadastra Animal</a></li>
+		              <li><a ng-click = "atualizarAnimal()">Atualizar Animal</a></li>
+		              <li><a ng-click = "meusAnimaisResponsavel()">Ver meus Animais</a></li>
 		            </ul>
-		          </li>  
+		          </li>
 		          
-		           <li class="nav-header">
-		            <div class="link"><i class="fa fa-lg fa-map-marker"></i>Analisar Hemograma<i class="fa fa-chevron-down"></i></div>
+		          <li class="nav-header">
+		            <div class="link"><i class="fa fa-lg fa-users"></i>Veterinários<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a ng-click="paginaDeterminarAnemia()">Analisar</a></li>
-		              
+		              <li><a ng-click = "medicosMeusAnimais()">Médicos dos seus Animais</a></li>
+		              <li><a ng-click = "pesquisaMedicos()">Pesquisar veterinários</a></li>
 		            </ul>
 		          </li>
 		          
 		      </ul>
 		  </aside>
-
-		   <!--Body content-->
+		  
+		  <!--Body content-->
 		  <div class="content">
 		    <div class="top-bar">       
 		      <a href="#menu" class="side-menu-link burger"> 
@@ -527,61 +512,34 @@
 		      </a>      
 		    </div>
 		    <section class="content-inner">
-		        <div class="main-login main-center">
-
-		        <div class="panel-title text-center">
-		    		<h1 class="title">Atualizar Médico</h1>
+		      	
+		      	<div class="jumbotron">
+			    	<div class="panel-title text-center">
+		    			<h1 class="title">Seu Perfil</h1>
+		    		</div>
+			    		<table class="table table-responsive">
+			    		<tbody>
+			    			<tr>
+			    				<th>Cpf</th>
+			    				<th>Nome</th>
+			    				<th>Telefone</th>
+			    				<th>E-mail</th>
+			    				<th>Endereço</th>
+			    			</tr>
+			    			<tr class="table table-responsive" ng-repeat="responsavel in responsaveis">
+			    				<td>{{responsavel.cpfResponsavel}}</td>
+			    				<td>{{responsavel.nomeResponsavel}}</td>
+			    				<td>{{responsavel.telefoneResponsavel}}</td>
+			    				<td>{{responsavel.emailResponsavel}}</td>
+			    				<td><textarea>{{responsavel.enderecoResponsavel}}</textarea></td>
+			    			</tr>
+			    		</tbody>
+			    		</table>
 		    	</div>
 
-				<form class="form-horizontal" name="atualizaMedicoForm" method="post" action="#">
-
-					<div class="form-group">
-						
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<label for="name" class="cols-sm-2 control-label">Seu Nome</label>
-								<input type="text" class="form-control" name="name" ng-model="atualizaMedico.nomeMedico" placeholder="Digite seu Nome aqui..."/>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="email" class="cols-sm-2 control-label">Digite seu E-mail</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<input type="text" class="form-control" name="email" ng-model="atualizaMedico.emailMedico"  placeholder="Digite seu e-mail aqui..."/>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="phone" class="cols-sm-2 control-label">Telefone</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<input type="text" class="form-control" name="phone" ng-model="atualizaMedico.telefoneMedico"  placeholder="Digite seu telefone aqui..." ng-pattern= "/^\d{4,5}\d{4}$/" ng-required="true"/>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<div class="cols-sm-10">
-							<label for="Medicalprofile" class="cols-sm-2 control-label">Perfil Médico</label>
-								<div class="input-group">
-									<textarea rows="6" style="width: 20em" ng-model="atualizaMedico.perfilMedico" name="Medicalprofile"></textarea>
-								</div>
-						</div>
-					</div>						
-
-					<div class="form-group ">
-						<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click = "atualizaMedico(atualizaMedico)" ng-disabled="atualizaMedicoForm.$invalid" >Atualizar</button>
-					</div>
-
-				</form>
-			</div>
-		      
 		    </section>
 		  </div>  
 		  
-		</div>
-	
+	</div>
+
 </section>

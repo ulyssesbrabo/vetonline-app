@@ -229,6 +229,11 @@
                             controllerAs: 'vm'
                             
                         })
+                        .when('/perfilMedico',{
+                            templateUrl: 'perfilMedico.html',
+                            controller: 'PerfilMedicoController',
+                            controllerAs: 'vm'
+                        })
                         .when('/editarMedico', {
                             templateUrl: 'atualizarMedico.html',
                             controller: 'AtualizarMedicoController',
@@ -325,6 +330,11 @@
                             controllerAs: 'vm'
                             
                         })
+                        .when('/perfilResponsavel', {
+                            templateUrl: 'perfilResponsavel.html',
+                            controller : 'PerfilResponsavelController',
+                            controllerAs: 'vm'
+                        })
                         .when('/cadastroResponsavel', {
                             templateUrl: 'cadastroresponsavel.html',
                             controller: 'CadastroResponsavelController',
@@ -332,13 +342,13 @@
                             
                         })
                         .when('/editarResponsavel', {
-                            templateUrl: 'cadastroanimal.html',
+                            templateUrl: 'atualizarResponsavel.html',
                             controller: 'AtualizarResponsavelController',
                             controllerAs: 'vm'
                             
                         })
                         .when('/excluirResponsavel', {
-                            templateUrl: 'excluirresponsavel.html',
+                            templateUrl: 'excluirResponsavel.html',
                             controller: 'ExcluirResponsavelController',
                             controllerAs: 'vm'
                             
@@ -404,7 +414,7 @@
                             
                         })
                         .when('/editarAnimal', {
-                            templateUrl: 'editaranimal.html',
+                            templateUrl: 'editarAnimalResponsavel.html',
                             controller: 'AtualizarAnimalController',
                             controllerAs: 'vm'
                             
@@ -438,7 +448,7 @@
                     })
 
                     .when('/novaSenhaResponsavel', {
-                        templateUrl : 'novaSenhaResponsavel.html',
+                        templateUrl : 'atualizarSenhaResponsavel.html',
                         controller: 'novaSenhaResponsavelController',
                         controllerAs : 'vm'
                         
@@ -477,6 +487,10 @@
                         
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
+                        }
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
                         }
 
                         $scope.excluirPerfilMedico = function(){
@@ -534,37 +548,46 @@
                 .controller('ResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
                     function($scope, $http, $rootScope, $location, $localStorage){
                         
-                        $scope.paginaAtualiza = function(){
-                            $location.path('/editarMedico');
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
                         }
 
-                        $scope.excluirPerfilMedico = function(){
-                            $location.path('/excluirMedico');
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
                         }
 
                         $scope.sair = function(data){
                             $location.path('/login');
                         }
                         
-                        $scope.paginaAuxiliares = function(){
-                            $location.path('/auxiliarDosMedico');
-                        }
-
                         $scope.paginaCadastraAnimal = function(){
                             $location.path('/cadastroAnimal');
                         }
 
-                        $scope.paginaAnimaisCadastrados = function(){
-                            $location.path('/AdicionarAnimal');
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
                         }
 
-                        $scope.paginaAnimaisMedico = function(){
-                            $location.path('/AnimaisDoMedico');
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
                         }
 
-                        $scope.paginaDeterminarAnemia = function(){
-                            $location.path('/DeternimarAnemia');
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
                         }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+
                 }])
 
                 .controller('ClinicaController', ['$scope', '$rootScope', '$location', 
@@ -577,8 +600,14 @@
                 .controller('novaSenhaAuxiliarController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
      
                 }])
-                
-                .controller('AtualizarSenhaMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
+
+                .controller('PerfilMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.medicos = [];
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
+                        }
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
@@ -616,31 +645,147 @@
                             $location.path('/DeternimarAnemia');
                         }
 
-                        $scope.validarSenhas = function(){
-                        senha1 = document.cadastroMedicoForm.senhaMedico.value
-                        senha2 = document.cadastroMedicoForm.senhaMedico2.value
+                        var perfilMedico = function(){
+                            $http.get('http://localhost:8000/perfilMedico').then(function(success, data){
+                                $scope.medicos = success.data;
+                            }, function(error){
 
-                        if (senha1 == senha2) {
-                            return true;
-                        }else{
-                            alert("Senhas são diferentes")
-                            $scope.cadastroMedicoForm.senha2.$setPristine();
+                            });
+                        };
+
+                        perfilMedico();
+
+                }])
+
+
+                .controller('AtualizarSenhaMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.paginaAtualiza = function(){
+                            $location.path('/editarMedico');
                         }
-                    }
 
-                    $scope.atualizarsenha = function(medico){
-                        $http.put('http://localhost:8000/atualizaSenhaMedico', medico).then(function(success, data){
-                            alert("Senha atualizada com sucesso!")
-                            $location.path('/menuMedico');
-                        }, function(error){
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
+                        }
 
-                        });
-                    };
+                        $scope.atualizarsenha = function(){
+                            $location.path('/atualizarSenhaMedico');
+                        }
+
+                        $scope.excluirPerfilMedico = function(){
+                            $location.path('/excluirMedico');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaAuxiliares = function(){
+                            $location.path('/auxiliarDosMedico');
+                        }
+
+                        $scope.paginaPesquisaAuxiliar = function(){
+                            $location.path('/auxiliaresCadastrado');
+                        }
+
+                        $scope.paginaAnimaisCadastrados = function(){
+                            $location.path('/AdicionarAnimal');
+                        }
+
+                        $scope.paginaAnimaisMedico = function(){
+                            $location.path('/AnimaisDoMedico');
+                        }
+
+                        $scope.paginaDeterminarAnemia = function(){
+                            $location.path('/DeternimarAnemia');
+                        }
+
+                        $scope.validarSenhas = function(){
+                            senha1 = document.cadastroMedicoForm.senhaMedico.value
+                            senha2 = document.cadastroMedicoForm.senhaMedico2.value
+
+                            if (senha1 == senha2) {
+                                return true;
+                            }else{
+                                alert("Senhas são diferentes")
+                                $scope.cadastroMedicoForm.senha2.$setPristine();
+                            }
+                        }
+
+                        $scope.atualizarsenha = function(medico){
+                            $http.put('http://localhost:8000/atualizaSenhaMedico', medico).then(function(success, data){
+                                alert("Senha atualizada com sucesso!")
+                                $location.path('/menuMedico');
+                            }, function(error){
+
+                            });
+                        };
      
                 }])
 
                 .controller('novaSenhaResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
-     
+                    
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
+
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+
+                        $scope.validarSenhas = function(){
+                            senha1 = document.cadastroMedicoForm.senhaMedico.value
+                            senha2 = document.cadastroMedicoForm.senhaMedico2.value
+
+                            if (senha1 == senha2) {
+                                return true;
+                            }else{
+                                alert("Senhas são diferentes")
+                                $scope.cadastroMedicoForm.senha2.$setPristine();
+                            }
+                        }
+
+                        $scope.atualizarsenha = function(responsavel){
+                            $http.put('http://localhost:8000', responsavel)
+                                .then(function(success, data){
+                                alert("Senha atualizada com sucesso!")
+                                $location.path('/menuResponsavel');
+                            }, function(error){
+
+                            });
+                        };
                 }])
 
                 .controller('LoginController', ['$scope', '$rootScope', '$location', '$localStorage', '$http', '$timeout', 
@@ -757,11 +902,17 @@
                     };
 
                 }])
-                .controller('AtualizarMedicoController', ['$scope', '$rootScope', '$location', '$http', '$localStorage', 
-                    function($scope, $rootScope, $location, $localStorage, $http){
+                .controller('AtualizarMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
+                    function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.medicos = [];
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
+                        }
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
                         }
 
                         $scope.excluirPerfilMedico = function(){
@@ -804,14 +955,30 @@
                                 delete $scope.atualizaMedico;
                                 $scope.atualizarMedicoForm.$setPristine();
                             });
-                    }
+                    };
+
+                    $scope.perfilMedico = function(){
+                        $http({
+                            method: 'GET',
+                            url: 'http://localhost:8000/perfilMedico'
+                        }).then(function(success, data){
+                            $scope.medicos = success.data;
+                        }, function(error){
+
+                        });
+                    };
+
+                    $scope.perfilMedico();
                     
                 }])
-                .controller('ExcluirMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
-                    function($scope, $http, $rootScope, $location, $localStorage){
+                .controller('ExcluirMedicoController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
+                        }
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
                         }
 
                         $scope.excluirPerfilMedico = function(){
@@ -861,6 +1028,7 @@
                         };
                     
                 }])
+
                 .controller('AuxiliaresDosMedicosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
                     function($scope, $http, $rootScope, $location, $localStorage){
 
@@ -869,6 +1037,10 @@
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
+                        }
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
                         }
 
                         $scope.excluirPerfilMedico = function(){
@@ -948,6 +1120,10 @@
                             $location.path('/editarMedico');
                         }
 
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
+                        }
+
                         $scope.excluirPerfilMedico = function(){
                             $location.path('/excluirMedico');
                         }
@@ -1016,6 +1192,10 @@
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
+                        }
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
                         }
 
                         $scope.excluirPerfilMedico = function(){
@@ -1089,6 +1269,10 @@
                         
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
+                        }
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
                         }
 
                         $scope.excluirPerfilMedico = function(){
@@ -1323,7 +1507,7 @@
                                         console.log("Função Leucocitose");
                                         listarLeucocitose();
                                     }
-///////////////////////////////////////Valores Absolutos////////////////////////////////////////////////////
+///////////////////////////////////////Valores Absolutos///////////////////////////////////////////////////
                                     if (ABSEOSI<=120) {
                                         console.log("Eosinopenia");
                                         listarEosinopenia();
@@ -1348,7 +1532,7 @@
                                         console.log("Basofilia");
                                         listarBasofilia();
                                     }
-///////////////////////////////////////Valores Relativos////////////////////////////////////////////////////
+///////////////////////////////////////Valores Relativos///////////////////////////////////////////////////
                                     if (RELAEOSI<=120) {
                                         listarEosinopenia();
                                     }
@@ -1399,7 +1583,7 @@
                                         listarAnemiaNormal();
                                     }
                                 }
-////////////////////////////////Gato/////////////////////////////////////////////////////////////////////    
+////////////////////////////////Gato///////////////////////////////////////////////////////////////////    
                                 if (hemoga.especie == "2") {
                                     if (CGL<=8000) {
                                         console.log("Função leocopenia");
@@ -1485,13 +1669,16 @@
                         };
                     }])
 
-                .controller('DeternimarAnemiaController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', 
-                    function($scope, $http, $rootScope, $location, $localStorage){
+                .controller('DeternimarAnemiaController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
 
                         $scope.animais=[];
 
                         $scope.paginaAtualiza = function(){
                             $location.path('/editarMedico');
+                        }
+
+                        $scope.perfilMedico = function(){
+                            $location.path('/perfilMedico');
                         }
 
                         $scope.excluirPerfilMedico = function(){
@@ -1903,9 +2090,48 @@
 
                     listaAnimaisMedicos();
                 }])
-                .controller('CadastroAnimalController', ['$scope', '$rootScope', '$location', '$http',
-                    function($scope, $rootScope, $location, $http, urlBase){
-                    
+                .controller('CadastroAnimalController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
+                        
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
+
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+
                     $scope.especie = [];
                     $scope.raca = [];
                     $scope.Especie = [];
@@ -2286,9 +2512,105 @@
                     
 
                 }])
-                .controller('AtualizarResponsavelController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+
+                .controller('PerfilResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
                     
+                        $scope.responsaveis = [];
+
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
+
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+
+                        var perfilResponsavel = function(){
+                            $http.get('http://localhost:8000/perfilResponsavel')
+                                .then(function(success, data){
+                                $scope.responsaveis = success.data;
+                            }, function(error){
+
+                            });
+                        };
+
+                        perfilResponsavel();
+
+                }])
+
+                .controller('AtualizarResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
+                    
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
+
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
                     //Atualizar Responsavel
                     $scope.atualizaResponsavel = function(responsavel){
                         responsavel.data = new Date();
@@ -2298,20 +2620,112 @@
                             });
                     }; 
                 }])
-                .controller('ExcluirResponsavelController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('ExcluirResponsavelController',['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
                     
-                }])
-                .controller('VerAnimaisResponsavelController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
 
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+                    $scope.excluirPerfilMedico = function(status){
+                        console.log(status);
+                        if (status==undefined) {
+                            var statu = 2;
+                            console.log(statu);
+                            $http.put('http://localhost:8000/deletarMedico/'+statu).then(function(success, data){
+                                alert("Seu registro foi excluido com sucesso! Pedimos desculpas por qualquer transtorno!");
+                                $location.path('/login');
+                            }, function(error){
+
+                            });
+                        }
+                    };
+
+                }])
+                .controller('VerAnimaisResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage', function($scope, $http, $rootScope, $location, $localStorage){
+                        $scope.animais = [];
                      //Animais - Ver meus Animais
-                    $scope.listaAnimaisDoResponsavel = function(data){
+                    
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
+
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+
+                    var listaAnimaisDoResponsavel = function(data){
                         $http({
                             method: 'GET',
                             url: ('http://localhost:8000/AnimaisResponsavel'  )
                         }).then(function(success, data){
-
+                            $scope.animais = success.data;
                         }, function(error){
 
                         });
@@ -2322,14 +2736,58 @@
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
 
+                    listaAnimaisDoResponsavel();
+
                 }])
-                .controller('MedicosAnimaisResponsavelController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
-                    
+                .controller('MedicosAnimaisResponsavelController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',function($scope, $http, $rootScope, $location, $localStorage){
+                        $scope.medicoAnimal=[];
+
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
+
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+
                      ////Médicos - Medicos dos seus Animais
                     var listaMedicoResponsavelAnimal = function(){
-                        $http.get("api url", login(usuario.username)).success(function(data){
-                            $scope.buscarMedico=data;
+                        $http.get("api url").then(function(success, data){
+                            $scope.medicoAnimal= success.data;
+                        }, function(error){
+
                         });
                     };
 
@@ -2338,9 +2796,69 @@
                         $scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
                     };
 
+                    listaMedicoResponsavelAnimal();
                 }])
-                .controller('MedicosCadastradosController', ['$scope', '$rootScope', '$location', 
-                    function($scope, $rootScope, $location, $http, urlBase){
+                .controller('MedicosCadastradosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',function($scope, $http, $rootScope, $location, $localStorage){
+
+                        $scope.medicosCadastrados=[];
+
+                        $scope.visualizarPerfilResponsavel = function(){
+                            $location.path('/perfilResponsavel');
+                        }
+
+                        $scope.excluirPerfilResponsavel = function(){
+                            $location.path('/excluirResponsavel');
+                        }
+
+                        $scope.atualizarDadosResponsavel = function(){
+                            $location.path('/editarResponsavel');
+                        }
+
+                        $scope.atualizarSenhaResponsavel = function(){
+                            $location.path('/novaSenhaResponsavel');
+                        }
+
+                        $scope.sair = function(data){
+                            $location.path('/login');
+                        }
+                        
+                        $scope.paginaCadastraAnimal = function(){
+                            $location.path('/cadastroAnimal');
+                        }
+
+                        $scope.atualizarAnimal = function(){
+                            $location.path('/editarAnimal');
+                        }
+
+                        $scope.meusAnimaisResponsavel = function(){
+                            $location.path('/VerAnimaisResponsavel');
+                        }
+
+                        $scope.medicosMeusAnimais = function(){
+                            $location.path('/MedicosAnimaisResponsavel');
+                        }
+
+                        $scope.pesquisaMedicos = function(){
+                            $location.path('/MedicosCadastrados');
+                        }
+
+
+                    var listaMedicoCadastrados = function(){
+                        $http.get("api url").then(function(success, data){
+                            $scope.medicosCadastrados= success.data;
+                        }, function(error){
+
+                        });
+                    };
+
+                    listaMedicoCadastrados();
+
+
+
+
+
+
+
 /*
                     $scope.listaMedicosCadastrados = [];
                     

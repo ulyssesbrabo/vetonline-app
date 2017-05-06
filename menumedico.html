@@ -2,7 +2,54 @@
 	
 	<style>
 		
-			.wrap {
+			.custab{
+		    border: 1px solid #ccc;
+		    padding: 5px;
+		    margin: 5% 0;
+		    box-shadow: 3px 3px 2px #ccc;
+		    transition: 0.5s;
+		    }
+
+		body {
+		    background: #fff none repeat scroll 0 0;
+		}
+
+		.custab:hover{
+		    box-shadow: 3px 3px 0px transparent;
+		    transition: 0.5s;
+		    }
+	    .col-md-offset-2 {
+		    background-color: #fff;
+		    border-radius: 50px;
+		    margin-left: 6%;
+		    margin-top: 10px;
+		    width: 750px;
+		}
+		.well {
+		    
+		    border: 1px solid #000000;
+		    border-radius: 40px;
+		    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05) inset;
+		    margin-bottom: 20px;
+		    margin-left: 10px;
+		    margin-top: 10px;
+		    min-height: 20px;
+		    padding: 19px;
+		}
+		.table > thead > tr > th {
+		    border-bottom: 1px solid #ddd;
+		    border-right: 2px solid #ddd;
+		    padding: 5px;
+		    text-align: center;
+		}
+		.selecionado{
+			background-color: yellow;
+		}
+		.negrito{
+			font-weight: bold;
+		}
+
+		.wrap {
 			  position: relative;
 			}
 			.wrap .nav-bar .navbar-brand {
@@ -63,7 +110,17 @@
 			.wrap .burger #bgrThree {
 			  top: 20px;
 			}
-			
+			.wrap #side-menu {
+			    background: #cef0cf none repeat scroll 0 0;
+			    display: block;
+			    float: left;
+			    height: auto;
+			    padding-left: 10px;
+			    padding-right: 10px;
+			    padding-top: 10px;
+			    width: 20em;
+			    z-index: -1;
+			}
 			.wrap .content {
 			  position: absolute;
 			  right: 0;
@@ -79,15 +136,26 @@
 			  background: #ddd;
 			}
 			.wrap .content .content-inner {
-			 	background: #transparent none repeat scroll 0 0;
 			    display: block;
 			    height: auto;
-			    margin-left: 15px;
+			    margin-left: 5px;
 			    padding: 0 0 0 10px;
 			}
 			.wrap ul.accordion {
 			  width: 100%;
 			  background: transparent;
+			}
+			.wrap ul.accordion .link {
+			    border-bottom: 1px solid #303030;
+			    color: #1c5c2b;
+			    cursor: pointer;
+			    display: block;
+			    font-family: times new roman;
+			    font-size: 17px;
+			    font-weight: 700;
+			    padding: 15px 15px 15px 42px;
+			    position: relative;
+			    transition: all 0.4s ease 0s;
 			}
 			.wrap ul.accordion li:not(open) last-child .link {
 			  border-bottom: 0;
@@ -128,6 +196,15 @@
 			.wrap ul.accordion ul.submenu li {
 			  border-bottom: 1px solid #4b4a5e;
 			  list-style: none;
+			}
+			.wrap ul.accordion ul.submenu li a {
+			    color: #1c5c2b;
+			    display: block;
+			    font-family: times new roman;
+			    font-size: 15px;
+			    padding: 12px 12px 12px 42px;
+			    text-decoration: none;
+			    transition: all 0.25s ease 0s;
 			}
 			.wrap ul.accordion ul.submenu li a:hover {
 			  background: #2EA762;
@@ -187,74 +264,80 @@
         	}
 
         	.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-			    margin-left: 300px;
-			    width: 50%;
+			    height: 120px;
+			    margin: 1% 20% 1% 35%;
+    			max-width: 100%;
 			}
 
+			
 			.container-fluid {
 			    background: #cef0cf none repeat scroll 0 0;
-			    border-radius: 25px;
 			    margin-left: auto;
 			    margin-right: auto;
 			    padding-left: 15px;
 			    padding-right: 15px;
-			    margin-top: 8px;
 			}
-			.navbar-inverse {
-			    background-color: transparent;
-			    border-color: #080808;
+
+			.jumbotron {
+			    margin-left: 60px;
+			    padding-bottom: 38px;
+			    padding-top: 38px;
+			}
+			.container .jumbotron, .container-fluid .jumbotron {
+			    background-color: #fff;
+			    margin-left: 1%;
+			}
+
+			.form-control {
+			    background-color: #fff;
+			    background-image: none;
+			    border: 1px solid #ccc;
+			    border-radius: 44px;
+			    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+			    color: #555;
+			    display: block;
+			    line-height: 1.42857;
+			    margin-bottom: 24px;
+			    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+			    width: 100%;
+			}
+			.jumbotron h1, .jumbotron .h1 {
+			    font-family: times new roman;
+			    font-size: 25px;
+			    font-style: italic;
 			}
 			.btn-warning {
-			    background-color: #166304;
+			    background-color: #003806;
 			    border-color: transparent;
 			    color: #fff;
 			    line-height: 1.5;
-			    margin-bottom: 8px;
-			    margin-left: 1000px;
 			    padding: 5px 25px;
 			}
-			.btn-warning:hover {
-			  color: #fff;
-			  background-color: #FC1515;
-			  border-color: #d58512;
-			}
-			.wrap ul.accordion ul.submenu li a {
-			    color: #1c5c2b;
-			    display: block;
-			    font-family: times new roman;
-			    font-size: 15px;
-			    padding: 12px 12px 12px 42px;
-			    text-decoration: none;
-			    transition: all 0.25s ease 0s;
-			}
-			.wrap ul.accordion .link {
-			    border-bottom: 1px solid #303030;
-			    color: #1c5c2b;
-			    cursor: pointer;
-			    display: block;
-			    font-family: times new roman;
-			    font-size: 17px;
-			    font-weight: 700;
-			    padding: 15px 15px 15px 42px;
-			    position: relative;
-			    transition: all 0.4s ease 0s;
-			}
-			.wrap #side-menu {
-				background: #cef0cf none repeat scroll 0 0;
-				border-radius: 20px;
-				display: block;
-				float: left;
-				height: auto;
-				padding-left: 10px;
-				padding-right: 10px;
-				padding-top: 10px;
-				position: fixed;
-				width: 26em;
-				z-index: -1;
+
+			table {
+			    background-color: #E3F9E3;
 			}
 
-			body {
-			    background: #D4D8D2 none repeat scroll 0 0;
+			th {
+			    font-family: times new roman;
+			    font-size: 15px;
+			    text-align: center;
+			}
+
+			td, th {
+			    text-align: center;
+			}
+
+			.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+			    border-top: 1px solid #ddd;
+			    line-height: 1.42857;
+			    padding: 8px;
+			    vertical-align: middle;
+			}
+			.btn-info {
+			    background-color: #457845;
+			    border-color: #457845;
+			    color: #fff;
 			}
 
         	
@@ -384,9 +467,8 @@
 
 	      	<img src="img/logoVeterinarioPortugues.png" class="img-responsive" alt=""/>
 
-	      	<div>
-		      	<button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
-		    </div>
+		    <button type="button" class="btn btn-warning" ng-click="sair()">Sair</button>
+	      	
 	      </div>      
 	  </nav>
 
@@ -395,7 +477,7 @@
 		          <li class="nav-header">
 		            <div class="link"><i class="fa fa-lg fa-globe"></i>Meus dados<i class="fa fa-chevron-down"></i></div>
 		            <ul class="submenu">
-		              <li><a href="#">Ver Perfil</a></li>  
+		              <li><a ng-click="perfilMedico()">Ver Perfil</a></li>  
 		              <li><a ng-click="paginaAtualiza()">Editar Perfil</a></li>  
 		              <li><a ng-click="atualizarsenha()">Atualizar Senha</a></li>
 		              <li><a ng-click="excluirPerfilMedico()">Excluir Perfil</a></li>
@@ -441,9 +523,11 @@
 		      </a>      
 		    </div>
 		    <section class="content-inner">
-		      <div id="conteudoCentral" >
-		      	
-		      </div>
+		      	<div class="jumbotron">
+		   		 	<div class="panel-title text-center">
+	    				<h1 class="title">Bem vindo ao sistema veterinário sem fronteiras!</h1>
+	    			</div>
+		    	</div>
 		    </section>
 		  </div>  
 		  

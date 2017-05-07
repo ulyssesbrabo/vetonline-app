@@ -305,6 +305,7 @@
 			    font-family: times new roman;
 			    font-size: 25px;
 			    font-style: italic;
+			    text-align: center;
 			}
 			.btn-warning {
 			    background-color: #003806;
@@ -531,10 +532,10 @@
 		    			<tr>
 		    				<th>#</th>
 		    				<th>Nome Animal</th>
-		    				<th>Especie</th>
+		    				<th>Espécie</th>
 		    				<th>Raça</th>
-		    				<th>Nome do Responsavel</th>
-		    				<th>Telefone Responsavel</th>
+		    				<th>Nome do Responsável</th>
+		    				<th>Telefone Responsável</th>
 		    				<th>Ação</th>
 		    			</tr>
 		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': animal.selecionado}" ng-repeat="animal in animais | 
@@ -545,17 +546,17 @@
 							<td>{{animal.nomeRaca}}</td>
 							<td>{{animal.nomeResponsavel}}</td>
 							<td>{{animal.telefoneResponsavel}}</td>
-							<td><button class="btn btn-info btn-xs" ng-click="detalhesAnimais(animal)">Historico</button><button class="btn btn-danger btn-xs" ng-click="deletarAnimal(animal)">Deletar</button></td>
+							<td><button class="btn btn-info btn-xs" ng-click="detalhesAnimais(animal)">Histórico</button><button class="btn btn-danger btn-xs" ng-click="deletarAnimal(animal)">Deletar</button></td>
 		    			</tr>
 		    		</table>
 		    		<div>
-		    			<h1 class="title">Historico do Animal</h1>
+		    			<h1 class="title">Histórico do Animal</h1>
 		    		</div>
 		    		<table class="table table-responsive">
 		    			<tr>
 		    				<th>Espécie</th>
 		    				<th>Nome do animal</th>
-		    				<th>Historico</th>
+		    				<th>Histórico</th>
 		    				<th>Ação</th>
 		    			</tr>
 		    			<tr class="table table-responsive">

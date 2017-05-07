@@ -519,19 +519,17 @@
 		    		<input class="form-control" type="text" ng-model="buscarAuxiliar" placeholder="Qual Animal você procura?" >
 		    		<table class="table table-responsive">
 		    			<tr>
-		    				<th>#</th>
-		    				<th>Nome Animal</th>
-		    				<th>Especie</th>
-		    				<th>Raça</th>
-		    				<th>Ação</th>
+		    				<th>CRMV</th>
+		    				<th>Nome do Médico</th>
+		    				<th>Telefone</th>
+		    				<th>E-mail</th>
 		    			</tr>
 		    			<tr class="table table-responsive" ng-class="{'selecionado negrito': animal.selecionado}" ng-repeat="medico in medicosCadastrados | 
 						            	filter: buscarAuxiliar | orderBy:criterioOrdenacao:direcaoOrdenacao">
-							<td><input type="checkbox" ng-model="animal.selecionado"></td>
-							<td>{{medico.nomeAnimal}}</td>
-							<td>{{medico.nomeEspecie}}</td>
-							<td>{{medico.nomeRaca}}</td>
-							<td><button class="btn btn-danger btn-xs" ng-click="deletarAnimal(animal)">Deletar</button></td>
+							<td>{{medico.crmv}}</td>
+							<td>{{medico.nomeMedico}}</td>
+							<td>{{medico.telefoneMedico}}</td>
+							<td>{{medico.emailMedico}}</td>
 		    			</tr>
 		    		</table>
 		    		

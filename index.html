@@ -413,12 +413,13 @@
                             controllerAs: 'vm'
                             
                         })
+                        /*
                         .when('/editarAnimal', {
                             templateUrl: 'editarAnimalResponsavel.html',
                             controller: 'AtualizarAnimalController',
                             controllerAs: 'vm'
                             
-                        })
+                        })*/
                         .when('/excluirAnimal', {
                             templateUrl: 'excluiranimal.html',
                             controller: 'ExcluirAnimalController',
@@ -2784,7 +2785,7 @@
 
                      ////Médicos - Medicos dos seus Animais
                     var listaMedicoResponsavelAnimal = function(){
-                        $http.get("api url").then(function(success, data){
+                        $http.get("http://localhost:8000/listarAnimaisMedicos").then(function(success, data){
                             $scope.medicoAnimal= success.data;
                         }, function(error){
 
@@ -2797,6 +2798,7 @@
                     };
 
                     listaMedicoResponsavelAnimal();
+
                 }])
                 .controller('MedicosCadastradosController', ['$scope', '$http', '$rootScope', '$location', '$localStorage',function($scope, $http, $rootScope, $location, $localStorage){
 
@@ -2844,7 +2846,7 @@
 
 
                     var listaMedicoCadastrados = function(){
-                        $http.get("api url").then(function(success, data){
+                        $http.get("http://localhost:8000/listarMedicos").then(function(success, data){
                             $scope.medicosCadastrados= success.data;
                         }, function(error){
 
